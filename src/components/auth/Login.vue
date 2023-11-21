@@ -1,0 +1,103 @@
+<template>
+  <div class="main">
+    <section class="sign-in">
+      <div class="container">
+        <div class="signin-content">
+          <div class="signin-image">
+            <figure><img src="../../assets/images/signin-image.jpg" alt="sing up image"></figure>
+            <a href="/register" class="signup-image-link">Create an account</a>
+          </div>
+
+          <div class="signin-form">
+            <h2 class="form-title">Welcome Back</h2>
+            <Form @submit="handleLogin" :validation-schema="schema" class="user">
+              <div class="form-group">
+                <Field name="email" type="text" class="form-control form-control-user"
+                  placeholder="your-email@gmail.com" />
+                <ErrorMessage name="email" class="text-danger p-3" />
+              </div>
+              <div class="form-group">
+                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                <Field name="password" type="password" class="form-control form-control-user" placeholder="Password" />
+                <ErrorMessage name="password" class="text-danger p-3" />
+              </div>
+              <div class="form-group">
+                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+              </div>
+              <div class="form-group form-button">
+                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+              </div>
+              <div v-if="message" class="alert alert-dismissible fade show alert-card alert-danger" role="alert">
+                {{ message }}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</template>
+
+<script>
+import TokenService from "@/services/token.service";
+import { Form, Field, ErrorMessage } from "vee-validate"
+import * as yup from "yup"
+import { LOGIN_MUTATION, USER_QUERY, ADD_USER_MUTATION } from '@/graphql'
+export default {
+  name: 'Login',
+  components: {
+    Form, Field, ErrorMessage,
+  },
+  data() {
+    const schema = yup.object().shape({
+      email: yup
+        .string()
+        .required("Email is required!")
+        .email("Email is invalid!")
+        .max(50, "Must be maximum 50 characters!"),
+      password: yup.string().required("Password is required!"),
+    });
+
+    return {
+      loading: false,
+      register: false,
+      message: "",
+      schema,
+      title: "",
+      currentuser: [],
+
+    };
+  },
+  methods: {
+    async handleLogin(user) {
+      await this.$apollo
+        .mutate({
+          mutation: LOGIN_MUTATION,
+          variables: {
+            email: user.email,
+            password: user.password
+          }
+        })
+        .then(response => {
+          localStorage.setItem('token', response.data.login.token)
+
+        }).catch((error) => {
+          this.message = error.message
+        })
+      await this.$apollo.query({
+        query: USER_QUERY,
+        fetchPolicy: 'network-only'
+      }).then(response => {
+        TokenService.setUser(response.data.currentuser);
+      })
+      this.$router.push("/dashboard")
+    }
+  }
+}
+
+</script>
+
+<style  scoped src = "../../assets/css/style.css"></style>
+<style  scoped src = "../../assets/fonts/icomoon/style.css"></style>
