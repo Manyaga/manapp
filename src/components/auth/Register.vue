@@ -1,5 +1,5 @@
 <template>
-  <section class="signup">
+  <div class="main"><section class="signup">
     <div class="container">
       <div class="signup-content">
         <div class="signup-form">
@@ -7,7 +7,7 @@
           <Form @submit="addUser" :validation-schema="schema" class="register-form">
             <div class="form-group">
               <label class="col-form-label" for="last_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-              <Field name="first_name" class="form-control" id="first_name" type="text" placeholder="first name" />
+              <Field name="first_name" class="form-control" id="first_name" type="text" placeholder="First Name" />
               <ErrorMessage name="first_name" class="text-danger p-3" />
             </div>
             <div class="form-group">
@@ -17,13 +17,19 @@
             </div>
             <div class="form-group">
               <label class="col-form-label" for="email"><i class="zmdi zmdi-email"></i></label>
-              <Field name="email" class="form-control" id="email" type="text" placeholder="email" />
+              <Field name="email" class="form-control" id="email" type="text" placeholder="Email" />
               <ErrorMessage name="email" class="text-danger p-3" />
 
             </div>
             <div class="form-group">
+              <label class="col-form-label" for="username"><i class="zmdi zmdi-face"></i></label>
+              <Field name="username" class="form-control" id="username" type="text" placeholder="Username" />
+              <ErrorMessage name="username" class="text-danger p-3" />
+
+            </div>
+            <div class="form-group">
               <label class="col-form-label" for="phone_number"><i class="zmdi zmdi-phone"></i></label>
-              <Field name="phone_number" class="form-control" id="phone_number" type="text" placeholder="phone number" />
+              <Field name="phone_number" class="form-control" id="phone_number" type="text" placeholder="Phone number" />
               <ErrorMessage name="phone_number" class="text-danger p-3" />
             </div>
             <div class="form-group">
@@ -37,16 +43,51 @@
               <ErrorMessage name="country" class="text-danger py-3 text-sm" />
             </div>
             <div class="form-group">
+              <label class="col-form-label" for="state"><i class="zmdi zmdi-location"></i></label>
+              <Field name="state" class="form-control form-control-lg" v-model="state" as="select">
+                <option value="">-- State--</option>
+                <option v-for="state in states" :value="state.state_id" :key="state.state_id">
+                  {{ state.state_name }}
+                </option>
+              </Field>
+              <ErrorMessage name="state" class="text-danger py-3 text-sm" />
+            </div>
+            <div class="form-group">
+              <label class="col-form-label" for="role"><i class="zmdi zmdi-location"></i></label>
+              <Field name="role" class="form-control form-control-lg" v-model="group_id" as="select">
+                <option value="">-- role--</option>
+                <option v-for="role in userGroups" :value="role.group_id" :key="role.group_id">
+                  {{ role.group_name }}
+                </option>
+              </Field>
+              <ErrorMessage name="role" class="text-danger py-3 text-sm" />
+            </div>
+            <!-- <div class="form-group">
+              <label class="col-form-label" for="city"><i class="zmdi zmdi-pin"></i></label>
+              <Field name="city" class="form-control" id="city" type="text" placeholder="City" />
+              <ErrorMessage name="city" class="text-danger p-3" />
+            </div> -->
+            <!-- <div class="form-group">
+              <label class="col-form-label" for="zipCode"><i class="zmdi zmdi-pin"></i></label>
+              <Field name="zipCode" class="form-control" id="zipCode" type="text" placeholder="Zip Code" />
+              <ErrorMessage name="zipCode" class="text-danger p-3" />
+            </div>
+            <div class="form-group">
+              <label class="col-form-label" for="postalCode"><i class="zmdi zmdi-pin"></i></label>
+              <Field name="postalCode" class="form-control" id="postalCode" type="text" placeholder="Postal Code" />
+              <ErrorMessage name="postalCode" class="text-danger p-3" />
+            </div> -->
+            <div class="form-group">
               <label class="col-form-label" for="password"><i class="zmdi zmdi-lock"></i></label>
               <Field name="password" class="form-control" id="password" type="password" />
               <ErrorMessage name="password" class="text-danger p-3" />
 
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="col-form-label" for="confirmpassword"><i class="zmdi zmdi-lock-outline"></i></label>
               <Field name="confirmpassword" class="form-control" id="confirmpassword" type="password" />
               <ErrorMessage name="confirmpassword" class="text-danger p-3" />
-            </div>
+            </div> -->
             <div class="form-group form-button">
               <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
             </div>
@@ -59,12 +100,14 @@
       </div>
     </div>
   </section>
+</div>
+  
 </template>
 
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate"
 import * as yup from "yup"
-import { ALL_USER_GROUPS_QUERY, ALL_COUNTRIES_QUERY, ADD_USER_MUTATION } from '@/graphql'
+import { ALL_USER_GROUPS_QUERY, ALL_COUNTRIES_QUERY, ADD_USER_MUTATION, ALL_STATES_QUERY } from '@/graphql'
 export default {
   name: 'Login',
   components: {
@@ -74,10 +117,7 @@ export default {
     const schema = yup.object().shape({
       first_name: yup
         .string()
-        .required("first Name is required!"),
-      second_name: yup
-        .string()
-        .required("Second Name is required!"),
+        .required("First Name is required!"),
       last_name: yup
         .string()
         .required("Last Name is required!"),
@@ -90,15 +130,15 @@ export default {
       country: yup
         .string()
         .required("Country is required!"),
+      state: yup
+        .string()
+        .required("State is required!"),
       role: yup
         .string()
         .required("Role is required!"),
       password: yup
         .string()
-        .required("password is required!"),
-      confirmpassword: yup
-        .string()
-        .required("Password confirmation is required!"),
+        .required("Password is required!"),
     });
 
     return {
@@ -108,12 +148,20 @@ export default {
       schema,
       title: "",
       countries: [],
-
+      userGroups: [],
+      states: [],
+      group_id: "",
     };
   },
   apollo: {
     countries: {
       query: ALL_COUNTRIES_QUERY
+    },
+    userGroups: {
+      query: ALL_USER_GROUPS_QUERY
+    },
+    states: {
+      query: ALL_STATES_QUERY
     }
   },
   methods: {
@@ -124,18 +172,19 @@ export default {
           mutation: ADD_USER_MUTATION,
           variables: {
             createAcc: {
-              zip_code: user.zip_code,
-              street: user.street,
+              /* zip_code: user.zip_code, */
+              username: user.username,
               second_name: user.second_name,
-              user_group: 2,
-              postal_code: user.postal_code,
+              role:  parseInt(user.role),
+              /* postal_code: user.postal_code, */
               phone_number: user.phone_number,
               password: user.password,
               last_name: user.last_name,
               first_name: user.first_name,
               email: user.email,
-              country: user.country,
-              confirmpassword: user.confirmpassword,
+              country_id:  parseInt(user.country),
+              /* city: user.city, */
+              state:  parseInt(user.state),
             }
           }
         })

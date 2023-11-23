@@ -44,7 +44,7 @@
 import TokenService from "@/services/token.service";
 import { Form, Field, ErrorMessage } from "vee-validate"
 import * as yup from "yup"
-import { LOGIN_MUTATION, USER_QUERY, ADD_USER_MUTATION } from '@/graphql'
+import { LOGIN_MUTATION, CURRENTUSER_QUERY, ADD_USER_MUTATION } from '@/graphql'
 export default {
   name: 'Login',
   components: {
@@ -76,21 +76,22 @@ export default {
         .mutate({
           mutation: LOGIN_MUTATION,
           variables: {
-            email: user.email,
+            username: user.email,
             password: user.password
           }
         })
         .then(response => {
+          console.log(response.data)
           localStorage.setItem('token', response.data.login.token)
 
         }).catch((error) => {
           this.message = error.message
         })
       await this.$apollo.query({
-        query: USER_QUERY,
+        query: CURRENTUSER_QUERY,
         fetchPolicy: 'network-only'
       }).then(response => {
-        TokenService.setUser(response.data.currentuser);
+        TokenService.setUser(response.data.currentUser);
       })
       this.$router.push("/dashboard")
     }

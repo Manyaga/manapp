@@ -1,11 +1,13 @@
 import gql from 'graphql-tag'
 
 export const LOGIN_MUTATION = gql`
-mutation Mutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
+mutation Mutation($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    userId
+    token
+    tokenExpiration
   }
+}
 `
 export const LOGIOUT_MUTATION = gql`
 query Logoutuser {
@@ -16,28 +18,36 @@ query Logoutuser {
 `
 
 export const CURRENTUSER_QUERY = gql`
-query Oneuser($userId: ID!) {
-  oneuser(userId: $userId) {
-    _id
+query CurrentUser {
+  currentUser {
+    user_id
     first_name
     last_name
-    second_name
-    profilePhoto
-    phone_number
-    postal_code
-    zip_code
-    school_name
     email
-    street
+    password
+    phone_number
+    postalCode
+    city
+    state {
+      state_name
+      state_id
+      country_id {
+        country_name
+        country_id
+        country_code
+      }
+    }
+    country_id {
+      country_name
+      country_id
+    }
     role {
-      _id
-      role_name
-      createdAt
-      updatedAt
+      group_id {
+        group_id
+        group_name
+      }
     }
     createdAt
-    updatedAt
-    
   }
 }
 `
@@ -74,15 +84,15 @@ mutation CreateCountry($countryName: String!) {
 `
 //STATES
 export const ALL_STATES_QUERY = gql`
-query State($stateId: Int!) {
-  state(stateId: $stateId) {
+query States {
+  states {
     state_id
     state_name
     abbreviation
     country_id {
-      country_code
-      country_id
       country_name
+      country_id
+      country_code
     }
   }
 }
@@ -332,43 +342,19 @@ query Users {
 }
 `
 export const ADD_USER_MUTATION = gql`
-mutation CreateUser {
-  createUser(input: $input) {
-     user_id
-     first_name
-     last_name
-     nickname
-     email
-     password
-     date_of_birth
-     gender
-     location
-     profile_picture
-     phone_number
-     postalCode
-     zipCode
-     city
-     state {
-       state_id
-       state_name
-       abbreviation
-       country_id {
-         country_id
-         country_name
-         country_code
-       }
-     }
-     verifyString
-     verifiedEmail
-     verifiedPhone
-     status
-     country_id {
-       country_id
-       country_name
-       country_code
-     }
-   }
- }
+mutation CreateUser($createAcc: createuser) {
+  createUser(createAcc: $createAcc) {
+    phone_number
+    first_name
+    email
+    role {
+      group_id {
+        group_name
+      }
+    }
+    user_id
+  }
+}
 `
 export const DELETE_USER_MUTATION = gql`
 mutation DeleteUser($deleteUserId: Int!) {
