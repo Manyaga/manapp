@@ -80,6 +80,9 @@
       </div>
     </section>
   </div>
+  <div v-if="message" class="alert alert-dismissible fade show alert-card alert-danger" role="alert">
+    {{ message }}
+  </div>
 </template>
 
 <script>
@@ -140,6 +143,7 @@ export default {
       // }).then(response => {
       //   TokenService.setUser(response.data.currentUser);
       // })
+      this.message = "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
       // this.$router.push("/dashboard")
     },
   },
