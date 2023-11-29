@@ -273,6 +273,7 @@ body {
 
 figure {
   margin-bottom: 50px;
+  margin-top: 50px;
   text-align: center; }
 
 .form-submit {
@@ -297,7 +298,7 @@ figure {
 
 .signup-image-link {
   font-size: 14px;
-  color: #222;
+  color: hotpink;
   display: block;
   text-align: center; }
 
