@@ -122,31 +122,31 @@ export default {
   },
   methods: {
     async handleLogin(user) {
-      // await this.$apollo
-      //   .mutate({
-      //     mutation: LOGIN_MUTATION,
-      //     variables: {
-      //       username: user.email,
-      //       password: user.password,
-      //     },
-      //   })
-      //   .then((response) => {
-      //     console.log(response.data);
-      //     localStorage.setItem("token", response.data.login.token);
-      //   })
-      //   .catch((error) => {
-      //     this.message = error.message;
-      //   });
-      // await this.$apollo.query({
-      //   query: CURRENTUSER_QUERY,
-      //   fetchPolicy: 'network-only'
-      // }).then(response => {
-      //   TokenService.setUser(response.data.currentUser);
-      // })
+      await this.$apollo
+        .mutate({
+          mutation: LOGIN_MUTATION,
+          variables: {
+            username: user.email,
+            password: user.password,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("token", response.data.login.token);
+        })
+        .catch((error) => {
+          this.message = error.message;
+        });
+      await this.$apollo.query({
+        query: CURRENTUSER_QUERY,
+        fetchPolicy: 'network-only'
+      }).then(response => {
+        TokenService.setUser(response.data.currentUser);
+      })
       
-      // // this.message = "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
-      // this.$router.push("/dashboard")
-      this.message = "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
+      // this.message = "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
+      this.$router.push("/dashboard")
+      // this.message = "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
     },
   },
 };
