@@ -148,7 +148,7 @@ export default {
       this.$apollo
         .mutate({
           mutation: ADD_USER_GROUP_MUTATION,
-          input: {
+          variables: {
             group_name: group.group_name,
           }
         })

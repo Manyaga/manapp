@@ -4,9 +4,10 @@
       <div class="container">
         <div class="signin-content">
           <div class="signin-image">
+            <br />
             <figure>
               <img
-                src="../../assets/images/signin-image.jpg"
+                src="../../assets/images/wrist-watch.jpg"
                 alt="sing up image"
               />
             </figure>
@@ -14,7 +15,14 @@
           </div>
 
           <div class="signin-form">
-            <h2 class="form-title">Welcome Back</h2>
+            <span class="flex-grow-1"></span>
+            <div class="d-flex align-items-center">
+              <img class="logo" src="../../assets/login-logo.jpg" alt="" />
+              <div>
+                <h2 class="form-titlem-0">ManApp</h2>
+              </div>
+            </div>
+            <h3 class="form-title">Welcome Back!</h3>
             <Form
               @submit="handleLogin"
               :validation-schema="schema"
