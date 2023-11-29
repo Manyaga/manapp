@@ -12,9 +12,9 @@
                     <div class="dropdown-menu text-start" aria-labelledby="dropdownMenuButton">
                         <div class="row m-0">
                             <div class="col-md-4 p-4 bg-img">
-                                <h2 class="title">Mega Menu <br /> God's Gift</h2>
+                                <h2 class="title">Mega Menu <br /> Man App</h2>
                                 <p>GGE ROBOTICS FOR MEDICAL, AGRICULTURE, AND TECHNOLOGY.</p>
-                                <p class="mb-4">At God's Gift Enterprise (GGE) Roboticsfor Medical, Agriculture, and Technology, we purpose to empower professionals in Robotic Process Automation (RPA) for Medical, Agricultural, Manufacturing, Financial Technology, Retail, and Home Technology by closing the loop on experience and exposure.</p>
+                                <p class="mb-4">At Man App Enterprise (GGE) Roboticsfor Medical, Agriculture, and Technology, we purpose to empower professionals in Robotic Process Automation (RPA) for Medical, Agricultural, Manufacturing, Financial Technology, Retail, and Home Technology by closing the loop on experience and exposure.</p>
                                 <button class="btn btn-lg btn-rounded btn-outline-warning">Learn More</button>
                             </div>
                             <div class="col-md-4 p-4">

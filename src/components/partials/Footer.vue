@@ -4,12 +4,12 @@
              <div class="row">
                <div class="col-md-9">
                  <p>
-                   <strong>God's Gift Enterprise</strong>
+                   <strong>Man App Enterprise</strong>
                  </p>
-                 <p>
+                 <!-- <p>
                   As we say, "Every circle starts with hope and that's what we can... Start the circle of HOPE!”
                    <sunt></sunt>
-                 </p>
+                 </p> -->
                </div>
              </div>
              <div
@@ -20,11 +20,11 @@
                <div class="d-flex align-items-center">
                  <img
                    class="logo"
-                   src="../../assets/images/logo.jpg"
+                   src="../../assets/logo.jpg"
                    alt=""
                  />
                  <div>
-                   <p class="m-0">&copy; 2023 God's Gift Enterprise</p>
+                   <p class="m-0">&copy; 2023 Man App Enterprise</p>
                    <p class="m-0">All rights reserved</p>
                  </div>
                </div>
