@@ -307,6 +307,34 @@ mutation UpdateUserInterest($userInterestId: Int!, $input: UserInterestInput!) {
 }
 `
 //USER
+export const CATEGORY_USERS_QUERY = gql`
+query UserUserGroups($groupId: ID) {
+  userUserGroups(group_id: $groupId) {
+    group_id {
+      group_id
+      group_name
+    }
+    user_id {
+      email
+      first_name
+      last_name
+      phone_number
+      user_id
+      username
+      country_id {
+        country_code
+        country_id
+        country_name
+      }
+      state {
+        state_name
+        state_id
+      }
+    }
+    id
+  }
+}
+`
 export const ALL_USERS_QUERY = gql`
 query Users {
   users {
