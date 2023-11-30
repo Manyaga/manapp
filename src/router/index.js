@@ -117,6 +117,13 @@ const routes = [
     beforeEnter: authGuard,
     meta: { title: "Profile" },
   },
+  //common routes  @/components/requestLanding.vue
+  {
+    path: "/appointments",
+    component: () => import("@/components/admin/appointments.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Appointments" },
+  },
 ];
 
 const router = createRouter({

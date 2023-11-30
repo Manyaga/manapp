@@ -139,14 +139,17 @@ export default {
       //   .catch((error) => {
       //     this.message = error.message;
       //   });
-      // await this.$apollo.query({
-      //   query: CURRENTUSER_QUERY,
-      //   fetchPolicy: 'network-only'
-      // }).then(response => {
-      //   TokenService.setUser(response.data.currentUser);
-      // })
+      // await this.$apollo
+      //   .query({
+      //     query: CURRENTUSER_QUERY,
+      //     fetchPolicy: "network-only",
+      //   })
+      //   .then((response) => {
+      //     TokenService.setUser(response.data.currentUser);
+      //   });
+
       // // this.message = "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
-      // this.$router.push("/dashboard")
+      // this.$router.push("/dashboard");
       this.message =
         "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
     },
