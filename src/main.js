@@ -49,7 +49,8 @@ require("@/assets/js/scripts/smart.wizard.script.min.js");
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: "https://core.tandasafoundation.org/api",
+  /* uri: "https://core.tandasafoundation.org/api", */
+  uri: "http://localhost:8000/api",
 });
 
 // Cache implementation

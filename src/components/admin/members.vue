@@ -347,85 +347,89 @@
         </Form>
       </div>
     </div>
-  </div>
-  <div class="app-admin-wrap layout-horizontal-bar">
-    <Sidebar />
-    <Topbar />
-    <div class="main-content-wrap d-flex flex-column">
-      <div class="main-content">
-        <button
-          class="btn btn-info text-white ul-btn-raised--v2 m-1 float-end"
-          type="button"
-          data-bs-toggle="modal"
-          data-target="#verifyModalContent"
-          data-whatever="@mdo"
-        >
-          <i class="nav-icon i-add text-primary text-white fw-bold"></i> ADD
-          Member
-        </button>
-        <Breadcrumbs />
-        <div class="separator-breadcrumb border-top"></div>
-        <div class="row mb-4">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table
-                class="table text-center"
-                id="member_table"
-                style="width: 100%"
-              >
-                <thead>
-                  <tr class="bg-primary text-white">
-                    <th scope="col">#</th>
-                    <th scope="col">Member</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(member, index) in userUserGroups"
-                    :key="member.service_id"
-                  >
-                    <td>{{ index + 1 }}</td>
-                    <td>
-                      {{
-                        member.user_id.first_name.toUpperCase() +
-                        " " +
-                        member.user_id.last_name.toUpperCase()
-                      }}
-                    </td>
-                    <td>{{ member.user_id.email }}</td>
-                    <td>{{ member.user_id.phone_number }}</td>
-                    <td>
-                      {{ member.user_id.country_id.country_name.toUpperCase() }}
-                    </td>
-                    <td>
-                      <a
-                        class="text-success me-2"
-                        href="#"
-                        @click="openEditUser(member)"
-                        ><i class="nav-icon i-Pen-2 fw-bold"></i
-                      ></a>
-                      <a
-                        class="text-danger me-2"
-                        href="#"
-                        @click="deleteUser(member._id)"
-                        ><i class="nav-icon i-Close-Window fw-bold"></i
-                      ></a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+    <div class="app-admin-wrap layout-horizontal-bar">
+      <Sidebar />
+      <Topbar />
+      <div class="main-content-wrap d-flex flex-column">
+        <div class="main-content">
+          <button
+            class="btn btn-info text-white ul-btn-raised--v2 m-1 float-end"
+            type="button"
+            data-bs-toggle="modal"
+            data-target="#verifyModalContent"
+            data-whatever="@mdo"
+          >
+            <i class="nav-icon i-add text-primary text-white fw-bold"></i> ADD
+            MEMBER
+          </button>
+          <Breadcrumbs />
+          <div class="separator-breadcrumb border-top"></div>
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table
+                  class="table text-center"
+                  id="member_table"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr class="bg-primary text-white">
+                      <th scope="col">#</th>
+                      <th scope="col">Member</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Country</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="(member, index) in userUserGroups"
+                      :key="member.service_id"
+                    >
+                      <td>{{ index + 1 }}</td>
+                      <td>
+                        {{
+                          member.user_id.first_name.toUpperCase() +
+                          " " +
+                          member.user_id.last_name.toUpperCase()
+                        }}
+                      </td>
+                      <td>{{ member.user_id.email }}</td>
+                      <td>{{ member.user_id.phone_number }}</td>
+                      <td>
+                        {{
+                          member.user_id.country_id.country_name.toUpperCase()
+                        }}
+                      </td>
+                      <td>
+                        <a
+                          class="text-success me-2"
+                          href="#"
+                          @click="openEditUser(member)"
+                          ><i class="nav-icon i-Pen-2 fw-bold"></i
+                        ></a>
+                        <a
+                          class="text-danger me-2"
+                          href="#"
+                          @click="deleteUser(member._id)"
+                          ><i class="nav-icon i-Close-Window fw-bold"></i
+                        ></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="flex-grow-1"></div>
-      <Footer />
     </div>
   </div>
+  <div class="flex-grow-1"></div>
+  <Footer />
+  <!-- </div> -->
+  <!-- </div> -->
 </template>
 
 <script>
@@ -590,133 +594,226 @@ export default {
       this.country = user.user_id.country_id.country_id;
       $("#editModalContent").modal("show");
     },
-    editUser(user) {
-      console.log(user);
-      this.$apollo
-        .mutate({
-          mutation: EDIT_USER_MUTATION,
-          variables: {
-            updateuserId: parseInt(this.user_id),
-            input: {
-              first_name: user.first_name,
-              last_name: user.last_name,
-              email: user.email,
-              phone_number: user.phone_number,
-              postalCode: user.postalCode,
-              zipCode: user.zipCode,
-              country_id: parseInt(user.country),
-              state: parseInt(user.state),
-              role: 2,
-              username: user.username,
-            },
-          },
-        })
-        .then((response) => {
-          $("#editModalContent").modal("hide");
-          this.$swal({
-            title: "Member updated sucessfully",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          this.$apollo.queries.userUserGroups.refetch();
-        })
-        .catch((error) => {
-          this.$swal({
-            title: error.message,
-            position: "top-end",
-            icon: "warning",
-            showConfirmButton: false,
-            timer: 3000,
-          });
-        });
-    },
-    deleteUser(user_id) {
-      this.$swal({
-        title: "Delete the member?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.$apollo
-            .mutate({
-              mutation: DELETE_USER_MUTATION,
-              variables: {
-                id: user_id,
+    methods: {
+      addUser(user) {
+        console.log(user);
+        this.$apollo
+          .mutate({
+            mutation: ADD_USER_MUTATION,
+            variables: {
+              createAcc: {
+                zipCode: user.zipCode,
+                role: 2,
+                postalCode: user.postalCode,
+                phone_number: user.phone_number,
+                password: user.password,
+                last_name: user.last_name,
+                first_name: user.first_name,
+                email: user.email,
+                country_id: parseInt(user.country),
+                state: parseInt(user.state),
+                username: user.username,
               },
-            })
-            .then((response) => {
-              this.$swal({
-                title: "Member deleted sucessfully",
-                position: "top-end",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 2000,
-              });
-              this.$apollo.queries.userUserGroups.refetch();
-            })
-            .catch((error) => {
-              this.$swal({
-                title: error.message,
-                position: "top-end",
-                icon: "warning",
-                showConfirmButton: false,
-                timer: 3000,
-              });
+            },
+          })
+          .then((response) => {
+            // redirect user
+            $("#verifyModalContent").modal("hide");
+            this.$swal({
+              title: "Member added sucessfully",
+              position: "top-end",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000,
             });
-        }
-      });
-    },
-    async statusChange() {
-      this.userUserGroups = [];
-      $("#member_table").DataTable().destroy();
-      await this.$apollo
-        .query({
-          query: CATEGORY_USERS_QUERY,
-          variables: {
-            groupId: "2",
-          },
-        })
-        .then((response) => {
-          this.userUserGroups = response.data.userUserGroups;
+            this.$apollo.queries.userUserGroups.refetch();
+          })
+          .catch((error) => {
+            this.$swal({
+              title: error.message,
+              position: "top-end",
+              icon: "warning",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          });
+      },
+
+      openEditUser(user) {
+        this.user_id = user.user_id.user_id;
+        this.first_name = user.user_id.first_name;
+        this.last_name = user.user_id.last_name;
+        this.email = user.user_id.email;
+        this.phone_number = user.user_id.phone_number;
+        this.postalCode = user.user_id.postalCode;
+        this.zipCode = user.user_id.zipCode;
+        /* this.state = user.user_id.state.state_id */
+        this.username = user.user_id.username;
+        this.country = user.user_id.country_id.country_id;
+        $("#editModalContent").modal("show");
+      },
+      editUser(user) {
+        console.log(user);
+        this.$apollo
+          .mutate({
+            mutation: EDIT_USER_MUTATION,
+            variables: {
+              updateuserId: parseInt(this.user_id),
+              input: {
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                phone_number: user.phone_number,
+                postalCode: user.postalCode,
+                zipCode: user.zipCode,
+                country_id: parseInt(user.country),
+                state: parseInt(user.state),
+                role: 2,
+                username: user.username,
+              },
+            },
+          })
+          .then((response) => {
+            $("#editModalContent").modal("hide");
+            this.$swal({
+              title: "Member updated sucessfully",
+              position: "top-end",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            this.$apollo.queries.userUserGroups.refetch();
+          })
+          .catch((error) => {
+            this.$swal({
+              title: error.message,
+              position: "top-end",
+              icon: "warning",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          });
+      },
+      deleteUser(user_id) {
+        this.$swal({
+          title: "Delete the member?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$apollo
+              .mutate({
+                mutation: DELETE_USER_MUTATION,
+                variables: {
+                  deleteUserId: user_id,
+                },
+              })
+              .then((response) => {
+                this.$swal({
+                  title: "Member deleted sucessfully",
+                  position: "top-end",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+                this.$apollo.queries.userUserGroups.refetch();
+              })
+              .catch((error) => {
+                this.$swal({
+                  title: error.message,
+                  position: "top-end",
+                  icon: "warning",
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+              });
+          }
         });
-      setTimeout(function () {
-        $("#member_table").DataTable({
-          destroy: true,
-          pageLength: 5,
-          lengthChange: true,
-          processing: true,
-          paging: true,
-          info: false,
-          dom: "Bfrtip",
-          buttons: [
-            {
-              extend: "csv",
-              text: '<i class="fa-solid fa-file-pdf"></i>',
-              className: "btn btn-sm btn-outline-success mb-3 text-success",
+      },
+      async statusChange() {
+        this.userUserGroups = [];
+        $("#member_table").DataTable().destroy();
+        await this.$apollo
+          .query({
+            query: CATEGORY_USERS_QUERY,
+            variables: {
+              groupId: "2",
             },
-            {
-              extend: "pdf",
-              text: '<i class="fa fa-file-pdf"></i>',
-              className: "btn btn-sm btn-outline-danger mb-3 text-danger",
+          })
+          .then((response) => {
+            this.userUserGroups = response.data.userUserGroups;
+          })
+          .then((response) => {
+            this.$swal({
+              title: "Member deleted sucessfully",
+              position: "top-end",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            this.$apollo.queries.userUserGroups.refetch();
+          })
+          .catch((error) => {
+            this.$swal({
+              title: error.message,
+              position: "top-end",
+              icon: "warning",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          });
+      },
+      async statusChange() {
+        this.userUserGroups = [];
+        $("#member_table").DataTable().destroy();
+        await this.$apollo
+          .query({
+            query: CATEGORY_USERS_QUERY,
+            variables: {
+              groupId: "2",
             },
-            {
-              extend: "print",
-              text: '<i class="fa fa-print"></i>',
-              className: "btn btn-sm btn-outline-secondary mb-3 text-secondary",
-            },
-          ],
-        });
-      }, 300);
+          })
+          .then((response) => {
+            this.userUserGroups = response.data.userUserGroups;
+          });
+        setTimeout(function () {
+          $("#member_table").DataTable({
+            destroy: true,
+            pageLength: 5,
+            lengthChange: true,
+            processing: true,
+            paging: true,
+            info: false,
+            dom: "Bfrtip",
+            buttons: [
+              {
+                extend: "csv",
+                text: '<i class="fa-solid fa-file-pdf"></i>',
+                className: "btn btn-sm btn-outline-success mb-3 text-success",
+              },
+              {
+                extend: "pdf",
+                text: '<i class="fa fa-file-pdf"></i>',
+                className: "btn btn-sm btn-outline-danger mb-3 text-danger",
+              },
+              {
+                extend: "print",
+                text: '<i class="fa fa-print"></i>',
+                className:
+                  "btn btn-sm btn-outline-secondary mb-3 text-secondary",
+              },
+            ],
+          });
+        }, 300);
+      },
     },
-  },
-  async created() {
-    this.statusChange();
+    async created() {
+      this.statusChange();
+    },
   },
 };
 </script>
