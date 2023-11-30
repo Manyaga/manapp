@@ -1,5 +1,5 @@
 <template>
-  <!-- Add State Modal -->
+  <!-- Add City Modal -->
   <div
     class="modal fade"
     id="verifyModalContent"
@@ -11,7 +11,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="verifyModalContent_title">ADD STATE</h5>
+          <h5 class="modal-title" id="verifyModalContent_title">ADD CITY</h5>
           <button
             class="btn btn-close"
             type="button"
@@ -19,10 +19,10 @@
             aria-label="Close"
           ></button>
         </div>
-        <Form @submit="addState" :validation-schema="schema" class="user">
+        <Form @submit="addCity" :validation-schema="schema" class="user">
           <div class="modal-body">
             <div class="form-group">
-              <label class="col-form-label" for="state">State:</label>
+              <label class="col-form-label" for="city">City:</label>
               <Field name="state_name" class="form-control" type="text" />
               <ErrorMessage name="state_name" class="text-danger p-3" />
             </div>
@@ -67,7 +67,7 @@
       </div>
     </div>
   </div>
-  <!-- Edit State Modal -->
+  <!-- Edit City Modal -->
   <div
     class="modal fade"
     id="editModalContent"
@@ -79,7 +79,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editModalContent_title">EDIT STATE</h5>
+          <h5 class="modal-title" id="editModalContent_title">EDIT CITY</h5>
           <button
             class="btn btn-close"
             type="button"
@@ -87,10 +87,10 @@
             aria-label="Close"
           ></button>
         </div>
-        <Form @submit="editState" :validation-schema="schema" class="user">
+        <Form @submit="editCity" :validation-schema="schema" class="user">
           <div class="modal-body">
             <div class="form-group">
-              <label class="col-form-label" for="state">State Name:</label>
+              <label class="col-form-label" for="city">City Name:</label>
               <Field
                 name="state_name"
                 class="form-control"
@@ -101,7 +101,7 @@
               <ErrorMessage name="state_name" class="text-danger p-3" />
             </div>
             <div class="form-group">
-              <label class="col-form-label" for="state">Abbreviation:</label>
+              <label class="col-form-label" for="city">Abbreviation:</label>
               <Field
                 name="abbreviation"
                 class="form-control"
@@ -162,7 +162,7 @@
           data-target="#verifyModalContent"
           data-whatever="@mdo"
         >
-          <i class="nav-icon i-add text-white fw-bold"></i> ADD STATE
+          <i class="nav-icon i-add text-white fw-bold"></i> ADD CITY
         </button>
         <Breadcrumbs />
         <div class="separator-breadcrumb border-top"></div>
@@ -172,7 +172,7 @@
               <thead class="table">
                 <tr class="bg-primary text-white">
                   <th scope="col">#</th>
-                  <th scope="col">State</th>
+                  <th scope="col">City</th>
                   <th scope="col">Abbreviation</th>
                   <th scope="col">Country</th>
                   <!-- <th scope="col">Status</th> -->
@@ -180,30 +180,30 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(state, index) in states" v-bind:key="state._id">
+                <tr v-for="(city, index) in cities" v-bind:key="city._id">
                   <td>{{ index + 1 }}</td>
-                  <td>{{ state.state_name.toUpperCase() }}</td>
-                  <td>{{ state.abbreviation.toUpperCase() }}</td>
+                  <td>{{ city.state_name.toUpperCase() }}</td>
+                  <td>{{ city.abbreviation.toUpperCase() }}</td>
                   <td>
-                    {{ state.country_id.country_name.toUpperCase() }}
+                    {{ city.country_id.country_name.toUpperCase() }}
                   </td>
                   <!-- <td>
                     <span
                       :class="
-                        state.status == 'active'
+                        city.status == 'active'
                           ? 'badge bg-success'
                           : 'badge bg-danger'
                       "
-                      >{{ state.status }}</span
+                      >{{ city.status }}</span
                     >
                   </td> -->
                   <td>
-                    <a class="text-info me-2" @click="openEditState(state)"
+                    <a class="text-info me-2" @click="openEditCity(city)"
                       ><i class="nav-icon i-Pen-2 fw-bold"></i
                     ></a>
                     <a
                       class="text-danger me-2"
-                      @click="deleteState(state.state_id)"
+                      @click="deleteCity(city.state_id)"
                       ><i class="nav-icon i-Close-Window fw-bold"></i
                     ></a>
                   </td>
@@ -245,14 +245,14 @@ import "@/assets/datatables/jszip.min.js";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import {
-  ALL_STATES_QUERY,
+  ALL_CITIES_QUERY,
   ALL_COUNTRIES_QUERY,
-  ADD_STATE_MUTATION,
-  EDIT_STATE_MUTATION,
-  DELETE_STATE_MUTATION,
+  ADD_CITY_MUTATION,
+  EDIT_CITY_MUTATION,
+  DELETE_CITY_MUTATION,
 } from "@/graphql";
 export default {
-  name: "State",
+  name: "City",
   components: {
     Sidebar,
     Topbar,
@@ -264,15 +264,15 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      state_name: yup.string().required("State name is required!"),
+      state_name: yup.string().required("City name is required!"),
       country_id: yup
         .string("Country is required!")
         .required("Country is required!"),
     });
     return {
-      states: [],
+      cities: [],
       countries: [],
-      state: "",
+      city: "",
       country_id: "",
       county_id: "",
       abbreviation: "",
@@ -282,36 +282,36 @@ export default {
   },
   apollo: {
     // fetch all countries
-    states: {
-      query: ALL_STATES_QUERY,
+    cities: {
+      query: ALL_CITIES_QUERY,
     },
     countries: {
       query: ALL_COUNTRIES_QUERY,
     },
   },
   methods: {
-    addState(state) {
+    addCity(city) {
       this.$apollo
         .mutate({
-          mutation: ADD_STATE_MUTATION,
+          mutation: ADD_CITY_MUTATION,
           variables: {
             input: {
-              abbreviation: state.abbreviation,
-              country_id: state.country_id,
-              state_name: state.state_name,
+              abbreviation: city.abbreviation,
+              country_id: city.country_id,
+              state_name: city.state_name,
             },
           },
         })
         .then((response) => {
           $("#verifyModalContent").modal("hide");
           this.$swal({
-            title: "State added sucessfully",
+            title: "City added sucessfully",
             position: "top-end",
             icon: "success",
             showConfirmButton: false,
             timer: 2000,
           });
-          this.$apollo.queries.states.refetch();
+          this.$apollo.queries.cities.refetch();
         })
         .catch((error) => {
           this.$swal({
@@ -323,37 +323,37 @@ export default {
           });
         });
     },
-    openEditState(state) {
-      this.state_name = state.state_name;
-      this.country_id = state.country_id.country_id;
-      this.abbreviation = state.abbreviation;
-      this.state_id = state.state_id;
+    openEditCity(city) {
+      this.state_name = city.state_name;
+      this.country_id = city.country_id.country_id;
+      this.abbreviation = city.abbreviation;
+      this.state_id = city.state_id;
       $("#editModalContent").modal("show");
     },
-    editState(state) {
-      console.log(state);
+    editCity(city) {
+      console.log(city);
       this.$apollo
         .mutate({
-          mutation: EDIT_STATE_MUTATION,
+          mutation: EDIT_CITY_MUTATION,
           variables: {
-            updateStateId: parseInt(this.state_id),
+            updateCityId: parseInt(this.state_id),
             input: {
-              abbreviation: state.abbreviation,
-              country_id: state.country_id,
-              state_name: state.state_name,
+              abbreviation: city.abbreviation,
+              country_id: city.country_id,
+              state_name: city.state_name,
             },
           },
         })
         .then((response) => {
           $("#editModalContent").modal("hide");
           this.$swal({
-            title: "State updated sucessfully",
+            title: "City updated sucessfully",
             position: "top-end",
             icon: "success",
             showConfirmButton: false,
             timer: 2000,
           });
-          this.$apollo.queries.states.refetch();
+          this.$apollo.queries.cities.refetch();
         })
         .catch((error) => {
           this.$swal({
@@ -365,9 +365,9 @@ export default {
           });
         });
     },
-    deleteState(state) {
+    deleteCity(city) {
       this.$swal({
-        title: "Delete the State?",
+        title: "Delete the City?",
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
@@ -378,20 +378,20 @@ export default {
         if (result.isConfirmed) {
           this.$apollo
             .mutate({
-              mutation: DELETE_STATE_MUTATION,
+              mutation: DELETE_CITY_MUTATION,
               variables: {
-                deleteStateId: parseInt(state),
+                deleteCityId: parseInt(city),
               },
             })
             .then((response) => {
               this.$swal({
-                title: "State deleated sucessfully",
+                title: "City deleated sucessfully",
                 position: "top-end",
                 icon: "success",
                 showConfirmButton: false,
                 timer: 2000,
               });
-              this.$apollo.queries.states.refetch();
+              this.$apollo.queries.cities.refetch();
             })
             .catch((error) => {
               this.$swal({
@@ -406,14 +406,14 @@ export default {
       });
     },
     async statusChange() {
-      this.states = [];
+      this.cities = [];
       $("#county_table").DataTable().destroy();
       await this.$apollo
         .query({
-          query: ALL_STATES_QUERY,
+          query: ALL_CITIES_QUERY,
         })
         .then((response) => {
-          this.states = response.data.states;
+          this.cities = response.data.cities;
         });
       setTimeout(function () {
         $("#county_table").DataTable({
