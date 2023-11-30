@@ -164,7 +164,7 @@ import "@/assets/datatables/dataTables.buttons.min.js";
 import "@/assets/datatables/buttons.html5.min.js";
 import "@/assets/datatables/buttons.print.min.js";
 import "@/assets/datatables/jszip.min.js";
-import { EDIT_SERVICE_INTEREST_MUTATION, DELETE_SERVICE_INTEREST_MUTATION, ADD_SERVICE_INTEREST_MUTATION, ALL_SERVICE_INTERESTS_QUERY, ALL_SERVICES_QUERY } from '@/graphql';
+import { EDIT_SERVICE_INTEREST_MUTATION, DELETE_SERVICE_INTEREST_MUTATION, ALL_INTEREST_SUBCATEGORIES_QUERY, ADD_SERVICE_INTEREST_MUTATION, ALL_SERVICE_INTERESTS_QUERY, ALL_SERVICES_QUERY } from '@/graphql';
 import { Form, Field, ErrorMessage } from "vee-validate"
 import * as yup from "yup"
 export default {

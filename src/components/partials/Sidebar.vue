@@ -23,7 +23,7 @@
                             <li>
                                 <div>
                                     <div>
-                                        <label class="toggle" for="drop-2"> Vendors</label><router-link to="/donors"><i class="nav-icon me-2 i-money"></i> Vendors</router-link>
+                                        <label class="toggle" for="drop-2"> Vendors</label><router-link to="/vendors"><i class="nav-icon me-2 i-money"></i> Vendors</router-link>
                                     </div>
                                 </div>
                             </li>

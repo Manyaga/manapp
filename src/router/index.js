@@ -23,6 +23,7 @@ const routes = [
   { path: "/users", component: () => import("@/components/admin/users.vue"), beforeEnter: authGuard, meta: { title: "All user Accounts" }, },
   { path: "/members", component: () => import("@/components/admin/members.vue"), beforeEnter: authGuard, meta: { title: "Members" }, },
   { path: "/admins", component: () => import("@/components/admin/admins.vue"), beforeEnter: authGuard,meta: { title: "Admins" }, },
+  { path: "/vendors", component: () => import("@/components/admin/vendors.vue"), beforeEnter: authGuard,meta: { title: "Vendors" }, },
   { path: "/service-interests", component: () => import("@/components/admin/serviceInterests.vue"), beforeEnter: authGuard,  meta: { title: "Service Interest" }, },
   {
     path: "/service-pricings",
