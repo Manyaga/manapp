@@ -15,62 +15,15 @@ const routes = [
   { path: "/login", component: SignIn, meta: { title: "Sign In" } },
   { path: "/register", component: Register, meta: { title: "Register" } },
 
-  {
-    path: "/services",
-    component: () => import("@/components/admin/services.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Services" },
-  },
-  {
-    path: "/states",
-    component: () => import("@/components/admin/states.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "States" },
-  },
-  {
-    path: "/countries",
-    component: () => import("@/components/admin/countries.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Countries" },
-  },
-  {
-    path: "/cities",
-    component: () => import("@/components/admin/cities.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Cities" },
-  },
-
-  {
-    path: "/user-groups",
-    component: () => import("@/components/admin/userGroups.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Roles" },
-  },
-  {
-    path: "/users",
-    component: () => import("@/components/admin/users.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "All user Accounts" },
-  },
-  {
-    path: "/members",
-    component: () => import("@/components/admin/members.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Members" },
-  },
-  {
-    path: "/admins",
-    component: () => import("@/components/admin/users.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Admins" },
-  },
-
-  {
-    path: "/service-interests",
-    component: () => import("@/components/admin/serviceInterests.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Service Interest" },
-  },
+  { path: "/services", component: () => import("@/components/admin/services.vue"),  beforeEnter: authGuard, meta: { title: "Services" },},
+  {  path: "/states",  component: () => import("@/components/admin/states.vue"), beforeEnter: authGuard, meta: { title: "States" },},
+  { path: "/countries", component: () => import("@/components/admin/countries.vue"), beforeEnter: authGuard, meta: { title: "Countries" },},
+  { path: "/cities", component: () => import("@/components/admin/cities.vue"), beforeEnter: authGuard, meta: { title: "Cities" },},
+  { path: "/user-groups", component: () => import("@/components/admin/userGroups.vue"), beforeEnter: authGuard, meta: { title: "Roles" },},
+  { path: "/users", component: () => import("@/components/admin/users.vue"), beforeEnter: authGuard, meta: { title: "All user Accounts" }, },
+  { path: "/members", component: () => import("@/components/admin/members.vue"), beforeEnter: authGuard, meta: { title: "Members" }, },
+  { path: "/admins", component: () => import("@/components/admin/admins.vue"), beforeEnter: authGuard,meta: { title: "Admins" }, },
+  { path: "/service-interests", component: () => import("@/components/admin/serviceInterests.vue"), beforeEnter: authGuard,  meta: { title: "Service Interest" }, },
   {
     path: "/service-pricings",
     component: () => import("@/components/admin/servicePricings.vue"),

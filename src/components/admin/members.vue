@@ -193,7 +193,7 @@
             <div class="main-content">
                 <button class="btn btn-info text-white ul-btn-raised--v2 m-1  float-end" type="button"
                     data-bs-toggle="modal" data-target="#verifyModalContent" data-whatever="@mdo">
-                    <i class="nav-icon i-add text-primary text-white fw-bold"></i> ADD Member</button>
+                    <i class="nav-icon i-add text-primary text-white fw-bold"></i> ADD MEMBER</button>
                 <Breadcrumbs />
                 <div class="separator-breadcrumb border-top"></div>
                 <div class="row mb-4">
@@ -454,7 +454,7 @@ export default {
                         .mutate({
                             mutation: DELETE_USER_MUTATION,
                             variables: {
-                                id: user_id,
+                                deleteUserId: user_id,
                             }
                         })
                         .then(response => {

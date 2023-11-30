@@ -310,28 +310,28 @@ mutation UpdateUserInterest($userInterestId: Int!, $input: UserInterestInput!) {
 export const CATEGORY_USERS_QUERY = gql`
 query UserUserGroups($groupId: ID) {
   userUserGroups(group_id: $groupId) {
-    group_id {
-      group_id
-      group_name
-    }
     user_id {
-      email
-      first_name
       last_name
-      phone_number
-      user_id
       username
+      first_name
+      phone_number
+      email
       country_id {
-        country_code
         country_id
+        country_code
         country_name
       }
       state {
         state_name
         state_id
       }
+      user_id
     }
     id
+    group_id {
+      group_id
+      group_name
+    }
   }
 }
 `
@@ -385,7 +385,7 @@ mutation CreateUser($createAcc: createuser) {
 }
 `
 export const DELETE_USER_MUTATION = gql`
-mutation DeleteUser($deleteUserId: Int!) {
+mutation Mutation($deleteUserId: Int!) {
   deleteUser(id: $deleteUserId)
 }
 `
