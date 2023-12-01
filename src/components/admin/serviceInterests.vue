@@ -308,7 +308,7 @@ export default {
       service_id: yup.string().required("Service name is required!"),
     });
     return {
-      ServiceIterests: [],
+      serviceInterests: [],
       services: [],
       interestSubcategories: [],
       service_id: "",
@@ -317,7 +317,7 @@ export default {
     };
   },
   apollo: {
-    ServiceIterests: {
+    serviceInterests: {
       query: ALL_SERVICE_INTERESTS_QUERY,
     },
     services: {
@@ -349,7 +349,7 @@ export default {
             showConfirmButton: false,
             timer: 2000,
           });
-          this.$apollo.queries.ServiceIterests.refetch();
+          this.$apollo.queries.serviceInterests.refetch();
         })
         .catch((error) => {
           this.$swal({
@@ -385,7 +385,7 @@ export default {
                 showConfirmButton: false,
                 timer: 2000,
               });
-              this.$apollo.queries.ServiceIterests.refetch();
+              this.$apollo.queries.serviceInterests.refetch();
             })
             .catch((error) => {
               this.$swal({
@@ -426,7 +426,7 @@ export default {
             showConfirmButton: false,
             timer: 2000,
           });
-          this.$apollo.queries.ServiceIterests.refetch();
+          this.$apollo.queries.serviceInterests.refetch();
         })
         .catch((error) => {
           this.$swal({

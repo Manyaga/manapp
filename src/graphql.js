@@ -448,26 +448,40 @@ export const ALL_SERVICE_PRICINGS_QUERY = gql`
         service_id
         service_name
       }
+      user {
+        first_name
+        user_id
+        last_name
+        email
+      }
     }
   }
 `;
 export const ADD_SERVICE_PRICING_MUTATION = gql`
-  mutation CreateServicePricing($input: ServicePricingInput!) {
+  mutation Mutation($input: ServicePricingInput!) {
     createServicePricing(input: $input) {
       pricing_id
       price
       duration
       user_id {
-        last_name
-        first_name
         email
-        phone_number
+        first_name
+        gender
+        last_name
+        nickname
       }
       service_id
       service {
         description
         service_id
         service_name
+      }
+      user {
+        email
+        first_name
+        gender
+        last_name
+        nickname
       }
     }
   }
@@ -509,19 +523,23 @@ export const EDIT_SERVICE_PRICING_MUTATION = gql`
 `;
 //SERVICE_INTEREST
 export const ALL_SERVICE_INTERESTS_QUERY = gql`
-  query ServiceIterests {
+  query ServiceInterests {
     serviceInterests {
-      service {
-        service_id
-        service_name
-        description
-      }
-      service_id
       service_interest_id
       subcategory_id
+      service_id
       subcategory {
+        category {
+          category_id
+          name
+        }
         name
         subcategory_id
+      }
+      service {
+        description
+        service_id
+        service_name
       }
     }
   }

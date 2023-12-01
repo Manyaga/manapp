@@ -24,6 +24,42 @@
         <Form @submit="addAppointment" class="user">
           <div class="modal-body">
             <div class="row row-xs">
+              <div v-if="selectedService">
+                <h5>Vendors offering {{ selectedService.service_name }}</h5>
+                <div v-for="vendor in vendors" :key="vendor.vendor_id">
+                  <!-- Display vendor cards with relevant information -->
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ vendor.vendor_name }}</h5>
+                      <p class="card-text">Price: {{ vendor.price }}</p>
+                      <!-- Additional vendor information can be displayed here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="col-form-label" for="service_user"
+                  >Service User</label
+                >
+                <Field
+                  name="service_user"
+                  class="form-control form-control-lg"
+                  as="select"
+                >
+                  <option value="">-- Service User--</option>
+                  <option
+                    v-for="user in userUserGroups"
+                    :value="user.id"
+                    :key="user.id"
+                  >
+                    {{ user.user_id.first_name }}
+                  </option>
+                </Field>
+                <ErrorMessage
+                  name="service_user"
+                  class="text-danger py-3 text-sm"
+                />
+              </div>
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="service_id">Service</label>
                 <Field
@@ -57,32 +93,7 @@
                 />
                 <ErrorMessage name="price" class="text-danger p-3" />
               </div>
-
-              <div class="form-group col-md-6">
-                <label class="col-form-label" for="service_user"
-                  >Service User</label
-                >
-                <Field
-                  name="service_user"
-                  class="form-control form-control-lg"
-                  as="select"
-                >
-                  <option value="">-- Service User--</option>
-                  <option
-                    v-for="user in users"
-                    :value="user.user_id"
-                    :key="user.user_id"
-                  >
-                    {{ user.first_name }}
-                  </option>
-                </Field>
-                <ErrorMessage
-                  name="service_user"
-                  class="text-danger py-3 text-sm"
-                />
-              </div>
-
-              <div class="form-group col-md-6">
+              <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="user_id">User</label>
                 <Field
                   name="user_id"
@@ -99,9 +110,8 @@
                   </option>
                 </Field>
                 <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
-              </div>
-              <div class="form-group col-md-6">
-                <!-- <div class="row"> -->
+              </div> -->
+              <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="appointment_status"
                   >Appointment Status:</label
                 >
@@ -116,7 +126,7 @@
                   name="appointment_status"
                   class="text-danger p-3"
                 />
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="modal-footer">
@@ -155,19 +165,39 @@
             aria-label="Close"
           ></button>
         </div>
-        <Form
-          @submit="editAppointment"
-          :validation-schema="schema"
-          class="user"
-        >
+        <Form @submit="editAppointment" class="user">
           <div class="modal-body">
             <div class="row">
               <div class="form-group col-md-6">
-                <label class="col-form-label" for="service">Service</label>
+                <label class="col-form-label" for="service_user"
+                  >Service User</label
+                >
                 <Field
-                  name="service"
+                  name="service_user"
                   class="form-control form-control-lg"
-                  v-model="service"
+                  v-model="service_user"
+                  as="select"
+                >
+                  <option value="">-- Service User--</option>
+                  <option
+                    v-for="user in userUserGroups"
+                    :value="user.id"
+                    :key="user.id"
+                  >
+                    {{ user.user_id.first_name }}
+                  </option>
+                </Field>
+                <ErrorMessage
+                  name="service_user"
+                  class="text-danger py-3 text-sm"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="col-form-label" for="service_id">Service</label>
+                <Field
+                  name="service_id"
+                  class="form-control form-control-lg"
+                  v-model="service_id"
                   as="select"
                 >
                   <option value="">-- Service--</option>
@@ -179,7 +209,10 @@
                     {{ service.service_name }}
                   </option>
                 </Field>
-                <ErrorMessage name="service" class="text-danger py-3 text-sm" />
+                <ErrorMessage
+                  name="service_id"
+                  class="text-danger py-3 text-sm"
+                />
               </div>
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="price">Price:</label>
@@ -191,35 +224,13 @@
                 />
                 <ErrorMessage name="price" class="text-danger p-3" />
               </div>
-              <div class="form-group col-md-6">
-                <label class="col-form-label" for="service_user"
-                  >Service User</label
-                >
-                <Field
-                  name="service_user"
-                  class="form-control form-control-lg"
-                  as="select"
-                >
-                  <option value="">-- Service User--</option>
-                  <option
-                    v-for="user in users"
-                    :value="user.user_id"
-                    :key="user.user_id"
-                  >
-                    {{ user.first_name }}
-                  </option>
-                </Field>
-                <ErrorMessage
-                  name="service_user"
-                  class="text-danger py-3 text-sm"
-                />
-              </div>
 
-              <div class="form-group col-md-6">
+              <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="user_id">User</label>
                 <Field
                   name="user_id"
                   class="form-control form-control-lg"
+                  v-model="user_id"
                   as="select"
                 >
                   <option value="">-- User--</option>
@@ -232,7 +243,7 @@
                   </option>
                 </Field>
                 <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
-              </div>
+              </div> -->
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="appointment_status"
                   >Appointment Status:</label
@@ -381,6 +392,7 @@ import {
   DELETE_APPOINTMENT_MUTATION,
   ALL_USERS_QUERY,
   ALL_SERVICES_QUERY,
+  CATEGORY_USERS_QUERY,
 } from "@/graphql";
 export default {
   name: "Appointment",
@@ -404,6 +416,8 @@ export default {
       appointments: [],
       countries: [],
       users: [],
+      userUserGroups: [],
+      userUserGroups3: [],
       services: [],
       appointment: "",
       country_id: "",
@@ -414,6 +428,8 @@ export default {
       appointment_status: "",
       user_id: "",
       service_user: "",
+      selectedService: null,
+      vendors: [],
       schema,
     };
   },
@@ -441,8 +457,42 @@ export default {
     services: {
       query: ALL_SERVICES_QUERY,
     },
+    userUserGroups: {
+      query: CATEGORY_USERS_QUERY,
+      variables: {
+        groupId: "1",
+      },
+    },
+    userUserGroups3: {
+      query: CATEGORY_USERS_QUERY,
+      variables: {
+        groupId: "3",
+      },
+    },
   },
   methods: {
+    getVendorsByService() {
+      // Assuming you have an API endpoint to fetch vendors by service
+      // Adjust the API call based on your backend structure
+      const serviceId = this.selectedService.service_id;
+
+      // Make an API call to get vendors for the selected service
+      // Example using axios:
+      // axios.get(`/api/vendors?serviceId=${serviceId}`)
+      //   .then(response => {
+      //     this.vendors = response.data;
+      //   })
+      //   .catch(error => {
+      //     console.error('Error fetching vendors:', error);
+      //   });
+
+      // For now, let's simulate some data for demonstration purposes
+      this.vendors = [
+        { vendor_id: 1, vendor_name: "Vendor A", price: 50 },
+        { vendor_id: 2, vendor_name: "Vendor B", price: 60 },
+        // Add more vendors as needed
+      ];
+    },
     addAppointment(appointment) {
       this.$apollo
         .mutate({
@@ -450,10 +500,10 @@ export default {
           variables: {
             input: {
               appointment_status: appointment.appointment_status,
-              price: appointment.price,
+              price: parseFloat(appointment.price),
               service_id: appointment.service_id,
               service_user: appointment.service_user,
-              user_id: this.user_id,
+              user_id: appointment.user_id,
             },
           },
         })
@@ -495,7 +545,7 @@ export default {
           variables: {
             appointmentId: parseInt(this.appointment_id),
             input: {
-              price: appointment.price,
+              price: parseFloat(appointment.price),
               service_user: appointment.service_user,
               user_id: appointment.user_id,
               appointment_status: this.appointment_status,

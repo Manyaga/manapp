@@ -1,4 +1,138 @@
 <template>
+  <!-- Add Appointment Modal -->
+  <div
+    class="modal fade"
+    id="verifyModalContent"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="verifyModalContent"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="verifyModalContent_title">
+            BOOK APPOINTMENT
+          </h5>
+          <button
+            class="btn btn-close"
+            type="button"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <Form @submit="addAppointment" class="user">
+          <div class="modal-body">
+            <div class="row row-xs">
+              <div class="form-group col-md-6">
+                <label class="col-form-label" for="service_id">Service</label>
+                <Field
+                  name="service_id"
+                  class="form-control form-control-lg"
+                  v-model="service_id"
+                  as="select"
+                >
+                  <option value="">-- Service--</option>
+                  <option
+                    v-for="service in services"
+                    :value="service.service_id"
+                    :key="service.service_id"
+                  >
+                    {{ service.service_name }}
+                  </option>
+                </Field>
+                <ErrorMessage
+                  name="service_id"
+                  class="text-danger py-3 text-sm"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <!-- <div class="row"> -->
+                <label class="col-form-label" for="price">Price:</label>
+                <Field
+                  name="price"
+                  class="form-control"
+                  id="price"
+                  type="text"
+                  placeholder="Price"
+                />
+                <ErrorMessage name="price" class="text-danger p-3" />
+              </div>
+
+              <div class="form-group col-md-6">
+                <label class="col-form-label" for="service_user"
+                  >Service User</label
+                >
+                <Field
+                  name="service_user"
+                  class="form-control form-control-lg"
+                  as="select"
+                >
+                  <option value="">-- Service User--</option>
+                  <option
+                    v-for="user in userUserGroups"
+                    :value="user.id"
+                    :key="user.id"
+                  >
+                    {{ user.user_id.first_name }}
+                  </option>
+                </Field>
+                <ErrorMessage
+                  name="service_user"
+                  class="text-danger py-3 text-sm"
+                />
+              </div>
+
+              <div class="form-group col-md-6">
+                <label class="col-form-label" for="user_id">User</label>
+                <Field
+                  name="user_id"
+                  class="form-control form-control-lg"
+                  as="select"
+                >
+                  <option value="">-- User--</option>
+                  <option
+                    v-for="user in users"
+                    :value="user.user_id"
+                    :key="user.user_id"
+                  >
+                    {{ user.first_name }}
+                  </option>
+                </Field>
+                <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
+              </div>
+              <!-- <div class="form-group col-md-6">
+                <label class="col-form-label" for="appointment_status"
+                  >Appointment Status:</label
+                >
+                <Field
+                  name="appointment_status"
+                  class="form-control"
+                  id="appointment_status"
+                  type="text"
+                  placeholder="Appointment Status"
+                />
+                <ErrorMessage
+                  name="appointment_status"
+                  class="text-danger p-3"
+                />
+              </div> -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button class="btn btn-primary" type="Submit">Submit</button>
+          </div>
+        </Form>
+      </div>
+    </div>
+  </div>
   <div class="app-admin-wrap layout-horizontal-bar">
     <Sidebar />
     <Topbar />
@@ -13,7 +147,7 @@
 
         <!-- Content Row -->
         <div class="row">
-          <!-- Earnings (Monthly) Card Example -->
+          <!-- Earnings  Card Example -->
           <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
               <div class="card-body">
@@ -22,11 +156,9 @@
                     <div
                       class="text-xs font-weight-bold text-primary text-uppercase mb-1"
                     >
-                      Appointments (Monthly)
+                      Appointments
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      2
-                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
                   </div>
                   <div class="col-auto">
                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -36,7 +168,7 @@
             </div>
           </div>
 
-          <!-- Earnings (Monthly) Card Example -->
+          <!-- Earnings  Card Example -->
           <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
               <div class="card-body">
@@ -45,11 +177,9 @@
                     <div
                       class="text-xs font-weight-bold text-success text-uppercase mb-1"
                     >
-                      Appointment Amount (Monthly)
+                      Appointment Amount
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      30
-                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">30</div>
                   </div>
                   <div class="col-auto">
                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -59,7 +189,7 @@
             </div>
           </div>
 
-          <!-- Earnings (Monthly) Card Example -->
+          <!-- Earnings  Card Example -->
           <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
               <div class="card-body">
@@ -68,7 +198,7 @@
                     <div
                       class="text-xs font-weight-bold text-info text-uppercase mb-1"
                     >
-                      Members (Monthly)
+                      Members
                     </div>
                     <div class="row no-gutters align-items-center">
                       <div class="col-auto">
@@ -109,11 +239,9 @@
                     <div
                       class="text-xs font-weight-bold text-warning text-uppercase mb-1"
                     >
-                      venders (Monthly)
+                      venders
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      13
-                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">13</div>
                   </div>
                   <div class="col-auto">
                     <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -123,7 +251,65 @@
             </div>
           </div>
         </div>
-
+        <div class="row">
+          <!-- Content Column -->
+          <div class="col-xl-12 col-lg-7">
+            <!-- Project Card Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Top Services</h6>
+              </div>
+              <div class="card-body">
+                <div class="row mb-2">
+                  <div
+                    class="col-lg-3 col-md-4 col-sm-6 mb-2"
+                    v-for="(service, index) in services"
+                    :key="service.service_id"
+                  >
+                    <div class="card card-ecommerce-3 o-hidden mb-4">
+                      <div class="d-flex flex-column flex-sm-row">
+                        <div>
+                          <img
+                            class="card-img-left"
+                            src="../assets/images/fashion.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="flex-grow-1 p-4">
+                          <h5 class="m-0">{{ service.service_name }}</h5>
+                          <p class="text-muted mt-3">
+                            {{ service.description }}
+                          </p>
+                          <div
+                            class="actions position-absolute bottom-0 end-0 p-4"
+                          >
+                            <button
+                              class="btn btn-primary ul-btn-raised--v2"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-target="#verifyModalContent"
+                              data-whatever="@mdo"
+                              @click="openAddAppointment(service)"
+                            >
+                              BOOK APPOINTMENT
+                            </button>
+                            <!-- <button
+                              class="btn btn-primary ul-btn-raised--v2"
+                              @click="openEditService(service)"
+                              type="button"
+                            >
+                              Book
+                            </button> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Content Row -->
         <div class="row">
           <!-- Content Column -->
@@ -180,7 +366,9 @@
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Annual Service Amounts</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    Annual Service Amounts
+                  </h6>
                 </div>
                 <div class="card-body">
                   <h4 class="small font-weight-bold">
@@ -271,11 +459,11 @@ import Sidebar from "@/components/partials/Sidebar";
 import {
   ALL_INTEREST_CATEGORIES_QUERY,
   ALL_SERVICES_QUERY,
-  EDIT_INTEREST_CATEGORY_MUTATION,
-  DELETE_INTEREST_CATEGORY_MUTATION,
+  ADD_APPOINTMENT_MUTATION,
+  CATEGORY_USERS_QUERY,
+  ALL_USERS_QUERY,
 } from "@/graphql";
 
-import { DASHBOARD_QUERY, USER_DASHBOARD_QUERY } from "@/graphql";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
@@ -286,11 +474,15 @@ export default {
       allDonationRequests: [],
       myDoughnutChart: null,
       currentuser: [],
+      services: [],
       total: 0,
       donationCount: 0,
       requestCount: 0,
       myLineChart: null,
       myDoughnutChart: null,
+      service_id: "",
+      price: "",
+      appointment_status: "",
     };
   },
   apollo: {
@@ -298,11 +490,62 @@ export default {
     interestCategories: {
       query: ALL_INTEREST_CATEGORIES_QUERY,
     },
+    services: {
+      query: ALL_SERVICES_QUERY,
+    },
+    userUserGroups: {
+      query: CATEGORY_USERS_QUERY,
+      variables: {
+        groupId: "2",
+      },
+    },
+    users: {
+      query: ALL_USERS_QUERY,
+    },
   },
   async created() {
     // Your async data fetching logic goes here
   },
   methods: {
+    openAddAppointment(service) {
+      this.service_id = service.service_id;
+      this.appointment_status = 0;
+    },
+    addAppointment(appointment) {
+      this.$apollo
+        .mutate({
+          mutation: ADD_APPOINTMENT_MUTATION,
+          variables: {
+            input: {
+              appointment_status: parseInt(this.appointment_status),
+              price: parseFloat(appointment.price),
+              service_id: this.service_id,
+              service_user: appointment.service_user,
+              user_id: appointment.user_id,
+            },
+          },
+        })
+        .then((response) => {
+          $("#verifyModalContent").modal("hide");
+          this.$swal({
+            title: "Appointment added sucessfully",
+            position: "top-end",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          this.$apollo.queries.appointments.refetch();
+        })
+        .catch((error) => {
+          this.$swal({
+            title: error.message,
+            position: "top-end",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        });
+    },
     loadChartData() {
       var lineChart = document.getElementById("lineChart").getContext("2d");
       var doughnutChart = document
@@ -314,7 +557,14 @@ export default {
       this.myLineChart = new Chart(lineChart, {
         type: "line",
         data: {
-          labels: ["Vendor", "Vendor1", "Vendor3", "Vendor2", "Vendor4", "Vendor5"],
+          labels: [
+            "Vendor",
+            "Vendor1",
+            "Vendor3",
+            "Vendor2",
+            "Vendor4",
+            "Vendor5",
+          ],
           datasets: [
             {
               label: "Monthly appointment Amount",
@@ -364,16 +614,16 @@ export default {
           datasets: [
             {
               data: [123, 33, 3334, 445, 4577],
-              backgroundColor: [
-                "blue",
-                "red",
-                "purple",
-                "green",
-                "pink",
-              ],
+              backgroundColor: ["blue", "red", "purple", "green", "pink"],
             },
           ],
-          labels: ["Glooming", "Dressing", "Personality", "Communication", "Romance"],
+          labels: [
+            "Glooming",
+            "Dressing",
+            "Personality",
+            "Communication",
+            "Romance",
+          ],
         },
         options: {
           responsive: true,
