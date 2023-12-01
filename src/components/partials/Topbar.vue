@@ -13,28 +13,23 @@
                         <div class="row m-0">
                             <div class="col-md-4 p-4 bg-img">
                                 <h2 class="title">Mega Menu <br /> Man App</h2>
-                                <p>GGE ROBOTICS FOR MEDICAL, AGRICULTURE, AND TECHNOLOGY.</p>
-                                <p class="mb-4">At Man App Enterprise (GGE) Roboticsfor Medical, Agriculture, and Technology, we purpose to empower professionals in Robotic Process Automation (RPA) for Medical, Agricultural, Manufacturing, Financial Technology, Retail, and Home Technology by closing the loop on experience and exposure.</p>
+                                <p>Be a Gentleman.</p>
+                                <p class="mb-4">At Man App Enterprise we understand the need to transform you to a better you.</p>
                                 <button class="btn btn-lg btn-rounded btn-outline-warning">Learn More</button>
                             </div>
                             <div class="col-md-4 p-4">
                                 <p class="text-primary text--cap border-bottom-primary d-inline-block">Features</p>
-                                <div class="menu-icon-grid w-auto p-0"><router-link class="nav-link" to="/products"><i class="i-Shop-4"></i> Products</router-link><router-link class="nav-link" to="/donors"><i class="i-Library"></i> Donors</router-link><router-link class="nav-link" to="/donations"><i class="i-Drop"></i> Donations</router-link><router-link class="nav-link" to="/members"><i class="i-File-Clipboard-File--Text"></i> Members</router-link><router-link class="nav-link" to="/admins"><i class="i-Checked-User"></i> Admins</router-link><router-link class="nav-link" to="/donation-requests"><i class="i-Ambulance"></i> Requests</router-link></div>
+                                <div class="menu-icon-grid w-auto p-0"><router-link class="nav-link" to="/vendors"><i class="i-Shop-4"></i> Vendors</router-link><router-link class="nav-link" to="/donors"><i class="i-Library"></i> Vendors</router-link><router-link class="nav-link" to="/donations"><i class="i-Drop"></i> Donations</router-link><router-link class="nav-link" to="/members"><i class="i-File-Clipboard-File--Text"></i> Members</router-link><router-link class="nav-link" to="/admins"><i class="i-Checked-User"></i> Admins</router-link><router-link class="nav-link" to="/donation-requests"><i class="i-Ambulance"></i> Requests</router-link></div>
                             </div>
                             <div class="col-md-4 p-4">
                                 <p class="text-primary text--cap border-bottom-primary d-inline-block">Components</p>
                                 <ul class="links">
-                                    <li><router-link class="nav-link" to="/products-attributes">Product Attributes</router-link></li>
-                                    <li><router-link class="nav-link" to="/categories">Product Categories</router-link></li>
-                                    <li><router-link class="nav-link" to="suppliers">Suppliers</router-link></li>
-                                    <li><router-link class="nav-link" to="/counties">Countries</router-link></li>
-                                    <li><router-link class="nav-link" to="/countries">Counties</router-link></li>
-                                    <li><router-link class="nav-link" to="/cities">Cities</router-link></li>
-                                    <li><router-link class="nav-link" to="/taxes">Taxes</router-link></li>
-                                    <li><router-link class="nav-link" to="/payment-options">Payment Options</router-link></li>
-                                    <li><router-link class="nav-link" to="/settings">Settings</router-link></li>
-                                    <li><router-link class="nav-link" to="/email-templates">Email Templates</router-link></li>
-                                    <li><router-link class="nav-link" to="/faqs">FAQs</router-link></li>
+                                    <li><router-link class="nav-link" to="/services">Services</router-link></li>
+                                    <li><router-link class="nav-link" to="/appointments">Appointments</router-link></li>
+                                    <li><router-link class="nav-link" to="/interest-categories">Interest Categories</router-link></li>
+                                    <li><router-link class="nav-link" to="/vendors">Vendors</router-link></li>
+                                    <li><router-link class="nav-link" to="/countries">Countries</router-link></li>
+                                    <li><router-link class="nav-link" to="/states">States</router-link></li>
                                     <li><router-link class="nav-link" to="/logs">Logs</router-link></li>
                                 </ul>
                             </div>
@@ -49,9 +44,9 @@
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Notificaiton-->
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <div class="badge-top-container" id="dropdownNotification" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="badge bg-primary">3</span><i class="i-Bell text-muted header-icon"></i></div>
-                    <!-- Notification dropdown-->
+                    
                     <div class="dropdown-menu dropdown-menu-right notification-dropdown rtl-ps-none" aria-labelledby="dropdownNotification" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                         <div class="dropdown-item d-flex">
                             <div class="notification-icon"><i class="i-Speach-Bubble-6 text-primary me-1"></i></div>
@@ -61,11 +56,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Notificaiton End-->
                 <!-- User avatar dropdown-->
                 <div class="dropdown">
-                    <div class="user col align-self-end"><img id="userDropdown" v-bind:src="currentuser.profilePhoto" alt="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                    <div class="user col align-self-end"><img id="userDropdown" src="../../assets/images/user.png" alt="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <div class="dropdown-header"><a class="dropdown-item" href="/profile"><i class="i-Lock-User me-1"></i> {{ currentuser.first_name.toUpperCase() }}  {{ currentuser.last_name.toUpperCase() }}</a></div><router-link to="/profile" class="dropdown-item">Profile</router-link><a class="dropdown-item" @click="logout()">Sign out</a>
                         </div>

@@ -22,10 +22,10 @@
                     <div
                       class="text-xs font-weight-bold text-primary text-uppercase mb-1"
                     >
-                      Total Srts (Monthly)
+                      Appointments (Monthly)
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      234
+                      2
                     </div>
                   </div>
                   <div class="col-auto">
@@ -45,10 +45,10 @@
                     <div
                       class="text-xs font-weight-bold text-success text-uppercase mb-1"
                     >
-                      Total Scans (Monthly)
+                      Appointment Amount (Monthly)
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      345
+                      30
                     </div>
                   </div>
                   <div class="col-auto">
@@ -68,14 +68,14 @@
                     <div
                       class="text-xs font-weight-bold text-info text-uppercase mb-1"
                     >
-                      Total Invoices (Monthly)
+                      Members (Monthly)
                     </div>
                     <div class="row no-gutters align-items-center">
                       <div class="col-auto">
                         <div
                           class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
                         >
-                          56
+                          8
                         </div>
                       </div>
                       <div class="col">
@@ -109,10 +109,10 @@
                     <div
                       class="text-xs font-weight-bold text-warning text-uppercase mb-1"
                     >
-                      Total LPs (Monthly)
+                      venders (Monthly)
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      1345
+                      13
                     </div>
                   </div>
                   <div class="col-auto">
@@ -151,7 +151,7 @@
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                  Toll Process Totals
+                  Monthly Total Amounts Per Service
                 </h6>
               </div>
               <!-- <div
@@ -180,11 +180,11 @@
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Annual Service Amounts</h6>
                 </div>
                 <div class="card-body">
                   <h4 class="small font-weight-bold">
-                    Server Migration <span class="float-right">20%</span>
+                    Glooming<span class="float-right">20%</span>
                   </h4>
                   <div class="progress mb-4">
                     <div
@@ -197,7 +197,7 @@
                     ></div>
                   </div>
                   <h4 class="small font-weight-bold">
-                    Sales Tracking <span class="float-right">40%</span>
+                    Dressing <span class="float-right">40%</span>
                   </h4>
                   <div class="progress mb-4">
                     <div
@@ -210,7 +210,7 @@
                     ></div>
                   </div>
                   <h4 class="small font-weight-bold">
-                    Customer Database <span class="float-right">60%</span>
+                    Personality <span class="float-right">60%</span>
                   </h4>
                   <div class="progress mb-4">
                     <div
@@ -223,7 +223,7 @@
                     ></div>
                   </div>
                   <h4 class="small font-weight-bold">
-                    Payout Details <span class="float-right">80%</span>
+                    Communication <span class="float-right">80%</span>
                   </h4>
                   <div class="progress mb-4">
                     <div
@@ -236,14 +236,14 @@
                     ></div>
                   </div>
                   <h4 class="small font-weight-bold">
-                    Account Setup <span class="float-right">Complete!</span>
+                    Romance<span class="float-right">90%</span>
                   </h4>
                   <div class="progress">
                     <div
                       class="progress-bar bg-success"
                       role="progressbar"
-                      style="width: 100%"
-                      aria-valuenow="100"
+                      style="width: 90%"
+                      aria-valuenow="90"
                       aria-valuemin="0"
                       aria-valuemax="100"
                     ></div>
@@ -314,10 +314,10 @@ export default {
       this.myLineChart = new Chart(lineChart, {
         type: "line",
         data: {
-          labels: ["test", "test1", "test23", "test2", "test34", "test5"],
+          labels: ["Vendor", "Vendor1", "Vendor3", "Vendor2", "Vendor4", "Vendor5"],
           datasets: [
             {
-              label: "Daily Toll Spending",
+              label: "Monthly appointment Amount",
               borderColor: "#08431A",
               pointBorderColor: "#FFF",
               pointBackgroundColor: "#08431A",
@@ -363,18 +363,17 @@ export default {
         data: {
           datasets: [
             {
-              data: [123, 33, 3334, 445, 4577, 6789],
+              data: [123, 33, 3334, 445, 4577],
               backgroundColor: [
                 "blue",
                 "red",
                 "purple",
                 "green",
                 "pink",
-                "orange",
               ],
             },
           ],
-          labels: ["test", "test1", "test23", "test2", "test34", "test5"],
+          labels: ["Glooming", "Dressing", "Personality", "Communication", "Romance"],
         },
         options: {
           responsive: true,
