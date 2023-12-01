@@ -25,12 +25,7 @@ const routes = [
   { path: "/admins", component: () => import("@/components/admin/admins.vue"), beforeEnter: authGuard,meta: { title: "Admins" }, },
   { path: "/vendors", component: () => import("@/components/admin/vendors.vue"), beforeEnter: authGuard,meta: { title: "Vendors" }, },
   { path: "/service-interests", component: () => import("@/components/admin/serviceInterests.vue"), beforeEnter: authGuard,  meta: { title: "Service Interest" }, },
-  {
-    path: "/service-pricings",
-    component: () => import("@/components/admin/servicePricings.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Service Pricing" },
-  },
+  { path: "/service-pricing", component: () => import("@/components/admin/servicePricings.vue"), beforeEnter: authGuard, meta: { title: "Service Pricing" },},
   {
     path: "/interest-categories",
     component: () => import("@/components/admin/interestCategories.vue"),

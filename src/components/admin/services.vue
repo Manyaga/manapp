@@ -77,8 +77,8 @@
         <Breadcrumbs />
         <div class="separator-breadcrumb border-top"></div>
 
-        <div class="row mb-4" v-for="(service, index) in services" :key="service.service_id">
-          <div class="col-md-6">
+        <div class="row mb-4">
+          <div class="col-md-6" v-for="(service, index) in services" :key="service.service_id">
             <div class="card card-ecommerce-3 o-hidden mb-4">
               <div class="d-flex flex-column flex-sm-row">
                 <div><img class="card-img-left" src="../../assets/images/fashion.png" alt="" /></div>

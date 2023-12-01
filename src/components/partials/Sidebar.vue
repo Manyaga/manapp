@@ -69,15 +69,7 @@
                       >
                     </li>
                     <li>
-                      <router-link to="/service-interests"
-                        ><i class="nav-icon me-2 i-Tag-4"></i
-                        ><span class="item-name">
-                          Service Interest</span
-                        ></router-link
-                      >
-                    </li>
-                    <li>
-                      <router-link to="/Service-pricing"
+                      <router-link to="/service-pricing"
                         ><i class="nav-icon me-2 i-Big-Data"></i
                         ><span class="item-name"> Pricing</span></router-link
                       >
