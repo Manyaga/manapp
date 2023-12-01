@@ -64,6 +64,7 @@
               <Field name="duration" class="form-control" id="duration" />
             </div>
             <div class="form-group">
+<<<<<<< HEAD
               <label for="user_id" class="form-control-label"
                 >Service Provider</label
               >
@@ -84,6 +85,14 @@
                     " " +
                     supplier.user_id.last_name
                   }}
+=======
+              <label for="user_id" class="form-control-label">Service Provider</label>
+              <Field name="user_id" class="form-control form-control-lg" as="select">
+                <option value="">-- Provider--</option>
+                <option v-for="supplier in userUserGroups" :value="supplier.user_id.user_id" :key="supplier.user_id.user_id">
+                  {{ supplier.user_id.first_name.toUpperCase() + " " +
+                                            supplier.user_id.last_name.toUpperCase() }}
+>>>>>>> d32df05ebaf070bfb1a6cb28c738f10f656e7fd7
                 </option>
               </Field>
               <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
@@ -185,12 +194,18 @@
                 as="select"
               >
                 <option value="">-- Provider--</option>
+<<<<<<< HEAD
                 <option
                   v-for="supplier in userUserGroups"
                   :value="supplier.user_id"
                   :key="supplier.user_id"
                 >
                   {{ supplier.first_name + " " + supplier.last_name }}
+=======
+                <option v-for="supplier in userUserGroups" :value="supplier.user_id.user_id" :key="supplier.user_id.user_id">
+                  {{ supplier.user_id.first_name.toUpperCase() + " " +
+                                            supplier.user_id.last_name.toUpperCase() }}
+>>>>>>> d32df05ebaf070bfb1a6cb28c738f10f656e7fd7
                 </option>
               </Field>
               <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
@@ -228,7 +243,7 @@
         <Breadcrumbs />
         <div class="separator-breadcrumb border-top"></div>
         <div class="row mb-4">
-          <div class="col-md-12">
+          <!-- <div class="col-md-12">
             <div class="table-responsive">
               <table class="table text-center" id="service_pricing_table">
                 <thead>
@@ -274,7 +289,114 @@
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> -->
+          <div class="col-xl-12 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="ul-widget__head">
+                                    <div class="ul-widget__head-label">
+                                        <h3 class="ul-widget__head-title">Best Sellers</h3>
+                                    </div>
+                                    <div class="ul-widget__head-toolbar">
+                                        <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold ul-widget-nav-tabs-line" role="tablist">
+                                            <li class="nav-item"><a class="nav-link active show" data-bs-toggle="tab" href="#ul-widget5-tab1-content" role="tab" aria-selected="true">Latest</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#ul-widget5-tab2-content" role="tab" aria-selected="false">Month</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="ul-widget__body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active show" id="ul-widget5-tab1-content">
+                                            <div class="ul-widget5">
+                                                <div class="ul-widget5__item">
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__pic"><img src="../../assets/images/products/iphone-1.jpg" alt="Third slide" /></div>
+                                                        <div class="ul-widget5__section"><a class="ul-widget4__title" href="#">Great Logo Designn</a>
+                                                            <p class="ul-widget5__desc">UI lib admin themes.</p>
+                                                            <div class="ul-widget5__info"><span>Author:</span><span class="text-primary">Jon Snow</span><span>Released:</span><span class="text-primary">23.08.17</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">19,200</span><span class="ul-widget5__sales text-mute">sales</span></div>
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">1046</span><span class="ul-widget5__sales text-mute">votes</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="ul-widget5__item">
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__pic"><img src="../../assets/images/products/speaker-1.jpg" alt="Third slide" /></div>
+                                                        <div class="ul-widget5__section"><a class="ul-widget4__title" href="#">Great Logo Designn</a>
+                                                            <p class="ul-widget5__desc">UI lib admin themes.</p>
+                                                            <div class="ul-widget5__info"><span>Author:</span><span class="text-primary">Jon Snow</span><span>Released:</span><span class="text-primary">23.08.17</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">29,200</span><span class="ul-widget5__sales text-mute">sales</span></div>
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">4500</span><span class="ul-widget5__sales text-mute">votes</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="ul-widget5__item">
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__pic"><img src="../../assets/images/products/watch-1.jpg" alt="Third slide" /></div>
+                                                        <div class="ul-widget5__section"><a class="ul-widget4__title" href="#">Great Logo Designn</a>
+                                                            <p class="ul-widget5__desc">UI lib admin themes.</p>
+                                                            <div class="ul-widget5__info"><span>Author:</span><span class="text-primary">Jon Snow</span><span>Released:</span><span class="text-primary">23.08.17</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">23,200</span><span class="ul-widget5__sales text-mute">sales</span></div>
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">2046</span><span class="ul-widget5__sales text-mute">votes</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="ul-widget5-tab2-content">
+                                            <div class="ul-widget5">
+                                                <div class="ul-widget5__item">
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__pic"><img src="../../assets/images/products/speaker-1.jpg" alt="Third slide" /></div>
+                                                        <div class="ul-widget5__section"><a class="ul-widget4__title" href="#">Great Logo Designn</a>
+                                                            <p class="ul-widget5__desc">UI lib admin themes.</p>
+                                                            <div class="ul-widget5__info"><span>Author:</span><span class="text-primary">Jon Snow</span><span>Released:</span><span class="text-primary">23.08.17</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">19,200</span><span class="ul-widget5__sales text-mute">sales</span></div>
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">1046</span><span class="ul-widget5__sales text-mute">votes</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="ul-widget5__item">
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__pic"><img src="../../assets/images/products/iphone-1.jpg" alt="Third slide" /></div>
+                                                        <div class="ul-widget5__section"><a class="ul-widget4__title" href="#">Great Logo Designn</a>
+                                                            <p class="ul-widget5__desc">UI lib admin themes.</p>
+                                                            <div class="ul-widget5__info"><span>Author:</span><span class="text-primary">Jon Snow</span><span>Released:</span><span class="text-primary">23.08.17</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">29,200</span><span class="ul-widget5__sales text-mute">sales</span></div>
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">4500</span><span class="ul-widget5__sales text-mute">votes</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="ul-widget5__item">
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__pic"><img src="../../assets/images/products/watch-1.jpg" alt="Third slide" /></div>
+                                                        <div class="ul-widget5__section"><a class="ul-widget4__title" href="#">Great Logo Designn</a>
+                                                            <p class="ul-widget5__desc">UI lib admin themes.</p>
+                                                            <div class="ul-widget5__info"><span>Author:</span><span class="text-primary">Jon Snow</span><span>Released:</span><span class="text-primary">23.08.17</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ul-widget5__content">
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">23,200</span><span class="ul-widget5__sales text-mute">sales</span></div>
+                                                        <div class="ul-widget5__stats"><span class="ul-widget5__number">2046</span><span class="ul-widget5__sales text-mute">votes</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
         </div>
       </div>
       <div class="flex-grow-1"></div>
@@ -306,6 +428,7 @@ import "@/assets/datatables/dataTables.buttons.min.js";
 import "@/assets/datatables/buttons.html5.min.js";
 import "@/assets/datatables/buttons.print.min.js";
 import "@/assets/datatables/jszip.min.js";
+<<<<<<< HEAD
 import {
   EDIT_SERVICE_PRICING_MUTATION,
   DELETE_SERVICE_PRICING_MUTATION,
@@ -317,6 +440,11 @@ import {
 } from "@/graphql";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
+=======
+import { EDIT_SERVICE_PRICING_MUTATION, DELETE_SERVICE_PRICING_MUTATION, ADD_SERVICE_PRICING_MUTATION, ALL_SERVICE_PRICINGS_QUERY, ALL_SERVICES_QUERY, CATEGORY_USERS_QUERY } from '@/graphql';
+import { Form, Field, ErrorMessage } from "vee-validate"
+import * as yup from "yup"
+>>>>>>> d32df05ebaf070bfb1a6cb28c738f10f656e7fd7
 export default {
   name: "ServiceInterest",
   components: {
@@ -360,6 +488,12 @@ export default {
         groupId: 2,
       },
     },
+    userUserGroups: {
+          query: CATEGORY_USERS_QUERY,
+          variables: {
+              groupId: "3"
+          }
+      },
   },
   methods: {
     addServicePricing(pricing) {
@@ -479,6 +613,7 @@ export default {
         });
     },
     async statusChange() {
+<<<<<<< HEAD
       this.servicePricings = [];
       $("#service_pricing_table").DataTable().destroy();
       await this.$apollo
@@ -488,6 +623,18 @@ export default {
         .then((response) => {
           this.servicePricings = response.data.servicePricings;
         });
+=======
+      this.userUserGroups = [];
+      $('#service_pricing_table').DataTable().destroy();
+      await this.$apollo.query({
+                query: CATEGORY_USERS_QUERY,
+                variables: {
+                    groupId: "3"
+                }
+            }).then(response => {
+                this.userUserGroups = response.data.userUserGroups
+            })
+>>>>>>> d32df05ebaf070bfb1a6cb28c738f10f656e7fd7
       setTimeout(function () {
         $("#service_pricing_table").DataTable({
           destroy: true,

@@ -135,7 +135,7 @@
                   <td>
                     <img
                       class="rounded-circle m-0 avatar-sm-table"
-                      src="../../assets/images/faces/1.jpg"
+                      src="../../assets/images/interest.png"
                       alt=""
                     />
                   </td>

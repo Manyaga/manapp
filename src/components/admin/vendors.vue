@@ -43,6 +43,16 @@
                                     placeholder="phone number" />
                                 <ErrorMessage name="phone_number" class="text-danger p-3" />
                             </div>
+                            <!-- <div class="form-group col-md-6">
+                                <label class="col-form-label" for="service_id">service</label>
+                                <Field name="service_id" class="form-control form-control-lg" as="select">
+                                    <option value="">-- Service--</option>
+                                    <option v-for="service in services" :value="service.service_id" :key="service.service_id">
+                                        {{ service.service_name }}
+                                    </option>
+                                </Field>
+                                <ErrorMessage name="service_id" class="text-danger py-3 text-sm" />
+                            </div> -->
 
                             <div class="form-group col-md-6">
                                 <label class="col-form-label" for="street">Street:</label>
@@ -91,12 +101,7 @@
                                 <label class="col-form-label" for="password">Password:</label>
                                 <Field name="password" class="form-control" id="password" type="password" />
                                 <ErrorMessage name="password" class="text-danger p-3" />
-                            </div><!-- 
-                            <div class="form-group col-md-6">
-                                <label class="col-form-label" for="confirmpassword">Confirm Password:</label>
-                                <Field name="confirmpassword" class="form-control" id="confirmpassword" type="password" />
-                                <ErrorMessage name="confirmpassword" class="text-danger p-3" />
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -203,16 +208,19 @@
                                 <thead>
                                     <tr class="bg-primary text-white">
                                         <th scope="col">#</th>
+                                        <th scope="col"></th>
                                         <th scope="col">Vendor</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">Country</th>
                                         <th scope="col">Action</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(member, index) in userUserGroups" :key="member.service_id">
                                         <td>{{ index + 1 }}</td>
+                                        <td><img class="rounded-circle m-0 avatar-sm-table" src="../../assets/images/user.png" alt="" /></td>
                                         <td>{{ member.user_id.first_name.toUpperCase() + " " +
                                             member.user_id.last_name.toUpperCase() }}</td>
                                         <td>{{ member.user_id.email }}</td>
@@ -222,9 +230,12 @@
 
                                             <a class="text-success me-2" href="#" @click="openEditUser(member)"><i
                                                     class="nav-icon i-Pen-2 fw-bold"></i></a>
-                                            <a class="text-danger me-2" href="#" @click="deleteUser(member._id)"><i
+                                            <a class="text-danger me-2" href="#" @click="deleteUser(member.user_id.user_id)"><i
                                                     class="nav-icon i-Close-Window fw-bold"></i></a>
                                         </td>
+                                        <td><button class="btn btn-outline-secondary mt-3 mb-3 m-sm-0 btn-sm btn-rounded">
+                                            Manage Service
+                                        </button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -263,7 +274,7 @@ import "@/assets/datatables/buttons.html5.min.js";
 import "@/assets/datatables/buttons.print.min.js";
 import "@/assets/datatables/jszip.min.js";
 
-import { CATEGORY_USERS_QUERY, ALL_STATES_QUERY, ALL_USER_GROUPS_QUERY, ALL_COUNTRIES_QUERY, ADD_USER_MUTATION, DELETE_USER_MUTATION, EDIT_USER_MUTATION } from '@/graphql';
+import { CATEGORY_USERS_QUERY, ALL_STATES_QUERY, ALL_USER_GROUPS_QUERY, ALL_COUNTRIES_QUERY, ADD_USER_MUTATION, DELETE_USER_MUTATION, EDIT_USER_MUTATION, ALL_SERVICES_QUERY } from '@/graphql';
 import * as yup from "yup"
 import { Form, Field, ErrorMessage } from "vee-validate"
 
@@ -308,6 +319,7 @@ export default {
             userGroups: [],
             allcountries: [],
             userUserGroups: [],
+            services: [],
             first_name: "",
             last_name: "",
             email: "",
@@ -329,6 +341,9 @@ export default {
             variables: {
                 groupId: "3"
             }
+        },
+        services: {
+            query: ALL_SERVICES_QUERY,
         },
         states: {
             query: ALL_STATES_QUERY
