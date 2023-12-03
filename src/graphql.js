@@ -739,9 +739,9 @@ export const ALL_APPOINTMENTS_QUERY = gql`
 export const ADD_APPOINTMENT_MUTATION = gql`
 mutation Mutation($input: createappointment) {
   createAppointment(input: $input) {
+    redirectUrl
     orderTrackingId
     merchantReference
-    redirectUrl
   }
 }
 `;

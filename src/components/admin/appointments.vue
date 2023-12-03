@@ -1,4 +1,16 @@
 <template>
+  <!--Iframe for payment redirect-->
+  <div>
+    <!-- <h1>Make Payment</h1> -->
+    <iframe
+    v-if="appointmentAdded"
+      ref="myIframe"
+      width="600"
+      height="400"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
   <!-- Add Appointment Modal -->
   <div
     class="modal fade"
@@ -431,6 +443,7 @@ export default {
       service_user: "",
       selectedService: null,
       vendors: [],
+      appointmentAdded: false,
       schema,
     };
   },
@@ -509,17 +522,31 @@ export default {
           },
         })
         .then((response) => {
+          const redirectUrl = response.data.createAppointment.redirectUrl;
+
+          // Hide the modal
           $("#verifyModalContent").modal("hide");
-          this.$swal({
-            title: "Appointment added sucessfully",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2000,
-          });
+
+          this.appointmentAdded = true;
+          // Display success notification
+          // this.$swal({
+          //   title: "Appointment added successfully",
+          //   position: "top-end",
+          //   icon: "success",
+          //   showConfirmButton: false,
+          //   timer: 2000,
+          // });
+
+          // Load the redirect URL in the iframe
+          if (redirectUrl) {
+            this.$refs.myIframe.src = redirectUrl;
+          }
+
+          // Refetch appointments (if needed)
           this.$apollo.queries.appointments.refetch();
         })
         .catch((error) => {
+          // Display error notification
           this.$swal({
             title: error.message,
             position: "top-end",
@@ -595,7 +622,7 @@ export default {
             })
             .then((response) => {
               this.$swal({
-                title: "Appointment deleated sucessfully",
+                title: "Appointment deleted sucessfully",
                 position: "top-end",
                 icon: "success",
                 showConfirmButton: false,
