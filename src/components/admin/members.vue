@@ -347,64 +347,6 @@ export default {
     },
   },
   methods: {
-    addUser(user) {
-      console.log(user);
-      this.$apollo
-        .mutate({
-          mutation: ADD_USER_MUTATION,
-          variables: {
-            createAcc: {
-              zipCode: user.zipCode,
-              role: 2,
-              postalCode: user.postalCode,
-              phone_number: user.phone_number,
-              password: user.password,
-              last_name: user.last_name,
-              first_name: user.first_name,
-              email: user.email,
-              country_id: parseInt(user.country),
-              state: parseInt(user.state),
-              username: user.username,
-            },
-          },
-        })
-        .then((response) => {
-          // redirect user
-          $("#verifyModalContent").modal("hide");
-          this.$swal({
-            title: "Member added sucessfully",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          this.$apollo.queries.userUserGroups.refetch();
-        })
-        .catch((error) => {
-          this.$swal({
-            title: error.message,
-            position: "top-end",
-            icon: "warning",
-            showConfirmButton: false,
-            timer: 3000,
-          });
-        });
-    },
-
-    openEditUser(user) {
-      this.user_id = user.user_id.user_id;
-      this.first_name = user.user_id.first_name;
-      this.last_name = user.user_id.last_name;
-      this.email = user.user_id.email;
-      this.phone_number = user.user_id.phone_number;
-      this.postalCode = user.user_id.postalCode;
-      this.zipCode = user.user_id.zipCode;
-      /* this.state = user.user_id.state.state_id */
-      this.username = user.user_id.username;
-      this.country = user.user_id.country_id.country_id;
-      $("#editModalContent").modal("show");
-    },
-    methods: {
       addUser(user) {
         console.log(user);
         this.$apollo
@@ -624,6 +566,5 @@ export default {
     async created() {
       this.statusChange();
     },
-  },
 };
 </script>
