@@ -275,7 +275,6 @@ import "@/assets/datatables/jszip.min.js";
 import {
   CATEGORY_USERS_QUERY,
   ALL_STATES_QUERY,
-  ALL_USER_GROUPS_QUERY,
   ALL_COUNTRIES_QUERY,
   ADD_USER_MUTATION,
   DELETE_USER_MUTATION,
@@ -316,7 +315,6 @@ export default {
     });
     return {
       allusers: [],
-      userGroups: [],
       allcountries: [],
       userUserGroups: [],
       first_name: "",
@@ -343,9 +341,6 @@ export default {
     },
     states: {
       query: ALL_STATES_QUERY,
-    },
-    userGroups: {
-      query: ALL_USER_GROUPS_QUERY,
     },
     countries: {
       query: ALL_COUNTRIES_QUERY,

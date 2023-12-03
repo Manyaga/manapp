@@ -2,12 +2,17 @@ import gql from "graphql-tag";
 
 export const LOGIN_MUTATION = gql`
   mutation Mutation($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      userId
-      token
-      tokenExpiration
+  login(username: $username, password: $password) {
+    token
+    username
+    userId
+    profileimage
+    role {
+      group_name
+      group_id
     }
   }
+}
 `;
 export const LOGIOUT_MUTATION = gql`
   query Logoutuser {
@@ -18,48 +23,34 @@ export const LOGIOUT_MUTATION = gql`
 `;
 
 export const CURRENTUSER_QUERY = gql`
-  query CurrentUser {
-    currentUser {
-      user_id
-      first_name
-      last_name
-      email
-      phone_number
-      postalCode
-      city
-      state {
-        state_name
-        state_id
-        country_id {
-          country_name
-          country_id
-          country_code
-        }
-      }
-      country_id {
-        country_name
-        country_id
-      }
-      role {
-        group_id {
-          group_id
-          group_name
-        }
-      }
-      createdAt
+ query CurrentUser {
+  currentUser {
+    user_id
+    first_name
+    last_name
+    username
+    email
+    phone_number
+    city
+    state {
+      abbreviation
+      state_id
+      state_name
     }
-  }
-`;
-
-//COUNTRIES
-export const ALL_COUNTRIES_QUERY = gql`
-  query Countries {
-    countries {
+    country_id {
+      country_code
       country_id
       country_name
-      country_code
+    }
+    role {
+      group_id {
+        group_id
+        group_name
+      }
+      id
     }
   }
+}
 `;
 export const EDIT_COUNTRY_MUTATION = gql`
   mutation Updatecountry($input: updateCountry) {
