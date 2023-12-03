@@ -431,60 +431,33 @@ export const EDIT_USER_MUTATION = gql`
 `;
 //SERVICE_PRICING
 export const ALL_SERVICE_PRICINGS_QUERY = gql`
-  query ServicePricings {
-    servicePricings {
-      pricing_id
-      price
-      duration
-      user_id {
-        first_name
-        last_name
-        phone_number
-        email
-      }
+query ServicePricings($limit: Int, $offset: Int, $filter: servicepricingFilters) {
+  servicePricings(limit: $limit, offset: $offset, filter: $filter) {
+    pricing_id
+    price
+    duration
+    user_id {
+      email
+      first_name
+      last_name
+      phone_number
+    }
+    service {
       service_id
-      service {
-        description
-        service_id
-        service_name
-      }
-      user {
-        first_name
-        user_id
-        last_name
-        email
-      }
+      service_name
+      description
     }
   }
+}
 `;
 export const ADD_SERVICE_PRICING_MUTATION = gql`
-  mutation Mutation($input: ServicePricingInput!) {
-    createServicePricing(input: $input) {
-      pricing_id
-      price
-      duration
-      user_id {
-        email
-        first_name
-        gender
-        last_name
-        nickname
-      }
-      service_id
-      service {
-        description
-        service_id
-        service_name
-      }
-      user {
-        email
-        first_name
-        gender
-        last_name
-        nickname
-      }
-    }
+mutation CreateServicePricing($input: ServicePricingInput!) {
+  createServicePricing(input: $input) {
+    pricing_id
+    price
+    duration
   }
+}
 `;
 export const DELETE_SERVICE_PRICING_MUTATION = gql`
   mutation DeleteServicePricing($pricingId: Int!) {
@@ -740,44 +713,40 @@ export const USERS_BY_GROUP_QUERY = gql`
 `;
 
 export const ALL_APPOINTMENTS_QUERY = gql`
-  query Appointments($limit: Int, $offset: Int, $filter: appointmentFilter) {
-    appointments(limit: $limit, offset: $offset, filter: $filter) {
-      appointment_id
-      appointment_status
-      price
-      service_id {
-        description
-        service_name
-        service_id
-      }
-      user_id {
-        user_id
-        last_name
-        gender
-        first_name
-        email
-      }
-      service_user {
-        user_id
-        first_name
-        email
-        gender
-        last_name
-        location
-        nickname
-      }
+ query Appointments($limit: Int, $offset: Int) {
+  appointments(limit: $limit, offset: $offset) {
+    appointment_id
+    appointment_status
+    price
+    service_id {
+      service_id
+      service_name
+      description
+    }
+    vendor_id {
+      first_name
+      email
+      last_name
+      phone_number
+    }
+    user_id {
+      first_name
+      email
+      last_name
+      nickname
+      phone_number
     }
   }
-`;
+}`;
 
 export const ADD_APPOINTMENT_MUTATION = gql`
-  mutation CreateAppointment($input: createappointment) {
-    createAppointment(input: $input) {
-      appointment_id
-      appointment_status
-      price
-    }
+mutation Mutation($input: createappointment) {
+  createAppointment(input: $input) {
+    orderTrackingId
+    merchantReference
+    redirectUrl
   }
+}
 `;
 
 export const EDIT_APPOINTMENT_MUTATION = gql`

@@ -24,29 +24,27 @@
         <Form @submit="addAppointment" class="user">
           <div class="modal-body">
             <div class="row row-xs">
-              <div v-if="selectedService">
+              <!-- <div v-if="selectedService">
                 <h5>Vendors offering {{ selectedService.service_name }}</h5>
                 <div v-for="vendor in vendors" :key="vendor.vendor_id">
-                  <!-- Display vendor cards with relevant information -->
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{ vendor.vendor_name }}</h5>
                       <p class="card-text">Price: {{ vendor.price }}</p>
-                      <!-- Additional vendor information can be displayed here -->
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group col-md-6">
-                <label class="col-form-label" for="service_user"
-                  >Service User</label
+                <label class="col-form-label" for="user_id"
+                  >User </label
                 >
                 <Field
-                  name="service_user"
+                  name="user_id"
                   class="form-control form-control-lg"
                   as="select"
                 >
-                  <option value="">-- Service User--</option>
+                  <option value="">-- User--</option>
                   <option
                     v-for="user in userUserGroups"
                     :value="user.id"
@@ -81,8 +79,7 @@
                   class="text-danger py-3 text-sm"
                 />
               </div>
-              <div class="form-group col-md-6">
-                <!-- <div class="row"> -->
+              <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="price">Price:</label>
                 <Field
                   name="price"
@@ -92,7 +89,7 @@
                   placeholder="Price"
                 />
                 <ErrorMessage name="price" class="text-danger p-3" />
-              </div>
+              </div> -->
               <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="user_id">User</label>
                 <Field
@@ -214,7 +211,7 @@
                   class="text-danger py-3 text-sm"
                 />
               </div>
-              <div class="form-group col-md-6">
+              <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="price">Price:</label>
                 <Field
                   name="price"
@@ -223,7 +220,7 @@
                   type="text"
                 />
                 <ErrorMessage name="price" class="text-danger p-3" />
-              </div>
+              </div> -->
 
               <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="user_id">User</label>
@@ -299,6 +296,7 @@
                   <th scope="col">#</th>
                   <th scope="col">Sevice</th>
                   <th scope="col">Description</th>
+                  <th scope="col">Provider</th>
                   <th scope="col">User</th>
                   <th scope="col">Status</th>
                   <th scope="col">Price</th>
@@ -319,7 +317,10 @@
                     {{ appointment.service_id.description.toUpperCase() }}
                   </td>
                   <td>
-                    {{ appointment.service_user.first_name.toUpperCase() }}
+                    {{ appointment.vendor_id.first_name.toUpperCase() }}
+                  </td>
+                  <td>
+                    {{ appointment.user_id.first_name.toUpperCase() }}
                   </td>
                   <td>{{ appointment.appointment_status }}</td>
                   <td>
@@ -460,7 +461,7 @@ export default {
     userUserGroups: {
       query: CATEGORY_USERS_QUERY,
       variables: {
-        groupId: "1",
+        groupId: "2",
       },
     },
     userUserGroups3: {
@@ -499,10 +500,10 @@ export default {
           mutation: ADD_APPOINTMENT_MUTATION,
           variables: {
             input: {
-              appointment_status: appointment.appointment_status,
-              price: parseFloat(appointment.price),
+              // appointment_status: appointment.appointment_status,
+              // price: parseFloat(appointment.price),
               service_id: appointment.service_id,
-              service_user: appointment.service_user,
+              // service_user: appointment.service_user,
               user_id: appointment.user_id,
             },
           },
