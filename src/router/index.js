@@ -128,12 +128,6 @@ const routes = [
     beforeEnter: authGuard,
     meta: { title: "Appointments" },
   },
-  {
-    path: "/payment",
-    component: () => import("@/components/admin/payment.vue"),
-    beforeEnter: authGuard,
-    meta: { title: "Payment" },
-  },
 ];
 
 const router = createRouter({
