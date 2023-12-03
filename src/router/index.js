@@ -128,6 +128,18 @@ const routes = [
     beforeEnter: authGuard,
     meta: { title: "Appointments" },
   },
+  {
+    path: "/payment",
+    component: () => import("@/components/admin/payment.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Payment" },
+  },
+  {
+    path: "/paymentcomplete",
+    component: () => import("@/components/admin/paymentConfirmation.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Payment Complete" },
+  },
 ];
 
 const router = createRouter({

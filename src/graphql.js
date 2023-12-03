@@ -434,15 +434,23 @@ query ServicePricings($limit: Int, $offset: Int, $filter: servicepricingFilters)
     price
     duration
     user_id {
-      email
       first_name
+      email
+      gender
       last_name
-      phone_number
+      phone_number      
     }
     service {
       service_id
-      service_name
       description
+      service_name
+    }
+    user {
+      first_name
+      email
+      gender
+      last_name
+      phone_number
     }
   }
 }

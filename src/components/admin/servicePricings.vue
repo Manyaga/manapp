@@ -294,7 +294,7 @@
               <div class="card-body">
                 <div class="ul-widget__head">
                   <div class="ul-widget__head-label">
-                    <h3 class="ul-widget__head-title">Best Sellers</h3>
+                    <h3 class="ul-widget__head-title">Best Service Pricing</h3>
                   </div>
                   <div class="ul-widget__head-toolbar">
                     <ul
@@ -311,7 +311,7 @@
                           >Latest</a
                         >
                       </li>
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                         <a
                           class="nav-link"
                           data-bs-toggle="tab"
@@ -320,11 +320,19 @@
                           aria-selected="false"
                           >Month</a
                         >
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </div>
-                <div class="ul-widget__body">
+
+
+
+
+
+
+                
+                <div class="ul-widget__body" v-for="(pricing, index) in servicePricings"
+                :key="pricing.pricing_id">
                   <div class="tab-content">
                     <div
                       class="tab-pane active show"
@@ -339,37 +347,39 @@
                                 alt="Third slide"
                               />
                             </div>
+
                             <div class="ul-widget5__section">
                               <a class="ul-widget4__title" href="#"
-                                >Great Logo Designn</a
+                                >{{ pricing.service.service_name }}</a
                               >
                               <p class="ul-widget5__desc">
-                                UI lib admin themes.
+                                {{ pricing.service.description }}
                               </p>
                               <div class="ul-widget5__info">
-                                <span>Author:</span
-                                ><span class="text-primary">Jon Snow</span
-                                ><span>Released:</span
-                                ><span class="text-primary">23.08.17</span>
+                                <span>Service Provider:</span
+                                ><span class="text-primary">  {{ pricing.user.first_name }} {{ pricing.user.last_name }}</span
+                                >
+                                <!-- <span>Name:</span
+                            ><span class="text-primary">{{ pricing.user_id.first_name }}</span> -->
                               </div>
                             </div>
                           </div>
                           <div class="ul-widget5__content">
                             <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">19,200</span
+                              <span class="ul-widget5__number"> $ {{ pricing.price }}</span
                               ><span class="ul-widget5__sales text-mute"
-                                >sales</span
+                                >Price</span
                               >
                             </div>
                             <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">1046</span
+                              <span class="ul-widget5__number">{{ pricing.duration }} Hours</span
                               ><span class="ul-widget5__sales text-mute"
-                                >votes</span
+                                >Duration</span
                               >
                             </div>
                           </div>
                         </div>
-                        <div class="ul-widget5__item">
+                        <!-- <div class="ul-widget5__item">
                           <div class="ul-widget5__content">
                             <div class="ul-widget5__pic">
                               <img
@@ -444,125 +454,7 @@
                               >
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="ul-widget5-tab2-content">
-                      <div class="ul-widget5">
-                        <div class="ul-widget5__item">
-                          <div class="ul-widget5__content">
-                            <div class="ul-widget5__pic">
-                              <img
-                                src="../../assets/images/products/speaker-1.jpg"
-                                alt="Third slide"
-                              />
-                            </div>
-                            <div class="ul-widget5__section">
-                              <a class="ul-widget4__title" href="#"
-                                >Great Logo Designn</a
-                              >
-                              <p class="ul-widget5__desc">
-                                UI lib admin themes.
-                              </p>
-                              <div class="ul-widget5__info">
-                                <span>Author:</span
-                                ><span class="text-primary">Jon Snow</span
-                                ><span>Released:</span
-                                ><span class="text-primary">23.08.17</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="ul-widget5__content">
-                            <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">19,200</span
-                              ><span class="ul-widget5__sales text-mute"
-                                >sales</span
-                              >
-                            </div>
-                            <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">1046</span
-                              ><span class="ul-widget5__sales text-mute"
-                                >votes</span
-                              >
-                            </div>
-                          </div>
-                        </div>
-                        <div class="ul-widget5__item">
-                          <div class="ul-widget5__content">
-                            <div class="ul-widget5__pic">
-                              <img
-                                src="../../assets/images/products/iphone-1.jpg"
-                                alt="Third slide"
-                              />
-                            </div>
-                            <div class="ul-widget5__section">
-                              <a class="ul-widget4__title" href="#"
-                                >Great Logo Designn</a
-                              >
-                              <p class="ul-widget5__desc">
-                                UI lib admin themes.
-                              </p>
-                              <div class="ul-widget5__info">
-                                <span>Author:</span
-                                ><span class="text-primary">Jon Snow</span
-                                ><span>Released:</span
-                                ><span class="text-primary">23.08.17</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="ul-widget5__content">
-                            <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">29,200</span
-                              ><span class="ul-widget5__sales text-mute"
-                                >sales</span
-                              >
-                            </div>
-                            <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">4500</span
-                              ><span class="ul-widget5__sales text-mute"
-                                >votes</span
-                              >
-                            </div>
-                          </div>
-                        </div>
-                        <div class="ul-widget5__item">
-                          <div class="ul-widget5__content">
-                            <div class="ul-widget5__pic">
-                              <img
-                                src="../../assets/images/products/watch-1.jpg"
-                                alt="Third slide"
-                              />
-                            </div>
-                            <div class="ul-widget5__section">
-                              <a class="ul-widget4__title" href="#"
-                                >Great Logo Designn</a
-                              >
-                              <p class="ul-widget5__desc">
-                                UI lib admin themes.
-                              </p>
-                              <div class="ul-widget5__info">
-                                <span>Author:</span
-                                ><span class="text-primary">Jon Snow</span
-                                ><span>Released:</span
-                                ><span class="text-primary">23.08.17</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="ul-widget5__content">
-                            <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">23,200</span
-                              ><span class="ul-widget5__sales text-mute"
-                                >sales</span
-                              >
-                            </div>
-                            <div class="ul-widget5__stats">
-                              <span class="ul-widget5__number">2046</span
-                              ><span class="ul-widget5__sales text-mute"
-                                >votes</span
-                              >
-                            </div>
-                          </div>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
