@@ -262,7 +262,7 @@
               <div class="card-body">
                 <div class="row mb-2">
                   <div
-                    class="col-lg-3 col-md-4 col-sm-6 mb-2"
+                    class="col-lg-4 col-md-4 col-sm-6 mb-2"
                     v-for="(service, index) in services"
                     :key="service.service_id"
                   >

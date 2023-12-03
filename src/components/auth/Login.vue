@@ -102,6 +102,8 @@ export default {
         .then((response) => {
           console.log(response.data);
           localStorage.setItem("token", response.data.login.token);
+          localStorage.setItem("role", response.data.login.role);
+          console.log(response.data.login.role)
         })
         .catch((error) => {
           this.message = error.message;
