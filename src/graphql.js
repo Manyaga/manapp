@@ -24,7 +24,6 @@ export const CURRENTUSER_QUERY = gql`
       first_name
       last_name
       email
-      password
       phone_number
       postalCode
       city
@@ -345,7 +344,6 @@ export const ALL_USERS_QUERY = gql`
       nickname
       username
       email
-      password
       date_of_birth
       gender
       location
@@ -404,7 +402,6 @@ export const EDIT_USER_MUTATION = gql`
       last_name
       nickname
       email
-      password
       date_of_birth
       gender
       location
