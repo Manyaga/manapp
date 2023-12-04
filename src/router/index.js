@@ -129,6 +129,8 @@ const routes = [
   { path: "/member-interest-subcategories", component: () => import("@/components/member/interestSubcategories.vue"), beforeEnter: authGuard, meta: { title: "Interest Sub-Categories" },},
   { path: "/member-services", component: () => import("@/components/member/services.vue"), beforeEnter: authGuard, meta: { title: "Services" },},
   { path: "/service-vendors", component: () => import("@/components/member/servicePricings.vue"), beforeEnter: authGuard, meta: { title: "Services Vendors" },},
+  { path: "/payment", component: () => import("@/components/admin/payment.vue"), beforeEnter: authGuard, meta: { title: "Payment" },},
+  { path: "/paymentcomplete", component: () => import("@/components/admin/paymentConfirmation.vue"), beforeEnter: authGuard, meta: { title: "Payment Complete" },},
 ];
 
 const router = createRouter({

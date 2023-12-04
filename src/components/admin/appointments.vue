@@ -1,16 +1,5 @@
 <template>
-  <!--Iframe for payment redirect-->
-  <div>
-    <!-- <h1>Make Payment</h1> -->
-    <iframe
-    v-if="appointmentAdded"
-      ref="myIframe"
-      width="600"
-      height="400"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
-  </div>
+
   <!-- Add Appointment Modal -->
   <div
     class="modal fade"
@@ -443,7 +432,8 @@ export default {
       service_user: "",
       selectedService: null,
       vendors: [],
-      appointmentAdded: false,
+      savedRedirectUrl: "",
+      createAppointment: "",
       schema,
     };
   },
@@ -523,11 +513,10 @@ export default {
         })
         .then((response) => {
           const redirectUrl = response.data.createAppointment.redirectUrl;
-
+          const createAppointment = response.data.createAppointment;
+          
           // Hide the modal
           $("#verifyModalContent").modal("hide");
-
-          this.appointmentAdded = true;
           // Display success notification
           // this.$swal({
           //   title: "Appointment added successfully",
@@ -537,13 +526,12 @@ export default {
           //   timer: 2000,
           // });
 
-          // Load the redirect URL in the iframe
-          if (redirectUrl) {
-            this.$refs.myIframe.src = redirectUrl;
-          }
+          this.savedRedirectUrl = redirectUrl;
+          localStorage.setItem("savedRedirectUrl", this.savedRedirectUrl);
+          localStorage.setItem("appointments", JSON.stringify(createAppointment));
 
-          // Refetch appointments (if needed)
-          this.$apollo.queries.appointments.refetch();
+        // Navigate to /payment route
+        this.$router.push("/payment");
         })
         .catch((error) => {
           // Display error notification

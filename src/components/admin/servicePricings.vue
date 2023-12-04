@@ -132,7 +132,15 @@
                     </ul>
                   </div>
                 </div>
-                <div class="ul-widget__body">
+
+
+
+
+
+
+                
+                <div class="ul-widget__body" v-for="(pricing, index) in servicePricings"
+                :key="pricing.pricing_id">
                   <div class="tab-content">
                     <div class="tab-pane active show">
                       <div class="ul-widget5">
@@ -141,6 +149,7 @@
                           <div class="ul-widget5__content">
                             <div class="ul-widget5__pic"><img src="../../assets/images/service.png" alt="Third slide" />
                             </div>
+
                             <div class="ul-widget5__section">
                               <a class="ul-widget4__title" href="#">{{ pricing.service.service_name }}</a>
                               <p class="ul-widget5__desc">

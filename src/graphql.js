@@ -451,6 +451,8 @@ query ServicePricings($limit: Int, $offset: Int, $filter: servicepricingFilters)
     user {
       email
       first_name
+      email
+      gender
       last_name
       phone_number
       country_id {
@@ -465,8 +467,15 @@ query ServicePricings($limit: Int, $offset: Int, $filter: servicepricingFilters)
     }
     service {
       service_id
-      service_name
       description
+      service_name
+    }
+    user {
+      first_name
+      email
+      gender
+      last_name
+      phone_number
     }
   }
 }
@@ -789,3 +798,18 @@ export const DELETE_APPOINTMENT_MUTATION = gql`
     }
   }
 `;
+
+export const VIEW_PAYMENT_COMPLETE_QUERY = gql `
+query Query($merchantRef: String!) {
+  onePayment(merchantRef: $merchantRef) {
+    status
+    paymentDescription
+    description
+    OrderTrackingId
+    OrderMerchantReference
+    amount
+    confirmationCode
+    payment_id
+  }
+}
+`
