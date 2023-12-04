@@ -24,17 +24,6 @@
         <Form @submit="addAppointment" class="user">
           <div class="modal-body">
             <div class="row row-xs">
-              <!-- <div v-if="selectedService">
-                <h5>Vendors offering {{ selectedService.service_name }}</h5>
-                <div v-for="vendor in vendors" :key="vendor.vendor_id">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ vendor.vendor_name }}</h5>
-                      <p class="card-text">Price: {{ vendor.price }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="user_id">User </label>
                 <Field
@@ -77,51 +66,6 @@
                   class="text-danger py-3 text-sm"
                 />
               </div>
-              <!-- <div class="form-group col-md-6">
-                <label class="col-form-label" for="price">Price:</label>
-                <Field
-                  name="price"
-                  class="form-control"
-                  id="price"
-                  type="text"
-                  placeholder="Price"
-                />
-                <ErrorMessage name="price" class="text-danger p-3" />
-              </div> -->
-              <!-- <div class="form-group col-md-6">
-                <label class="col-form-label" for="user_id">User</label>
-                <Field
-                  name="user_id"
-                  class="form-control form-control-lg"
-                  as="select"
-                >
-                  <option value="">-- User--</option>
-                  <option
-                    v-for="user in users"
-                    :value="user.user_id"
-                    :key="user.user_id"
-                  >
-                    {{ user.first_name }}
-                  </option>
-                </Field>
-                <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
-              </div> -->
-              <!-- <div class="form-group col-md-6">
-                <label class="col-form-label" for="appointment_status"
-                  >Appointment Status:</label
-                >
-                <Field
-                  name="appointment_status"
-                  class="form-control"
-                  id="appointment_status"
-                  type="text"
-                  placeholder="Appointment Status"
-                />
-                <ErrorMessage
-                  name="appointment_status"
-                  class="text-danger p-3"
-                />
-              </div> -->
             </div>
           </div>
           <div class="modal-footer">
@@ -445,7 +389,7 @@ export default {
         filter: {
           appointment_status: null,
           service_id: null,
-          service_user: null,
+          // service_user: null,
           user_id: null,
         },
       },
@@ -523,7 +467,7 @@ export default {
     },
     openEditAppointment(appointment) {
       this.price = appointment.price;
-      this.service_user = appointment.service_user.user_id;
+      // this.service_user = appointment.service_user.user_id;
       this.user_id = appointment.user_id.user_id;
       this.service_id = appointment.service_id.service_id;
       this.appointment_status = appointment.appointment_status;
@@ -539,7 +483,7 @@ export default {
             appointmentId: parseInt(this.appointment_id),
             input: {
               price: parseFloat(appointment.price),
-              service_user: appointment.service_user,
+              // service_user: appointment.service_user,
               user_id: appointment.user_id,
               appointment_status: this.appointment_status,
               service_id: appointment.service_id,
@@ -619,7 +563,7 @@ export default {
             filter: {
               appointment_status: null,
               service_id: null,
-              service_user: null,
+              // service_user: null,
               user_id: null,
             },
           },

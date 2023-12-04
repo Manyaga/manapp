@@ -132,7 +132,7 @@ const routes = [
     path: "/my-appointments",
     component: () => import("@/components/member/appointments.vue"),
     beforeEnter: authGuard,
-    meta: { title: "Appointments" },
+    meta: { title: "My Appointments" },
   },
   {
     path: "/my-interests",
@@ -175,6 +175,25 @@ const routes = [
     component: () => import("@/components/admin/paymentConfirmation.vue"),
     beforeEnter: authGuard,
     meta: { title: "Payment Complete" },
+  },
+
+  {
+    path: "/vendor-appointments",
+    component: () => import("@/components/vendor/appointments.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "My Appointments" },
+  },
+  {
+    path: "/vendor-services",
+    component: () => import("@/components/vendor/services.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Services" },
+  },
+  {
+    path: "/vendor-service-pricing",
+    component: () => import("@/components/vendor/servicePricings.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "My services Pricing" },
   },
 ];
 

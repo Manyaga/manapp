@@ -6,11 +6,6 @@
       <div class="main-content">
         <div class="breadcrumb">
           <Breadcrumbs />
-          <h1>User Profile</h1>
-          <ul>
-            <li><a href="">Pages</a></li>
-            <li>User Profile</li>
-          </ul>
         </div>
         <div class="separator-breadcrumb border-top"></div>
         <div class="card user-profile o-hidden mb-4">
@@ -23,28 +18,16 @@
           <div class="user-info">
             <img
               class="profile-picture avatar-lg mb-2"
-              v-bind:src="currentuser.profilePhoto"
+              src="../assets/images/user.png"
               alt=""
             />
             <p class="m-0 text-24">
-              {{ currentuser.first_name.toUpperCase() }}
-              {{ currentuser.last_name.toUpperCase() }}
+              {{ user.first_name.toUpperCase() }}
+              {{ user.last_name.toUpperCase() }}
             </p>
-
-            <span>
-              <p class="text-small font-italic">
-                <img
-                  class="profile-picture avatar-sm mb-2"
-                  id="userDropdown"
-                  v-bind:src="currentuser.country.image"
-                  alt=""
-                />
-                {{ currentuser.country.country_name.toUpperCase() }}
-              </p>
-            </span>
-            <p class="text-muted m-0">
-              User Role: {{ currentuser.role.role_name }}
-            </p>
+            <!-- <p class="text-muted m-0">
+              User Role: {{ user.role.group_id.group_name }}
+            </p> -->
           </div>
           <div class="card-body">
             <ul
@@ -64,36 +47,6 @@
                   >Profile</a
                 >
               </li>
-              <li
-                v-if="currentuser.role._id == '63fd058921a945fd564e9c6c'"
-                class="nav-item"
-              >
-                <a
-                  class="nav-link"
-                  id="friends-tab"
-                  data-bs-toggle="tab"
-                  href="#friends"
-                  role="tab"
-                  aria-controls="friends"
-                  aria-selected="false"
-                  >Payment Options</a
-                >
-              </li>
-              <li
-                v-if="currentuser.role._id == '63fd058921a945fd564e9c6c'"
-                class="nav-item"
-              >
-                <a
-                  class="nav-link"
-                  id="photos-tab"
-                  data-bs-toggle="tab"
-                  href="#photos"
-                  role="tab"
-                  aria-controls="photos"
-                  aria-selected="false"
-                  >Account</a
-                >
-              </li>
             </ul>
             <div class="tab-content" id="profileTabContent">
               <div
@@ -111,11 +64,10 @@
                     <div class="card-body">
                       <div class="card-title">Personal Information</div>
                       <p>
-                        The account {{ currentuser.first_name.toUpperCase() }}
-                        {{ currentuser.last_name.toUpperCase() }} created this
-                        account on {{ currentuser.createdAt }} with phone
-                        details of {{ currentuser.phone_number }} and email
-                        {{ currentuser.phone_number }}.
+                        The account {{ user.first_name.toUpperCase() }}
+                        {{ user.last_name.toUpperCase() }} created this account
+                        on {{ user.createdAt }} with phone details of
+                        {{ user.phone_number }} and email {{ user.email }}.
                       </p>
                       <hr />
                       <div class="row">
@@ -126,26 +78,11 @@
                           <Field
                             name="first_name"
                             class="form-control"
-                            :value="currentuser.first_name"
+                            :value="user.first_name"
                             type="text"
                           />
                           <ErrorMessage
                             name="first_name"
-                            class="text-danger p-3"
-                          />
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label class="col-form-label" for="second_name"
-                            >Second Name:</label
-                          >
-                          <Field
-                            name="second_name"
-                            class="form-control"
-                            :value="currentuser.second_name"
-                            type="text"
-                          />
-                          <ErrorMessage
-                            name="second_name"
                             class="text-danger p-3"
                           />
                         </div>
@@ -156,7 +93,7 @@
                           <Field
                             name="last_name"
                             class="form-control"
-                            :value="currentuser.last_name"
+                            :value="user.last_name"
                             type="text"
                           />
                           <ErrorMessage
@@ -171,7 +108,7 @@
                           <Field
                             name="email"
                             class="form-control"
-                            :value="currentuser.email"
+                            :value="user.email"
                             type="text"
                           />
                           <ErrorMessage name="email" class="text-danger p-3" />
@@ -183,7 +120,7 @@
                           <Field
                             name="phone_number"
                             class="form-control"
-                            :value="currentuser.phone_number"
+                            :value="user.phone_number"
                             type="text"
                           />
                           <ErrorMessage
@@ -198,7 +135,7 @@
                           <Field
                             name="postal_code"
                             class="form-control"
-                            :value="currentuser.postal_code"
+                            :value="user.postal_code"
                             type="text"
                           />
                           <ErrorMessage
@@ -213,25 +150,13 @@
                           <Field
                             name="zip_code"
                             class="form-control"
-                            :value="currentuser.zip_code"
+                            :value="user.zip_code"
                             type="text"
                           />
                           <ErrorMessage
                             name="zip_code"
                             class="text-danger p-3"
                           />
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label class="col-form-label" for="street"
-                            >Street:</label
-                          >
-                          <Field
-                            name="street"
-                            class="form-control"
-                            :value="currentuser.street"
-                            type="text"
-                          />
-                          <ErrorMessage name="street" class="text-danger p-3" />
                         </div>
                         <div class="form-group col-md-12">
                           <label for="country" class="form-control-label"
@@ -240,14 +165,14 @@
                           <Field
                             name="country"
                             class="form-control form-control-lg"
-                            :value="currentuser.country._id"
+                            :value="user.country_id.country_id"
                             as="select"
                           >
                             <option value="">-- Country--</option>
                             <option
                               v-for="country in countries"
-                              :value="country._id"
-                              :key="country._id"
+                              :value="country.country_id"
+                              :key="country.country_id"
                             >
                               {{ country.country_name }}
                             </option>
@@ -273,273 +198,6 @@
 
                 <hr />
               </div>
-              <div
-                v-if="currentuser.role._id == '63fd058921a945fd564e9c6c'"
-                class="tab-pane fade"
-                id="friends"
-                role="tabpanel"
-                aria-labelledby="friends-tab"
-              >
-                <div class="card mt-4">
-                  <div class="card-body">
-                    <div class="card-title">Billing Details</div>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item">
-                        <a
-                          class="nav-link active"
-                          id="home-basic-tab"
-                          data-bs-toggle="tab"
-                          href="#homeBasic"
-                          role="tab"
-                          aria-controls="homeBasic"
-                          aria-selected="true"
-                          ><i
-                            class="i-Telephone text-danger text-16 align-middle me-1"
-                          ></i
-                          ><span>Mobile Money</span></a
-                        >
-                      </li>
-                      <li class="nav-item">
-                        <a
-                          class="nav-link"
-                          id="profile-basic-tab"
-                          data-bs-toggle="tab"
-                          href="#profileBasic"
-                          role="tab"
-                          aria-controls="profileBasic"
-                          aria-selected="false"
-                          ><i
-                            class="i-Paypal text-primary text-16 align-middle me-1"
-                          ></i
-                          ><span>Paypal</span></a
-                        >
-                      </li>
-                      <li class="nav-item">
-                        <a
-                          class="nav-link"
-                          id="contact-basic-tab"
-                          data-bs-toggle="tab"
-                          href="#contactBasic"
-                          role="tab"
-                          aria-controls="contactBasic"
-                          aria-selected="false"
-                          ><i
-                            class="i-Building text-warning text-16 align-middle me-1"
-                          ></i
-                          ><span>Bank</span></a
-                        >
-                      </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                      <div
-                        class="tab-pane fade show active"
-                        id="homeBasic"
-                        role="tabpanel"
-                        aria-labelledby="home-basic-tab"
-                      >
-                        <div class="row">
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputEmail12"
-                              >Full Name:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputEmail12"
-                              type="text"
-                              value="Account Name"
-                            />
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputtext11"
-                              >Phone Number:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputtext11"
-                              type="text"
-                              value="Phone Number"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="tab-pane fade"
-                        id="profileBasic"
-                        role="tabpanel"
-                        aria-labelledby="profile-basic-tab"
-                      >
-                        <div class="row">
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputtext11"
-                              >PayPal Email:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputtext11"
-                              type="email"
-                              value="Email"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="tab-pane fade"
-                        id="contactBasic"
-                        role="tabpanel"
-                        aria-labelledby="contact-basic-tab"
-                      >
-                        <div class="row">
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputEmail12"
-                              >Bank:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputEmail12"
-                              type="text"
-                              value="Bank"
-                            />
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputtext11"
-                              >Branch:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputtext11"
-                              type="text"
-                              value="Branch"
-                            />
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputEmail12"
-                              >Swift Code:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputEmail12"
-                              type="text"
-                              value="Swift Code"
-                            />
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputtext11"
-                              >Account Name:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputtext11"
-                              type="text"
-                              value="Account Name"
-                            />
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label class="ul-form__label" for="inputtext11"
-                              >Account NO#:</label
-                            >
-                            <input
-                              class="form-control"
-                              id="inputtext11"
-                              type="text"
-                              value="Account Number"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <div class="row text-end">
-                      <div class="col-lg-12">
-                        <button class="btn btn-primary m-1" type="button">
-                          Update
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                v-if="currentuser.role._id == '63fd058921a945fd564e9c6c'"
-                class="tab-pane fade"
-                id="photos"
-                role="tabpanel"
-                aria-labelledby="photos-tab"
-              >
-                <div class="card">
-                  <div class="tab-content" id="myTabContent">
-                    <div
-                      class="tab-pane fade show active"
-                      id="invoice"
-                      role="tabpanel"
-                      aria-labelledby="invoice-tab"
-                    >
-                      <div class="d-sm-flex mb-5" data-view="print">
-                        <span class="m-auto"></span>
-                        <button
-                          class="btn btn-success mb-sm-0 mb-3 print-invoice"
-                        >
-                          Cashout
-                        </button>
-                      </div>
-                      <!-- -===== Print Area =======-->
-                      <div id="print-area">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <h4 class="fw-bold">Account</h4>
-                            <p>#FUNDRAISERS</p>
-                          </div>
-                          <div class="col-md-6 text-sm-end">
-                            <p><strong>Order status: </strong>Closed</p>
-                          </div>
-                        </div>
-                        <div class="mt-3 mb-4 border-top"></div>
-                        <div class="row">
-                          <div class="col-md-12 table-responsive">
-                            <table class="table table-hover mb-4">
-                              <thead class="bg-gray-300">
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Item Name</th>
-                                  <th scope="col">Unit Price</th>
-                                  <th scope="col">Unit</th>
-                                  <th scope="col">Cost</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Product 1</td>
-                                  <td>300</td>
-                                  <td>2</td>
-                                  <td>600</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Product 2</td>
-                                  <td>200</td>
-                                  <td>3</td>
-                                  <td>600</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="invoice-summary">
-                              <p>Sub total: <span>$1200</span></p>
-                              <p>Processing Fee: <span>$120</span></p>
-                              <h5 class="fw-bold">
-                                Grand Total: <span>$1320</span>
-                              </h5>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- ==== / Print Area =====-->
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -560,7 +218,7 @@ import TokenService from "@/services/token.service";
 
 import {
   CREATE_BANKING_MUTATION,
-  USER_QUERY,
+  CURRENTUSER_QUERY,
   EDIT_USER_MUTATION,
   ALL_ROLES_MUTATION,
   ALL_COUNTRIES_QUERY,
@@ -583,28 +241,19 @@ export default {
   },
   data() {
     return {
-      currentuser: [],
-      bankBillings: [],
-      mpesaDetails: [],
+      currentUser: [],
       countries: [],
       role_name: "",
+      country_id: "",
+      user: "",
     };
   },
   apollo: {
-    currentuser: {
-      query: USER_QUERY,
-    },
-    allRoles: {
-      query: ALL_ROLES_MUTATION,
+    currentUser: {
+      query: CURRENTUSER_QUERY,
     },
     countries: {
       query: ALL_COUNTRIES_QUERY,
-    },
-    bankBillings: {
-      query: BANK_BILLING_QUERY,
-    },
-    mpesaDetails: {
-      query: MPESA_DETAILS_QUERY,
     },
   },
   methods: {
@@ -614,9 +263,9 @@ export default {
           mutation: EDIT_USER_MUTATION,
           variables: {
             input: {
-              id: this.currentuser._id,
+              id: this.currentUser.country_id,
               first_name: user.first_name,
-              second_name: user.second_name,
+              //   second_name: user.second_name,
               last_name: user.last_name,
               email: user.email,
               phone_number: user.phone_number,
@@ -636,7 +285,7 @@ export default {
             showConfirmButton: false,
             timer: 2000,
           });
-          this.$apollo.queries.currentuser.refetch();
+          this.$apollo.queries.currentUser.refetch();
         })
         .catch((error) => {
           this.$swal({
@@ -649,8 +298,9 @@ export default {
         });
     },
   },
-  //   created() {
-  //     this.currentuser = TokenService.getUser();
-  //   },
+  async created() {
+    this.user = TokenService.getUser();
+    //     this.currentUser = TokenService.getUser();
+  },
 };
 </script>
