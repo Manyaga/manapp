@@ -780,13 +780,31 @@ mutation Mutation($input: createappointment) {
 `;
 
 export const EDIT_APPOINTMENT_MUTATION = gql`
-  mutation UpdateAppointment($appointmentId: ID!, $input: updateappointment) {
-    updateAppointment(appointment_id: $appointmentId, input: $input) {
-      appointment_id
-      appointment_status
-      price
+mutation UpdateAppointment($appointmentId: ID!, $input: updateappointment) {
+  updateAppointment(appointment_id: $appointmentId, input: $input) {
+    appointment_id
+    appointment_status
+    price
+    service_id {
+      service_id
+      service_name
+      icon
+      description
+    }
+    user_id {
+      first_name
+      last_name
+      phone_number
+      email
+    }
+    vendor_id {
+      last_name
+      first_name
+      email
+      phone_number
     }
   }
+}
 `;
 
 export const DELETE_APPOINTMENT_MUTATION = gql`
@@ -810,6 +828,18 @@ query Query($merchantRef: String!) {
     amount
     confirmationCode
     payment_id
+  }
+}
+`
+export const DASHBOARD_QUERY = gql `
+query Insights {
+  insights {
+    amountReceivedYrToDate
+    appointments
+    appointmentsCurrentMonth
+    members
+    services
+    vendors
   }
 }
 `

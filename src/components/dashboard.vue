@@ -158,7 +158,7 @@
                     >
                       Appointments
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{insights.appointments}}</div>
                   </div>
                   <div class="col-auto">
                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -177,12 +177,12 @@
                     <div
                       class="text-xs font-weight-bold text-success text-uppercase mb-1"
                     >
-                      Appointment Amount
+                      Services
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">30</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ insights.services }}</div>
                   </div>
                   <div class="col-auto">
-                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
                   </div>
                 </div>
               </div>
@@ -205,19 +205,7 @@
                         <div
                           class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
                         >
-                          8
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="progress progress-sm mr-2">
-                          <div
-                            class="progress-bar bg-info"
-                            role="progressbar"
-                            style="width: 50%"
-                            aria-valuenow="50"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
+                        {{ insights.members }}
                         </div>
                       </div>
                     </div>
@@ -241,7 +229,7 @@
                     >
                       venders
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">13</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ insights.vendors }}</div>
                   </div>
                   <div class="col-auto">
                     <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -360,86 +348,6 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <!-- Content Column -->
-            <div class="col-lg-12 mb-4">
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">
-                    Annual Service Amounts
-                  </h6>
-                </div>
-                <div class="card-body">
-                  <h4 class="small font-weight-bold">
-                    Glooming<span class="float-right">20%</span>
-                  </h4>
-                  <div class="progress mb-4">
-                    <div
-                      class="progress-bar bg-danger"
-                      role="progressbar"
-                      style="width: 20%"
-                      aria-valuenow="20"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                  <h4 class="small font-weight-bold">
-                    Dressing <span class="float-right">40%</span>
-                  </h4>
-                  <div class="progress mb-4">
-                    <div
-                      class="progress-bar bg-warning"
-                      role="progressbar"
-                      style="width: 40%"
-                      aria-valuenow="40"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                  <h4 class="small font-weight-bold">
-                    Personality <span class="float-right">60%</span>
-                  </h4>
-                  <div class="progress mb-4">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 60%"
-                      aria-valuenow="60"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                  <h4 class="small font-weight-bold">
-                    Communication <span class="float-right">80%</span>
-                  </h4>
-                  <div class="progress mb-4">
-                    <div
-                      class="progress-bar bg-info"
-                      role="progressbar"
-                      style="width: 80%"
-                      aria-valuenow="80"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                  <h4 class="small font-weight-bold">
-                    Romance<span class="float-right">90%</span>
-                  </h4>
-                  <div class="progress">
-                    <div
-                      class="progress-bar bg-success"
-                      role="progressbar"
-                      style="width: 90%"
-                      aria-valuenow="90"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <!-- /.container-fluid -->
       </div>
@@ -462,6 +370,7 @@ import {
   ADD_APPOINTMENT_MUTATION,
   CATEGORY_USERS_QUERY,
   ALL_USERS_QUERY,
+  DASHBOARD_QUERY
 } from "@/graphql";
 
 import { Form, Field, ErrorMessage } from "vee-validate";
@@ -482,6 +391,7 @@ export default {
       myDoughnutChart: null,
       service_id: "",
       price: "",
+      insights: [],
       appointment_status: "",
     };
   },
@@ -664,6 +574,14 @@ export default {
   async created() {},
 
   async mounted() {
+    await this.$apollo
+        .query({
+          query: DASHBOARD_QUERY,
+        })
+        .then((response) => {
+          this.insights = response.data.insights;
+        });
+    
     this.loadChartData();
   },
 };
