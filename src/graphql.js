@@ -773,3 +773,18 @@ export const DELETE_APPOINTMENT_MUTATION = gql`
     }
   }
 `;
+
+export const VIEW_PAYMENT_COMPLETE_QUERY = gql `
+query Query($merchantRef: String!) {
+  onePayment(merchantRef: $merchantRef) {
+    status
+    paymentDescription
+    description
+    OrderTrackingId
+    OrderMerchantReference
+    amount
+    confirmationCode
+    payment_id
+  }
+}
+`

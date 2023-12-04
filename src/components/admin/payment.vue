@@ -54,6 +54,10 @@ import "@/assets/datatables/buttons.html5.min.js";
 import "@/assets/datatables/buttons.print.min.js";
 import "@/assets/datatables/jszip.min.js";
 import { Form, Field, ErrorMessage } from "vee-validate";
+
+import {
+  VIEW_PAYMENT_COMPLETE_QUERY,
+} from "@/graphql";
 export default {
   name: "Appointment",
   components: {
@@ -70,8 +74,35 @@ export default {
       appointments: [],
     };
   },
+  apollo: {
+    servicePricings: {
+      query: VIEW_PAYMENT_COMPLETE_QUERY,
+      variables: {
+        merchantRef: this.$route.query.OrderMerchantReference,
+        // merchantRef: "6e25d254b7640bf11681319382579",
+      },
+    },
+  },
+  methods () {
+    // async statusChange() {
+    //   this.servicePricings = [];
+    //   await this.$apollo
+    //     .query({
+    //       query: VIEW_PAYMENT_COMPLETE_QUERY,
+    //       variables: {
+    //     merchantRef: this.appointments.merchantReference,
+    //     // merchantRef: "6e25d254b7640bf11681319382579",
+    //   },
+    //     })
+    //     .then((response) => {
+    //       this.servicePricings = response.data.servicePricings;
+    //     });
+    // }
+  },
 mounted() {
   const redirectUrl = localStorage.getItem("savedRedirectUrl");
+  const appointments =  JSON.parse(localStorage.getItem('appointments'));
+  console.log(appointments);
 
 if (redirectUrl) {
   // Set the src attribute of the iframe

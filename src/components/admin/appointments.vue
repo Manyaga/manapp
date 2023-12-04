@@ -433,6 +433,7 @@ export default {
       selectedService: null,
       vendors: [],
       savedRedirectUrl: "",
+      createAppointment: "",
       schema,
     };
   },
@@ -512,7 +513,8 @@ export default {
         })
         .then((response) => {
           const redirectUrl = response.data.createAppointment.redirectUrl;
-
+          const createAppointment = response.data.createAppointment;
+          
           // Hide the modal
           $("#verifyModalContent").modal("hide");
           // Display success notification
@@ -526,6 +528,7 @@ export default {
 
           this.savedRedirectUrl = redirectUrl;
           localStorage.setItem("savedRedirectUrl", this.savedRedirectUrl);
+          localStorage.setItem("appointments", JSON.stringify(createAppointment));
 
         // Navigate to /payment route
         this.$router.push("/payment");
