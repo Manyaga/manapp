@@ -1,22 +1,22 @@
 import gql from "graphql-tag";
 
 export const LOGIN_MUTATION = gql`
-mutation Login($username: String!, $password: String!) {
-  login(username: $username, password: $password) {
-    userId
-    token
-    tokenExpiration
-    username
-    role {
-      group_id
-      group_name
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      userId
+      token
+      tokenExpiration
+      username
+      role {
+        group_id
+        group_name
+      }
+      profileimage
+      verifiedEmail
+      verifiedPhone
+      status
     }
-    profileimage
-    verifiedEmail
-    verifiedPhone
-    status
   }
-}
 `;
 export const LOGIOUT_MUTATION = gql`
   query Logoutuser {
@@ -249,8 +249,8 @@ export const EDIT_CITY_MUTATION = gql`
 
 //USER INTERESTS
 export const ALL_USER_INTERESTS_QUERY = gql`
-query UserInterests($filter: userFilter) {
-  userInterests(filter: $filter) {
+  query UserInterests($filter: userFilter) {
+    userInterests(filter: $filter) {
       user_interest_id
       user_id
       subcategory_id
@@ -442,52 +442,56 @@ export const EDIT_USER_MUTATION = gql`
 `;
 //SERVICE_PRICING
 export const ALL_SERVICE_PRICINGS_QUERY = gql`
-query ServicePricings($limit: Int, $offset: Int, $filter: servicepricingFilters) {
-  servicePricings(limit: $limit, offset: $offset, filter: $filter) {
-    pricing_id
-    price
-    duration
-    service_id
-    user {
-      email
-      first_name
-      email
-      gender
-      last_name
-      phone_number
-      country_id {
-        country_name
-        country_id
-        country_code
-      }
-      state {
-        state_name
-        state_id
-      }
-    }
-    service {
+  query ServicePricings(
+    $limit: Int
+    $offset: Int
+    $filter: servicepricingFilters
+  ) {
+    servicePricings(limit: $limit, offset: $offset, filter: $filter) {
+      pricing_id
+      price
+      duration
       service_id
-      description
-      service_name
-    }
-    user {
-      first_name
-      email
-      gender
-      last_name
-      phone_number
+      user {
+        email
+        first_name
+        email
+        gender
+        last_name
+        phone_number
+        country_id {
+          country_name
+          country_id
+          country_code
+        }
+        state {
+          state_name
+          state_id
+        }
+      }
+      service {
+        service_id
+        description
+        service_name
+      }
+      user {
+        first_name
+        email
+        gender
+        last_name
+        phone_number
+      }
     }
   }
-}
 `;
 export const ADD_SERVICE_PRICING_MUTATION = gql`
-mutation CreateServicePricing($input: ServicePricingInput!) {
-  createServicePricing(input: $input) {
-    pricing_id
-    price
-    duration
+  mutation CreateServicePricing($input: ServicePricingInput!) {
+    createServicePricing(input: $input) {
+      pricing_id
+      price
+      duration
+    }
   }
-}
 `;
 export const DELETE_SERVICE_PRICING_MUTATION = gql`
   mutation DeleteServicePricing($pricingId: Int!) {
@@ -743,40 +747,41 @@ export const USERS_BY_GROUP_QUERY = gql`
 `;
 
 export const ALL_APPOINTMENTS_QUERY = gql`
-query Appointments($filter: appointmentFilter) {
-  appointments(filter: $filter) {
-    appointment_id
-    appointment_status
-    price
-    service_id {
-      service_id
-      service_name
-      description
-    }
-    vendor_id {
-      first_name
-      email
-      last_name
-      phone_number
-    }
-    user_id {
-      first_name
-      email
-      last_name
-      nickname
-      phone_number
+  query Appointments($filter: appointmentFilter) {
+    appointments(filter: $filter) {
+      appointment_id
+      appointment_status
+      price
+      service_id {
+        service_id
+        service_name
+        description
+      }
+      vendor_id {
+        first_name
+        email
+        last_name
+        phone_number
+      }
+      user_id {
+        first_name
+        email
+        last_name
+        nickname
+        phone_number
+      }
     }
   }
-}`;
+`;
 
 export const ADD_APPOINTMENT_MUTATION = gql`
-mutation Mutation($input: createappointment) {
-  createAppointment(input: $input) {
-    redirectUrl
-    orderTrackingId
-    merchantReference
+  mutation Mutation($input: createappointment) {
+    createAppointment(input: $input) {
+      redirectUrl
+      orderTrackingId
+      merchantReference
+    }
   }
-}
 `;
 
 export const EDIT_APPOINTMENT_MUTATION = gql`
@@ -799,17 +804,16 @@ export const DELETE_APPOINTMENT_MUTATION = gql`
   }
 `;
 
-export const VIEW_PAYMENT_COMPLETE_QUERY = gql `
-query Query($merchantRef: String!) {
-  onePayment(merchantRef: $merchantRef) {
-    status
-    paymentDescription
-    description
-    OrderTrackingId
-    OrderMerchantReference
-    amount
-    confirmationCode
-    payment_id
+export const VIEW_PAYMENT_COMPLETE_QUERY = gql`
+  query Query($merchantRef: String!) {
+    onePayment(merchantRef: $merchantRef) {
+      status
+      paymentDescription
+      OrderTrackingId
+      OrderMerchantReference
+      amount
+      confirmationCode
+      payment_id
+    }
   }
-}
-`
+`;

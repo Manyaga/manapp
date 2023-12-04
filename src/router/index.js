@@ -107,7 +107,12 @@ const routes = [
     beforeEnter: authGuard,
     meta: { title: "Dashboard" },
   },
-  { path: "/logs", component: () => import("@/components/admin/logs.vue"), beforeEnter: authGuard, meta: { title: "System Logs" },},
+  {
+    path: "/logs",
+    component: () => import("@/components/admin/logs.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "System Logs" },
+  },
 
   //common routes  @/components/requestLanding.vue
   {
@@ -123,14 +128,54 @@ const routes = [
     beforeEnter: authGuard,
     meta: { title: "Appointments" },
   },
-  { path: "/my-appointments", component: () => import("@/components/member/appointments.vue"), beforeEnter: authGuard, meta: { title: "Appointments" },},
-  { path: "/my-interests", component: () => import("@/components/member/userInterests.vue"), beforeEnter: authGuard, meta: { title: "Interest Categories" },},
-  { path: "/member-interests-categories", component: () => import("@/components/member/interestCategories.vue"), beforeEnter: authGuard, meta: { title: "Interest Categories" },},
-  { path: "/member-interest-subcategories", component: () => import("@/components/member/interestSubcategories.vue"), beforeEnter: authGuard, meta: { title: "Interest Sub-Categories" },},
-  { path: "/member-services", component: () => import("@/components/member/services.vue"), beforeEnter: authGuard, meta: { title: "Services" },},
-  { path: "/service-vendors", component: () => import("@/components/member/servicePricings.vue"), beforeEnter: authGuard, meta: { title: "Services Vendors" },},
-  { path: "/payment", component: () => import("@/components/admin/payment.vue"), beforeEnter: authGuard, meta: { title: "Payment" },},
-  { path: "/paymentcomplete", component: () => import("@/components/admin/paymentConfirmation.vue"), beforeEnter: authGuard, meta: { title: "Payment Complete" },},
+  {
+    path: "/my-appointments",
+    component: () => import("@/components/member/appointments.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Appointments" },
+  },
+  {
+    path: "/my-interests",
+    component: () => import("@/components/member/userInterests.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Interest Categories" },
+  },
+  {
+    path: "/member-interests-categories",
+    component: () => import("@/components/member/interestCategories.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Interest Categories" },
+  },
+  {
+    path: "/member-interest-subcategories",
+    component: () => import("@/components/member/interestSubcategories.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Interest Sub-Categories" },
+  },
+  {
+    path: "/member-services",
+    component: () => import("@/components/member/services.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Services" },
+  },
+  {
+    path: "/service-vendors",
+    component: () => import("@/components/member/servicePricings.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Services Vendors" },
+  },
+  {
+    path: "/payment",
+    component: () => import("@/components/admin/payment.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Payment" },
+  },
+  {
+    path: "/paymentcomplete",
+    component: () => import("@/components/admin/paymentConfirmation.vue"),
+    beforeEnter: authGuard,
+    meta: { title: "Payment Complete" },
+  },
 ];
 
 const router = createRouter({

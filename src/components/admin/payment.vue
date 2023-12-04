@@ -1,29 +1,27 @@
 <template>
   <!--Iframe for payment redirect-->
- 
+
   <div class="app-admin-wrap layout-horizontal-bar">
     <Sidebar />
     <Topbar />
     <div class="main-content-wrap d-flex flex-column">
       <div class="main-content">
-        
         <Breadcrumbs />
         <div class="separator-breadcrumb border-top"></div>
         <div class="row mb-4">
           <div class="col-md-12">
             <div class="card shadow mb-4">
-              
-    <iframe
-      ref="myIframe"
-      frameborder="0"
-      allowfullscreen
-      style="position: fixed; left: 0; width: 100%; height: 500px; "
-    ></iframe>
-  </div>
-    </div>
-    </div>
-    </div>
-      
+              <iframe
+                ref="myIframe"
+                frameborder="0"
+                allowfullscreen
+                style="position: fixed; left: 0; width: 100%; height: 500px"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="flex-grow-1"></div>
       <Footer />
     </div>
@@ -55,9 +53,7 @@ import "@/assets/datatables/buttons.print.min.js";
 import "@/assets/datatables/jszip.min.js";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
-import {
-  VIEW_PAYMENT_COMPLETE_QUERY,
-} from "@/graphql";
+import { VIEW_PAYMENT_COMPLETE_QUERY } from "@/graphql";
 export default {
   name: "Appointment",
   components: {
@@ -71,19 +67,20 @@ export default {
   },
   data() {
     return {
-      appointments: [],
+      merchantReference: null,
     };
   },
   apollo: {
-    servicePricings: {
+    onePayment: {
       query: VIEW_PAYMENT_COMPLETE_QUERY,
       variables: {
-        merchantRef: this.$route.query.OrderMerchantReference,
+        merchantRef: JSON.parse(localStorage.getItem("appointments"))
+          .merchantReference,
         // merchantRef: "6e25d254b7640bf11681319382579",
       },
     },
   },
-  methods () {
+  methods() {
     // async statusChange() {
     //   this.servicePricings = [];
     //   await this.$apollo
@@ -99,15 +96,16 @@ export default {
     //     });
     // }
   },
-mounted() {
-  const redirectUrl = localStorage.getItem("savedRedirectUrl");
-  const appointments =  JSON.parse(localStorage.getItem('appointments'));
-  console.log(appointments);
+  mounted() {
+    const redirectUrl = localStorage.getItem("savedRedirectUrl");
+    this.merchantReference = JSON.parse(
+      localStorage.getItem("appointments")
+    ).merchantReference;
 
-if (redirectUrl) {
-  // Set the src attribute of the iframe
-  this.$refs.myIframe.src = redirectUrl;
-}
-},
+    if (redirectUrl) {
+      // Set the src attribute of the iframe
+      this.$refs.myIframe.src = redirectUrl;
+    }
+  },
 };
 </script>

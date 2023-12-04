@@ -1,5 +1,4 @@
 <template>
-
   <!-- Add Appointment Modal -->
   <div
     class="modal fade"
@@ -37,9 +36,7 @@
                 </div>
               </div> -->
               <div class="form-group col-md-6">
-                <label class="col-form-label" for="user_id"
-                  >User </label
-                >
+                <label class="col-form-label" for="user_id">User </label>
                 <Field
                   name="user_id"
                   class="form-control form-control-lg"
@@ -434,6 +431,7 @@ export default {
       vendors: [],
       savedRedirectUrl: "",
       createAppointment: "",
+      service_id: "",
       schema,
     };
   },
@@ -475,28 +473,6 @@ export default {
     },
   },
   methods: {
-    getVendorsByService() {
-      // Assuming you have an API endpoint to fetch vendors by service
-      // Adjust the API call based on your backend structure
-      const serviceId = this.selectedService.service_id;
-
-      // Make an API call to get vendors for the selected service
-      // Example using axios:
-      // axios.get(`/api/vendors?serviceId=${serviceId}`)
-      //   .then(response => {
-      //     this.vendors = response.data;
-      //   })
-      //   .catch(error => {
-      //     console.error('Error fetching vendors:', error);
-      //   });
-
-      // For now, let's simulate some data for demonstration purposes
-      this.vendors = [
-        { vendor_id: 1, vendor_name: "Vendor A", price: 50 },
-        { vendor_id: 2, vendor_name: "Vendor B", price: 60 },
-        // Add more vendors as needed
-      ];
-    },
     addAppointment(appointment) {
       this.$apollo
         .mutate({
@@ -514,7 +490,7 @@ export default {
         .then((response) => {
           const redirectUrl = response.data.createAppointment.redirectUrl;
           const createAppointment = response.data.createAppointment;
-          
+
           // Hide the modal
           $("#verifyModalContent").modal("hide");
           // Display success notification
@@ -525,13 +501,14 @@ export default {
           //   showConfirmButton: false,
           //   timer: 2000,
           // });
-
           this.savedRedirectUrl = redirectUrl;
           localStorage.setItem("savedRedirectUrl", this.savedRedirectUrl);
-          localStorage.setItem("appointments", JSON.stringify(createAppointment));
-
-        // Navigate to /payment route
-        this.$router.push("/payment");
+          localStorage.setItem(
+            "appointments",
+            JSON.stringify(createAppointment)
+          );
+          // Refetch appointments (if needed)
+          this.$router.push("/payment");
         })
         .catch((error) => {
           // Display error notification

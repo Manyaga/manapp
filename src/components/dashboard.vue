@@ -25,11 +25,31 @@
           <div class="modal-body">
             <div class="row row-xs">
               <div class="form-group col-md-6">
+                <label class="col-form-label" for="user_id">User </label>
+                <Field
+                  name="user_id"
+                  class="form-control form-control-lg"
+                  as="select"
+                >
+                  <option value="">-- User--</option>
+                  <option
+                    v-for="user in userUserGroups"
+                    :value="user.id"
+                    :key="user.id"
+                  >
+                    {{ user.user_id.first_name }}
+                  </option>
+                </Field>
+                <ErrorMessage
+                  name="service_user"
+                  class="text-danger py-3 text-sm"
+                />
+              </div>
+              <div class="form-group col-md-6">
                 <label class="col-form-label" for="service_id">Service</label>
                 <Field
                   name="service_id"
                   class="form-control form-control-lg"
-                  v-model="service_id"
                   as="select"
                 >
                   <option value="">-- Service--</option>
@@ -46,77 +66,6 @@
                   class="text-danger py-3 text-sm"
                 />
               </div>
-              <div class="form-group col-md-6">
-                <!-- <div class="row"> -->
-                <label class="col-form-label" for="price">Price:</label>
-                <Field
-                  name="price"
-                  class="form-control"
-                  id="price"
-                  type="text"
-                  placeholder="Price"
-                />
-                <ErrorMessage name="price" class="text-danger p-3" />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label class="col-form-label" for="service_user"
-                  >Service User</label
-                >
-                <Field
-                  name="service_user"
-                  class="form-control form-control-lg"
-                  as="select"
-                >
-                  <option value="">-- Service User--</option>
-                  <option
-                    v-for="user in userUserGroups"
-                    :value="user.id"
-                    :key="user.id"
-                  >
-                    {{ user.user_id.first_name }}
-                  </option>
-                </Field>
-                <ErrorMessage
-                  name="service_user"
-                  class="text-danger py-3 text-sm"
-                />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label class="col-form-label" for="user_id">User</label>
-                <Field
-                  name="user_id"
-                  class="form-control form-control-lg"
-                  as="select"
-                >
-                  <option value="">-- User--</option>
-                  <option
-                    v-for="user in users"
-                    :value="user.user_id"
-                    :key="user.user_id"
-                  >
-                    {{ user.first_name }}
-                  </option>
-                </Field>
-                <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
-              </div>
-              <!-- <div class="form-group col-md-6">
-                <label class="col-form-label" for="appointment_status"
-                  >Appointment Status:</label
-                >
-                <Field
-                  name="appointment_status"
-                  class="form-control"
-                  id="appointment_status"
-                  type="text"
-                  placeholder="Appointment Status"
-                />
-                <ErrorMessage
-                  name="appointment_status"
-                  class="text-danger p-3"
-                />
-              </div> -->
             </div>
           </div>
           <div class="modal-footer">
@@ -511,32 +460,46 @@ export default {
       this.service_id = service.service_id;
       this.appointment_status = 0;
     },
+
     addAppointment(appointment) {
       this.$apollo
         .mutate({
           mutation: ADD_APPOINTMENT_MUTATION,
           variables: {
             input: {
-              appointment_status: parseInt(this.appointment_status),
-              price: parseFloat(appointment.price),
-              service_id: this.service_id,
-              service_user: appointment.service_user,
+              // appointment_status: appointment.appointment_status,
+              // price: parseFloat(appointment.price),
+              service_id: appointment.service_id,
+              // service_user: appointment.service_user,
               user_id: appointment.user_id,
             },
           },
         })
         .then((response) => {
+          const redirectUrl = response.data.createAppointment.redirectUrl;
+          const createAppointment = response.data.createAppointment;
+
+          // Hide the modal
           $("#verifyModalContent").modal("hide");
-          this.$swal({
-            title: "Appointment added sucessfully",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          this.$apollo.queries.appointments.refetch();
+          // Display success notification
+          // this.$swal({
+          //   title: "Appointment added successfully",
+          //   position: "top-end",
+          //   icon: "success",
+          //   showConfirmButton: false,
+          //   timer: 2000,
+          // });
+          this.savedRedirectUrl = redirectUrl;
+          localStorage.setItem("savedRedirectUrl", this.savedRedirectUrl);
+          localStorage.setItem(
+            "appointments",
+            JSON.stringify(createAppointment)
+          );
+          // Refetch appointments (if needed)
+          this.$router.push("/payment");
         })
         .catch((error) => {
+          // Display error notification
           this.$swal({
             title: error.message,
             position: "top-end",
