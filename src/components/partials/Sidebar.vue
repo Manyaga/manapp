@@ -9,7 +9,7 @@
           data-suppress-scroll-x="true"
         >
           <!-- admin -->
-          <ul class="menu float-start" v-if="hasGroupID('1')">
+          <ul class="menu float-start" v-if="hasGroupID('2')">
             <li>
               <div>
                 <div>
@@ -124,7 +124,7 @@
             </li>
           </ul>
           <!--member -->
-          <ul v-if="hasGroupID('2')" class="menu float-start">
+          <ul v-if="hasGroupID('1')" class="menu float-start">
             <li>
               <div>
                 <div>
