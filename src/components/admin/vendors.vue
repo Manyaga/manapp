@@ -233,7 +233,7 @@
                                             <a class="text-danger me-2" href="#" @click="deleteUser(member.user_id.user_id)"><i
                                                     class="nav-icon i-Close-Window fw-bold"></i></a>
                                         </td>
-                                        <td><button class="btn btn-outline-secondary mt-3 mb-3 m-sm-0 btn-sm btn-rounded">
+                                        <td><button class="btn btn-outline-secondary mt-3 mb-3 m-sm-0 btn-sm btn-rounded" @click="pricing(member.user_id)">
                                             Manage Service
                                         </button></td>
                                     </tr>
@@ -254,6 +254,7 @@ import Topbar from "@/components/partials/Topbar.vue";
 import Footer from "@/components/partials/Footer.vue";
 import Sidebar from "@/components/partials/Sidebar";
 import Breadcrumbs from "@/components/partials/Breadcrumbs";
+import TokenService from "@/services/token.service";
 
 import "datatables.net-dt/js/dataTables.dataTables";
 import "@/assets/css/dataTables.bootstrap4.min.css";
@@ -398,7 +399,6 @@ export default {
                     });
                 })
         },
-
         openEditUser(user) {
             this.user_id = user.user_id.user_id
             this.first_name = user.user_id.first_name
@@ -520,7 +520,11 @@ export default {
                     ]
                 });
             }, 300);
-        }
+        },
+        pricing(vendor) {
+            TokenService.setVendor(vendor);
+            this.$router.push("/service-pricing");
+        },
 
     },
     async created() {

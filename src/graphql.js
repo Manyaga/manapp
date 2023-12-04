@@ -1,13 +1,22 @@
 import gql from "graphql-tag";
 
 export const LOGIN_MUTATION = gql`
-  mutation Mutation($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      userId
-      token
-      tokenExpiration
+mutation Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    userId
+    token
+    tokenExpiration
+    username
+    role {
+      group_id
+      group_name
     }
+    profileimage
+    verifiedEmail
+    verifiedPhone
+    status
   }
+}
 `;
 export const LOGIOUT_MUTATION = gql`
   query Logoutuser {
@@ -240,8 +249,8 @@ export const EDIT_CITY_MUTATION = gql`
 
 //USER INTERESTS
 export const ALL_USER_INTERESTS_QUERY = gql`
-  query UserInterests {
-    userInterests {
+query UserInterests($filter: userFilter) {
+  userInterests(filter: $filter) {
       user_interest_id
       user_id
       subcategory_id
@@ -254,6 +263,11 @@ export const ALL_USER_INTERESTS_QUERY = gql`
       subcategory {
         name
         subcategory_id
+        category {
+          category_id
+          icon
+          name
+        }
       }
     }
   }
@@ -433,11 +447,21 @@ query ServicePricings($limit: Int, $offset: Int, $filter: servicepricingFilters)
     pricing_id
     price
     duration
-    user_id {
+    service_id
+    user {
       email
       first_name
       last_name
       phone_number
+      country_id {
+        country_name
+        country_id
+        country_code
+      }
+      state {
+        state_name
+        state_id
+      }
     }
     service {
       service_id
@@ -710,8 +734,8 @@ export const USERS_BY_GROUP_QUERY = gql`
 `;
 
 export const ALL_APPOINTMENTS_QUERY = gql`
- query Appointments($limit: Int, $offset: Int) {
-  appointments(limit: $limit, offset: $offset) {
+query Appointments($filter: appointmentFilter) {
+  appointments(filter: $filter) {
     appointment_id
     appointment_status
     price

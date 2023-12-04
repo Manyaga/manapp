@@ -8,26 +8,38 @@ class TokenService {
   removeUser() {
     localStorage.removeItem("user")
   }
-  getRequest() {
-    return JSON.parse(localStorage.getItem("request"))
-  }
   getCategory() {
     return JSON.parse(localStorage.getItem("categoryID"))
-  }
-  getProduct() {
-    return JSON.parse(localStorage.getItem("product"))
-  }
-  setRequest(request) {
-    localStorage.setItem("request", JSON.stringify(request))
   }
   setCategory(category) {
     localStorage.setItem("categoryID", JSON.stringify(category))
   }
-  setProduct(product) {
-    localStorage.setItem("product", JSON.stringify(product))
+  setPricing(pricing) {
+    localStorage.setItem("pricing", JSON.stringify(pricing))
+  }  
+  getPricing() {
+    return JSON.parse(localStorage.getItem("pricing"))
   }
-  removeRequest() {
-    localStorage.removeItem("request")
+  removePricing() {
+    localStorage.removeItem("pricing")
+  } 
+  removeVendor() {
+    localStorage.removeItem("vendor")
+  }  
+  setVendor(vendor) {
+    localStorage.setItem("vendor", JSON.stringify(vendor))
+  }
+  getVendor() {
+    return JSON.parse(localStorage.getItem("vendor"))
+  }
+  removeInterest() {
+    localStorage.removeItem("interest")
+  }  
+  setInterest (interest) {
+    localStorage.setItem("interest", JSON.stringify(interest))
+  }
+  getInterest() {
+    return JSON.parse(localStorage.getItem("interest"))
   }
 }
 
