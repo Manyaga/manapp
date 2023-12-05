@@ -87,10 +87,10 @@ import {LOGIOUT_MUTATION} from '@/graphql';
           query: LOGIOUT_MUTATION
           }).then(response => {
             localStorage.clear();
+            this.$router.push("/login");
           }).catch((error) => {
           console.log(error.message)
         })
-      this.$router.push("/login");
       }
     }
   }

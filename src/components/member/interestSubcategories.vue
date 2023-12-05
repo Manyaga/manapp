@@ -18,7 +18,6 @@
                     <h3 class="ul-widget__head-title">INTEREST SUB-CATEGORIES FOR {{ interest.name.toUpperCase() }}</h3>
                   </div>
                   <div class="ul-widget__head-toolbar">
-                    <!-- <button class="btn btn-outline-secondary m-1" @click="back()" type="button">BACK</button> -->
                     <i class="nav-icon me-2 i-left text-primary" @click="back()"></i>
                   </div>
                 </div>
@@ -39,8 +38,7 @@
 
                       </div>
                       <div class="ul-widget-card--line text-center mt-2">
-                        <a type="button" data-bs-toggle="modal" data-target="#verifyModalContent" data-whatever="@mdo">
-                          No sub-categoy yet please add!</a>
+                        <a type="button" data-bs-toggle="modal" data-target="#verifyModalContent" data-whatever="@mdo"> No sub-categoy yet please add!</a>
                       </div>
                     </div>
                   </div>
@@ -88,7 +86,14 @@ export default {
   },
   apollo: {
     interestSubcategories: {
-      query: ALL_INTEREST_SUBCATEGORIES_QUERY
+      query: ALL_INTEREST_SUBCATEGORIES_QUERY,
+      variables() {
+        return {
+          filter: {
+            category_id: this.category_id ? parseInt(this.category_id) : null,
+          },
+        }
+      },
     }
   },
   methods: {

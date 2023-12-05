@@ -91,6 +91,8 @@ export default {
   },
   methods: {
     async handleLogin(user) {
+
+
       await this.$apollo
         .mutate({
           mutation: LOGIN_MUTATION,
@@ -98,26 +100,25 @@ export default {
             username: user.email,
             password: user.password,
           },
-        })
-        .then((response) => {
-          console.log(response.data);
-          localStorage.setItem("token", response.data.login.token);
-          
-        })
-        .catch((error) => {
+        }).then(async (response) => {
+          if (response.data.login.token) {
+            localStorage.setItem("token", response.data.login.token);
+            await this.$apollo
+              .query({
+                query: CURRENTUSER_QUERY,
+                fetchPolicy: "network-only",
+              })
+              .then((response) => {
+                TokenService.setUser(response.data.currentUser);
+                this.$router.push("/dashboard");
+              });
+          }
+
+        }).catch((error) => {
           this.message = error.message;
         });
-      await this.$apollo
-        .query({
-          query: CURRENTUSER_QUERY,
-          fetchPolicy: "network-only",
-        })
-        .then((response) => {
-          TokenService.setUser(response.data.currentUser);
-        });
 
-      // // this.message = "We apologize, but we are currently unable to process your login. Kindly attempt to log in again later.";
-      this.$router.push("/dashboard");
+
     },
   },
 };

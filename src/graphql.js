@@ -19,12 +19,13 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 export const LOGIOUT_MUTATION = gql`
-  query Logoutuser {
-    logoutuser {
-      token
-    }
+mutation Logoutuser {
+  logoutuser {
+    username
+    userId
   }
-`;
+}
+`
 
 export const CURRENTUSER_QUERY = gql`
   query CurrentUser {
@@ -595,17 +596,18 @@ export const EDIT_SERVICE_INTEREST_MUTATION = gql`
 `;
 //INTEREST_SUBCATEGORY
 export const ALL_INTEREST_SUBCATEGORIES_QUERY = gql`
-  query InterestSubcategories {
-    interestSubcategories {
-      category {
-        name
-        category_id
-      }
+query InterestSubcategories($filter: interestsubfilter) {
+  interestSubcategories(filter: $filter) {
+    name
+    subcategory_id
+    category {
+      category_id
+      icon
       name
-      subcategory_id
     }
   }
-`;
+}
+`
 export const ADD_INTEREST_SUBCATEGORY_MUTATION = gql`
   mutation CreateInterestSubcategory($input: InterestSubcategoryInput!) {
     createInterestSubcategory(input: $input) {
