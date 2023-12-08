@@ -1,46 +1,4 @@
 <template>
-  <!-- Add Appointment Modal -->
-  <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="verifyModalContent_title">
-            BOOK APPOINTMENT
-          </h5>
-          <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <Form @submit="addAppointment" class="user">
-          <div class="modal-body">
-            <div class="row row-xs">
-              <div class="form-group col-md-6">
-                <label class="col-form-label" for="user_id">User </label>
-                <Field name="user_id" class="form-control form-control-lg" as="select">
-                  <option value="">-- User--</option>
-                  <option v-for="user in userUserGroups" :value="user.id" :key="user.id"> {{ user.user_id.first_name }}
-                  </option>
-                </Field>
-                <ErrorMessage name="service_user" class="text-danger py-3 text-sm" />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="col-form-label" for="service_id">Service</label>
-                <Field name="service_id" class="form-control form-control-lg" as="select">
-                  <option value="">-- Service--</option>
-                  <option v-for="service in services" :value="service.service_id" :key="service.service_id"> {{
-                    service.service_name }} </option>
-                </Field>
-                <ErrorMessage name="service_id" class="text-danger py-3 text-sm" />
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"> Close </button>
-            <button class="btn btn-primary" type="Submit">Submit</button>
-          </div>
-        </Form>
-      </div>
-    </div>
-  </div>
   <div class="app-admin-wrap layout-horizontal-bar">
     <Sidebar />
     <Topbar />
@@ -200,7 +158,7 @@ import TokenService from "@/services/token.service";
 import Topbar from "@/components/partials/Topbar.vue";
 import Footer from "@/components/partials/Footer.vue";
 import Sidebar from "@/components/partials/Sidebar";
-import { ALL_INTEREST_CATEGORIES_QUERY, ALL_SERVICES_QUERY, ADD_APPOINTMENT_MUTATION, CATEGORY_USERS_QUERY, ALL_USERS_QUERY, DASHBOARD_QUERY } from "@/graphql";
+import { ALL_SERVICES_QUERY, ADD_APPOINTMENT_MUTATION, CATEGORY_USERS_QUERY, ALL_USERS_QUERY, DASHBOARD_QUERY } from "@/graphql";
 
 import { Form, Field, ErrorMessage } from "vee-validate";
 
@@ -210,7 +168,6 @@ export default {
   data() {
     return {
       currentuser: TokenService.getUser(),
-      allDonationRequests: [],
       services: [],
       total: 0,
       user: "",
@@ -222,22 +179,11 @@ export default {
       service_id: "",
       price: "",
       insights: [],
-      appointment_status: "",
     };
   },
   apollo: {
-    // fetch all countries
-    interestCategories: {
-      query: ALL_INTEREST_CATEGORIES_QUERY,
-    },
     services: {
       query: ALL_SERVICES_QUERY,
-    },
-    userUserGroups: {
-      query: CATEGORY_USERS_QUERY,
-      variables: {
-        groupId: "2",
-      },
     },
     users: {
       query: ALL_USERS_QUERY,
@@ -247,44 +193,6 @@ export default {
     // Your async data fetching logic goes here
   },
   methods: {
-    openAddAppointment(service) {
-      this.service_id = service.service_id;
-      this.appointment_status = 0;
-    },
-
-    addAppointment(appointment) {
-      this.$apollo
-        .mutate({
-          mutation: ADD_APPOINTMENT_MUTATION,
-          variables: {
-            input: {
-              service_id: appointment.service_id,
-              user_id: appointment.user_id,
-            },
-          },
-        })
-        .then((response) => {
-          const redirectUrl = response.data.createAppointment.redirectUrl;
-          const createAppointment = response.data.createAppointment;
-          $("#verifyModalContent").modal("hide");
-          this.savedRedirectUrl = redirectUrl;
-          localStorage.setItem("savedRedirectUrl", this.savedRedirectUrl);
-          localStorage.setItem(
-            "appointments",
-            JSON.stringify(createAppointment)
-          );
-          this.$router.push("/payment");
-        })
-        .catch((error) => {
-          this.$swal({
-            title: error.message,
-            position: "top-end",
-            icon: "warning",
-            showConfirmButton: false,
-            timer: 3000,
-          });
-        });
-    },
     hasGroupID(id) {
       // Check if any object in the role array has the provided groupIdToCheck
       return this.currentuser.role.some(
