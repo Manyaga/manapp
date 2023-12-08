@@ -33,38 +33,6 @@
       </div>
     </div>
   </div>
-  <!-- Add Request Modal -->
-  <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent" aria-hidden="true" >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header"> <h5 class="modal-title" id="verifyModalContent_title"> Add Service Pricing </h5> <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button> </div>
-        <Form @submit="addServicePricing" :validation-schema="schema" class="user" >
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="service_id" class="form-control-label">Service</label>
-              <Field name="service_id" class="form-control form-control-lg" v-model="service_id" as="select" >
-                <option value="">-- service--</option>
-                <option v-for="service in services" :value="service.service_id" :key="service.service_id" > {{ service.service_name }} </option>
-              </Field>
-              <ErrorMessage name="service_id" class="text-danger py-3 text-sm" />
-            </div>
-            <div class="form-group">
-              <label class="col-form-label" for="price">Price:</label>
-              <Field name="price" class="form-control" id="price" type="number" step="0.01" />
-            </div>
-            <div class="form-group">
-              <label class="col-form-label" for="duration">Duration:</label>
-              <Field name="duration" class="form-control" id="duration" />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" > Close </button>
-            <button class="btn btn-primary" type="Submit">Submit</button>
-          </div>
-        </Form>
-      </div>
-    </div>
-  </div>
   <div class="app-admin-wrap layout-horizontal-bar">
     <Sidebar />
     <Topbar />
@@ -100,7 +68,7 @@
                           </div>
                           <div class="ul-widget5__content">
                             <div class="ul-widget5__stats"> <span class="ul-widget5__number" >Ksh. {{ pricing.price }}</span ><span class="ul-widget5__sales text-mute" >Price</span > </div>
-                            <div class="ul-widget5__stats"> <span class="ul-widget5__number" ><button class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-target="#verifyModalContent" data-whatever="@mdo" type="button" > BOOK APPOINTMENT </button></span > </div>
+                            <div class="ul-widget5__stats"> <span class="ul-widget5__number" ><button class="btn btn-outline-primary m-1" @click="addAppointment(pricing.pricing_id)" type="button" > BOOK APPOINTMENT </button></span > </div>
                           </div>
                         </div>
                         <div v-if="servicePricings.length == 0" class="row">
@@ -131,7 +99,7 @@ import Sidebar from "@/components/partials/Sidebar";
 import Breadcrumbs from "@/components/partials/Breadcrumbs";
 import TokenService from "@/services/token.service";
 
-import { ADD_SERVICE_PRICING_MUTATION, ALL_SERVICE_PRICINGS_QUERY, ALL_SERVICES_QUERY, CATEGORY_USERS_QUERY, ADD_APPOINTMENT_MUTATION, } from "@/graphql";
+import { ALL_SERVICE_PRICINGS_QUERY, ALL_SERVICES_QUERY, CATEGORY_USERS_QUERY, ADD_APPOINTMENT_MUTATION, } from "@/graphql";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default {
@@ -152,6 +120,7 @@ export default {
       duration: "",
       userUserGroups: [],
       service: TokenService.getPricing(),
+      user: [],
       schema,
     };
   },
@@ -167,14 +136,24 @@ export default {
     },
   },
   methods: {
-    addAppointment(appointment) {
-      this.$apollo
+    addAppointment(pricing_id) {
+      this.$swal({
+        title: "Book Appointment?",
+        text: "For "+ this.service.service_name.toUpperCase(),
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$apollo
         .mutate({
           mutation: ADD_APPOINTMENT_MUTATION,
           variables: {
             input: {
-              service_id: appointment.service_id,
-              user_id: appointment.user_id,
+              pricing_id: pricing_id,
+              user_id: parseInt(this.user.user_id),
             },
           },
         })
@@ -198,40 +177,8 @@ export default {
             timer: 3000,
           });
         });
-    },
-    addServicePricing(pricing) {
-      this.$apollo
-        .mutate({
-          mutation: ADD_SERVICE_PRICING_MUTATION,
-          variables: {
-            input: {
-              duration: parseInt(pricing.duration),
-              user_id: parseInt(this.vendor.user_id),
-              service_id: parseInt(pricing.service_id),
-              price: parseFloat(pricing.price),
-            },
-          },
-        })
-        .then((response) => {
-          $("#verifyModalContent").modal("hide");
-          this.$swal({
-            title: "Service Pricing added sucessfully",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          this.$apollo.queries.servicePricings.refetch();
-        })
-        .catch((error) => {
-          this.$swal({
-            title: error.message,
-            position: "top-end",
-            icon: "warning",
-            showConfirmButton: false,
-            timer: 3000,
-          });
-        });
+        }
+      });
     },
     back() {
       TokenService.removePricing();
@@ -254,6 +201,7 @@ export default {
     },
   },
   async created() {
+    this.user = TokenService.getUser();
     this.statusChange();
   },
 };

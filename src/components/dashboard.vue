@@ -1,37 +1,40 @@
 <template>
   <!-- Add Appointment Modal -->
-  <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent" aria-hidden="true">
+  <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="verifyModalContent_title">
             BOOK APPOINTMENT
           </h5>
-          <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
+          <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <Form @submit="addAppointment" class="user">
           <div class="modal-body">
             <div class="row row-xs">
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="user_id">User </label>
-                <Field name="user_id" class="form-control form-control-lg" as="select" >
+                <Field name="user_id" class="form-control form-control-lg" as="select">
                   <option value="">-- User--</option>
-                  <option v-for="user in userUserGroups" :value="user.id" :key="user.id" > {{ user.user_id.first_name }} </option>
+                  <option v-for="user in userUserGroups" :value="user.id" :key="user.id"> {{ user.user_id.first_name }}
+                  </option>
                 </Field>
                 <ErrorMessage name="service_user" class="text-danger py-3 text-sm" />
               </div>
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="service_id">Service</label>
-                <Field name="service_id" class="form-control form-control-lg" as="select" >
+                <Field name="service_id" class="form-control form-control-lg" as="select">
                   <option value="">-- Service--</option>
-                  <option v-for="service in services" :value="service.service_id" :key="service.service_id" > {{ service.service_name }} </option>
+                  <option v-for="service in services" :value="service.service_id" :key="service.service_id"> {{
+                    service.service_name }} </option>
                 </Field>
                 <ErrorMessage name="service_id" class="text-danger py-3 text-sm" />
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" > Close </button>
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"> Close </button>
             <button class="btn btn-primary" type="Submit">Submit</button>
           </div>
         </Form>
@@ -58,8 +61,8 @@
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > Appointments </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{insights.appointments}}</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Appointments </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ insights.appointments }}</div>
                   </div>
                   <div class="col-auto"> <i class="fas fa-calendar fa-2x text-gray-300"></i> </div>
                 </div>
@@ -72,7 +75,8 @@
             <div class="card border-left-success shadow h-100 py-2">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
-                  <div class="col mr-2"> <div class="text-xs font-weight-bold text-success text-uppercase mb-1" > Services </div>
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Services </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ insights.services }}</div>
                   </div>
                   <div class="col-auto">
@@ -89,10 +93,10 @@
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1" > Members </div>
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Members </div>
                     <div class="row no-gutters align-items-center">
                       <div class="col-auto">
-                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" > {{ insights.members }} </div>
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"> {{ insights.members }} </div>
                       </div>
                     </div>
                   </div>
@@ -110,7 +114,7 @@
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1" > Vendors </div>
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Vendors </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ insights.vendors }}</div>
                   </div>
                   <div class="col-auto">
@@ -131,15 +135,23 @@
               </div>
               <div class="card-body">
                 <div class="row mb-2">
-                  <div class="col-lg-6 col-md-6 col-sm-6 mb-2" v-for="(service, index) in services" :key="service.service_id" >
+                  <div class="col-lg-6 col-md-6 col-sm-6 mb-2" v-for="(service, index) in services"
+                    :key="service.service_id">
                     <div class="card card-ecommerce-3 o-hidden mb-4">
                       <div class="d-flex flex-column flex-sm-row">
                         <div> <img class="card-img-left" src="../assets/images/fashion.png" alt="" /> </div>
                         <div class="flex-grow-1 p-4">
                           <h5 class="m-0">{{ service.service_name }}</h5>
                           <p class="text-muted mt-3"> {{ service.description }} </p>
-                          <div class="actions position-absolute bottom-0 end-0 p-4" >
-                            <button class="btn btn-primary ul-btn-raised--v2" type="button" data-bs-toggle="modal" data-target="#verifyModalContent" data-whatever="@mdo" @click="openAddAppointment(service)" > BOOK APPOINTMENT </button>
+                          <div class="actions position-absolute bottom-0 end-0 p-4">
+                            <router-link v-if="hasGroupID('1')" :to="{ path: '/member-services' }"
+                              class="btn btn-primary ul-btn-raised--v2 m-1 text-white float-end">
+                              <i class="nav-icon i-add text-white fw-bold"></i> BOOK APPOINTMENT
+                            </router-link>
+                            <router-link v-if="hasGroupID('2')" :to="{ path: '/services' }"
+                              class="btn btn-primary ul-btn-raised--v2 m-1 text-white float-end">
+                              <i class="nav-icon i-add text-white fw-bold"></i> BOOK APPOINTMENT
+                            </router-link>
                           </div>
                         </div>
                       </div>
@@ -151,14 +163,15 @@
           </div>
         </div>
         <!-- Content Row -->
-        <div class="row">
+        <div class="row" v-if="hasGroupID('2')">
           <div class="col-xl-8 col-lg-7 mb-4">
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Summary</h6>
               </div>
               <div class="card-body">
-                <div class="chart-container"> <canvas id="lineChart" style="display: block; width: 432px; height: 245px" width="432" height="245" ></canvas> </div>
+                <div class="chart-container"> <canvas id="lineChart" style="display: block; width: 432px; height: 245px"
+                    width="432" height="245"></canvas> </div>
               </div>
             </div>
           </div>
@@ -169,7 +182,8 @@
                 <h6 class="m-0 font-weight-bold text-primary"> Monthly Total Amounts Per Service </h6>
               </div>
               <div class="card-body">
-                <div class="chart-container"> <canvas id="doughnutChart" style="display: block; width: 432px; height: 245px" width="432" height="245" ></canvas> </div>
+                <div class="chart-container"> <canvas id="doughnutChart"
+                    style="display: block; width: 432px; height: 245px" width="432" height="245"></canvas> </div>
               </div>
             </div>
           </div>
@@ -195,13 +209,14 @@ export default {
   components: { Sidebar, Topbar, Footer, Form, Field, ErrorMessage },
   data() {
     return {
+      currentuser: TokenService.getUser(),
       allDonationRequests: [],
-      myDoughnutChart: null,
-      currentuser: [],
       services: [],
       total: 0,
+      user: "",
       donationCount: 0,
       requestCount: 0,
+      lineChart: null,
       myLineChart: null,
       myDoughnutChart: null,
       service_id: "",
@@ -270,11 +285,15 @@ export default {
           });
         });
     },
+    hasGroupID(id) {
+      // Check if any object in the role array has the provided groupIdToCheck
+      return this.currentuser.role.some(
+        (role) => role.group_id && role.group_id.group_id === id
+      );
+    },
     loadChartData() {
-      var lineChart = document.getElementById("lineChart").getContext("2d");
-      var doughnutChart = document
-        .getElementById("doughnutChart")
-        .getContext("2d");
+      if(this.hasGroupID('2')){var lineChart = document.getElementById("lineChart").getContext("2d");
+      var doughnutChart = document .getElementById("doughnutChart") .getContext("2d");
       if (this.myLineChart) this.myLineChart.destroy();
       if (this.myDoughnutChart) this.myDoughnutChart.destroy();
       this.myLineChart = new Chart(lineChart, {
@@ -379,20 +398,21 @@ export default {
       if (document.getElementById("chart-legends") != null) {
         document.getElementById("chart-legends").innerHTML =
           this.myDoughnutChart.generateLegend();
-      }
+      }}
     },
   },
-  async created() {},
+  async created() {
+   },
 
   async mounted() {
     await this.$apollo
-        .query({
-          query: DASHBOARD_QUERY,
-        })
-        .then((response) => {
-          this.insights = response.data.insights;
-        });
-    
+      .query({
+        query: DASHBOARD_QUERY,
+      })
+      .then((response) => {
+        this.insights = response.data.insights;
+      });
+
     this.loadChartData();
   },
 };

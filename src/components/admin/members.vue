@@ -679,39 +679,6 @@ export default {
         })
         .then((response) => {
           this.userUserGroups = response.data.userUserGroups;
-        })
-        .then((response) => {
-          this.$swal({
-            title: "Member deleted sucessfully",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          this.$apollo.queries.userUserGroups.refetch();
-        })
-        .catch((error) => {
-          this.$swal({
-            title: error.message,
-            position: "top-end",
-            icon: "warning",
-            showConfirmButton: false,
-            timer: 3000,
-          });
-        });
-    },
-    async statusChange() {
-      this.userUserGroups = [];
-      $("#member_table").DataTable().destroy();
-      await this.$apollo
-        .query({
-          query: CATEGORY_USERS_QUERY,
-          variables: {
-            groupId: "1",
-          },
-        })
-        .then((response) => {
-          this.userUserGroups = response.data.userUserGroups;
         });
       setTimeout(function () {
         $("#member_table").DataTable({

@@ -1,23 +1,11 @@
 <template>
   <!-- Add State Modal -->
-  <div
-    class="modal fade"
-    id="verifyModalContent"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="verifyModalContent"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent" aria-hidden="true" >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="verifyModalContent_title">ADD STATE</h5>
-          <button
-            class="btn btn-close"
-            type="button"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
         </div>
         <Form @submit="addState" :validation-schema="schema" class="user">
           <div class="modal-body">
@@ -27,9 +15,7 @@
               <ErrorMessage name="state_name" class="text-danger p-3" />
             </div>
             <div class="form-group">
-              <label class="col-form-label" for="abbreviation"
-                >Abbreviation:</label
-              >
+              <label class="col-form-label" for="abbreviation" >Abbreviation:</label >
               <Field name="abbreviation" class="form-control" type="text" />
               <ErrorMessage name="abbreviation" class="text-danger p-3" />
             </div>

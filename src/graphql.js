@@ -777,13 +777,13 @@ export const ALL_APPOINTMENTS_QUERY = gql`
 `;
 
 export const ADD_APPOINTMENT_MUTATION = gql`
-  mutation Mutation($input: createappointment) {
-    createAppointment(input: $input) {
-      redirectUrl
-      orderTrackingId
-      merchantReference
-    }
+mutation CreateAppointment($input: createappointment) {
+  createAppointment(input: $input) {
+    redirectUrl
+    orderTrackingId
+    merchantReference
   }
+}
 `;
 
 export const EDIT_APPOINTMENT_MUTATION = gql`

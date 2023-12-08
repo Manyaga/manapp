@@ -1,25 +1,14 @@
 <template>
   <!-- Add Appointment Modal -->
-  <div
-    class="modal fade"
-    id="verifyModalContent"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="verifyModalContent"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="verifyModalContent_title">
             BOOK APPOINTMENT
           </h5>
-          <button
-            class="btn btn-close"
-            type="button"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <Form @submit="addAppointment" class="user">
           <div class="modal-body">
@@ -37,45 +26,23 @@
               </div> -->
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="user_id">User </label>
-                <Field
-                  name="user_id"
-                  class="form-control form-control-lg"
-                  as="select"
-                >
+                <Field name="user_id" class="form-control form-control-lg" as="select">
                   <option value="">-- User--</option>
-                  <option
-                    v-for="user in userUserGroups"
-                    :value="user.id"
-                    :key="user.id"
-                  >
+                  <option v-for="user in userUserGroups" :value="user.id" :key="user.id">
                     {{ user.user_id.first_name }}
                   </option>
                 </Field>
-                <ErrorMessage
-                  name="service_user"
-                  class="text-danger py-3 text-sm"
-                />
+                <ErrorMessage name="service_user" class="text-danger py-3 text-sm" />
               </div>
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="service_id">Service</label>
-                <Field
-                  name="service_id"
-                  class="form-control form-control-lg"
-                  as="select"
-                >
+                <Field name="service_id" class="form-control form-control-lg" as="select">
                   <option value="">-- Service--</option>
-                  <option
-                    v-for="service in services"
-                    :value="service.service_id"
-                    :key="service.service_id"
-                  >
+                  <option v-for="service in services" :value="service.service_id" :key="service.service_id">
                     {{ service.service_name }}
                   </option>
                 </Field>
-                <ErrorMessage
-                  name="service_id"
-                  class="text-danger py-3 text-sm"
-                />
+                <ErrorMessage name="service_id" class="text-danger py-3 text-sm" />
               </div>
               <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="price">Price:</label>
@@ -125,11 +92,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              class="btn btn-secondary"
-              type="button"
-              data-bs-dismiss="modal"
-            >
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">
               Close
             </button>
             <button class="btn btn-primary" type="Submit">Submit</button>
@@ -139,75 +102,38 @@
     </div>
   </div>
   <!-- Edit Appointment Modal -->
-  <div
-    class="modal fade"
-    id="editModalContent"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="editModalContent"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="editModalContent" tabindex="-1" role="dialog" aria-labelledby="editModalContent"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="editModalContent_title">
             EDIT APPOINTMENT
           </h5>
-          <button
-            class="btn btn-close"
-            type="button"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <Form @submit="editAppointment" class="user">
           <div class="modal-body">
             <div class="row">
               <div class="form-group col-md-6">
-                <label class="col-form-label" for="service_user"
-                  >Service User</label
-                >
-                <Field
-                  name="service_user"
-                  class="form-control form-control-lg"
-                  v-model="service_user"
-                  as="select"
-                >
+                <label class="col-form-label" for="service_user">Service User</label>
+                <Field name="service_user" class="form-control form-control-lg" v-model="service_user" as="select">
                   <option value="">-- Service User--</option>
-                  <option
-                    v-for="user in userUserGroups"
-                    :value="user.id"
-                    :key="user.id"
-                  >
+                  <option v-for="user in userUserGroups" :value="user.id" :key="user.id">
                     {{ user.user_id.first_name }}
                   </option>
                 </Field>
-                <ErrorMessage
-                  name="service_user"
-                  class="text-danger py-3 text-sm"
-                />
+                <ErrorMessage name="service_user" class="text-danger py-3 text-sm" />
               </div>
               <div class="form-group col-md-6">
                 <label class="col-form-label" for="service_id">Service</label>
-                <Field
-                  name="service_id"
-                  class="form-control form-control-lg"
-                  v-model="service_id"
-                  as="select"
-                >
+                <Field name="service_id" class="form-control form-control-lg" v-model="service_id" as="select">
                   <option value="">-- Service--</option>
-                  <option
-                    v-for="service in services"
-                    :value="service.service_id"
-                    :key="service.service_id"
-                  >
+                  <option v-for="service in services" :value="service.service_id" :key="service.service_id">
                     {{ service.service_name }}
                   </option>
                 </Field>
-                <ErrorMessage
-                  name="service_id"
-                  class="text-danger py-3 text-sm"
-                />
+                <ErrorMessage name="service_id" class="text-danger py-3 text-sm" />
               </div>
               <!-- <div class="form-group col-md-6">
                 <label class="col-form-label" for="price">Price:</label>
@@ -240,28 +166,14 @@
                 <ErrorMessage name="user_id" class="text-danger py-3 text-sm" />
               </div> -->
               <div class="form-group col-md-6">
-                <label class="col-form-label" for="appointment_status"
-                  >Appointment Status:</label
-                >
-                <Field
-                  name="appointment_status"
-                  class="form-control"
-                  v-model="appointment_status"
-                  type="text"
-                />
-                <ErrorMessage
-                  name="appointment_status"
-                  class="text-danger p-3"
-                />
+                <label class="col-form-label" for="appointment_status">Appointment Status:</label>
+                <Field name="appointment_status" class="form-control" v-model="appointment_status" type="text" />
+                <ErrorMessage name="appointment_status" class="text-danger p-3" />
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              class="btn btn-secondary"
-              type="button"
-              data-bs-dismiss="modal"
-            >
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">
               Close
             </button>
             <button class="btn btn-primary" type="Submit">Update</button>
@@ -275,15 +187,10 @@
     <Topbar />
     <div class="main-content-wrap d-flex flex-column">
       <div class="main-content">
-        <button
-          class="btn btn-info text-white ul-btn-raised--v2 m-1 text-white float-end"
-          type="button"
-          data-bs-toggle="modal"
-          data-target="#verifyModalContent"
-          data-whatever="@mdo"
-        >
+        <router-link :to="{ path: '/member-services' }"
+          class="btn btn-info text-white ul-btn-raised--v2 m-1 text-white float-end">
           <i class="nav-icon i-add text-white fw-bold"></i> BOOK APPOINTMENT
-        </button>
+        </router-link>
         <Breadcrumbs />
         <div class="separator-breadcrumb border-top"></div>
         <div class="row mb-4">
@@ -299,45 +206,23 @@
                   <div class="ul-widget__head-toolbar">
                     <ul class="nav nav-tabs profile-nav" role="tablist">
                       <li class="nav-item">
-                        <a
-                          class="nav-link active show"
-                          data-bs-toggle="tab"
-                          role="tab"
-                          aria-selected="true"
-                          @click="statusChange('1')"
-                          >Active</a
-                        >
+                        <a class="nav-link active show" data-bs-toggle="tab" role="tab" aria-selected="true"
+                          @click="statusChange('1')">Active</a>
                       </li>
                       <li class="nav-item">
-                        <a
-                          class="nav-link"
-                          data-bs-toggle="tab"
-                          role="tab"
-                          aria-selected="false"
-                          @click="statusChange('2')"
-                          >Completed</a
-                        >
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" aria-selected="false"
+                          @click="statusChange('2')">Completed</a>
                       </li>
                       <li class="nav-item">
-                        <a
-                          class="nav-link"
-                          data-bs-toggle="tab"
-                          role="tab"
-                          aria-selected="false"
-                          @click="statusChange('0')"
-                          >Pending</a
-                        >
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" aria-selected="false"
+                          @click="statusChange('0')">Pending</a>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div class="tab-content">
                   <div v-if="appointments.length > 0" class="table-responsive">
-                    <table
-                      class="table align-items-center mb-5"
-                      id="appointment-table"
-                      style="width: 100%"
-                    >
+                    <table class="table align-items-center mb-5" id="appointment-table" style="width: 100%">
                       <thead>
                         <tr class="bg-primary text-white">
                           <th scope="col">#</th>
@@ -352,10 +237,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr
-                          v-for="(appointment, index) in appointments"
-                          v-bind:key="appointment.appointment_id"
-                        >
+                        <tr v-for="(appointment, index) in appointments" v-bind:key="appointment.appointment_id">
                           <td>{{ index + 1 }}</td>
                           <td>
                             {{
@@ -388,18 +270,11 @@
                     >
                   </td> -->
                           <td>
-                            <a
-                              class="text-info me-2"
-                              @click="openEditAppointment(appointment)"
-                              ><i class="nav-icon i-Pen-2 fw-bold"></i
-                            ></a>
-                            <a
-                              class="text-danger me-2"
-                              @click="
-                                deleteAppointment(appointment.appointment_id)
-                              "
-                              ><i class="nav-icon i-Close-Window fw-bold"></i
-                            ></a>
+                            <a class="text-info me-2" @click="openEditAppointment(appointment)"><i
+                                class="nav-icon i-Pen-2 fw-bold"></i></a>
+                            <a class="text-danger me-2" @click="
+                              deleteAppointment(appointment.appointment_id)
+                              "><i class="nav-icon i-Close-Window fw-bold"></i></a>
                           </td>
                         </tr>
                       </tbody>
@@ -410,11 +285,7 @@
                     <div class="card-body">
                       <div class="user-profile mb-4">
                         <div class="ul-widget-card__user-info">
-                          <img
-                            class="profile-picture avatar-lg mb-2 mt-2"
-                            src="../../assets/images/booking.png"
-                            alt=""
-                          />
+                          <img class="profile-picture avatar-lg mb-2 mt-2" src="../../assets/images/booking.png" alt="" />
                         </div>
                         <div class="ul-widget-card--line text-center mt-2">
                           <a type="button"> No appointment with this status!</a>

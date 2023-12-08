@@ -1,49 +1,27 @@
 <template>
   <!-- Add Country Modal -->
-  <div
-    class="modal fade"
-    id="verifyModalContent"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="verifyModalContent"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="verifyModalContent" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent" aria-hidden="true" >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="verifyModalContent_title">ADD COUNTRY</h5>
-          <button
-            class="btn btn-close"
-            type="button"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button class="btn btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" ></button>
         </div>
         <Form @submit="addCountry" :validation-schema="schema" class="user">
           <div class="modal-body">
             <div class="form-group">
-              <label class="col-form-label" for="country_name"
-                >Country Name:</label
-              >
+              <label class="col-form-label" for="country_name" >Country Name:</label >
               <Field name="country_name" class="form-control" type="text" />
               <ErrorMessage name="country_name" class="text-danger p-3" />
             </div>
             <div class="form-group">
-              <label class="col-form-label" for="country_code"
-                >Country Code:</label
-              >
+              <label class="col-form-label" for="country_code" >Country Code:</label >
               <Field name="country_code" class="form-control" type="text" />
               <ErrorMessage name="country_code" class="text-danger p-3" />
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              class="btn btn-secondary"
-              type="button"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" > Close </button>
             <button class="btn btn-primary" type="Submit">Submit</button>
           </div>
         </Form>
