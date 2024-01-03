@@ -52,7 +52,7 @@
               </Field>
               <ErrorMessage name="state" class="text-danger py-3 text-sm" />
             </div>
-            <div class="form-group">
+          <!--   <div class="form-group">
               <label class="col-form-label" for="role"><i class="zmdi zmdi-location"></i></label>
               <Field name="role" class="form-control form-control-lg" v-model="group_id" as="select">
                 <option value="">-- role--</option>
@@ -61,7 +61,7 @@
                 </option>
               </Field>
               <ErrorMessage name="role" class="text-danger py-3 text-sm" />
-            </div>
+            </div> -->
             <!-- <div class="form-group">
               <label class="col-form-label" for="city"><i class="zmdi zmdi-pin"></i></label>
               <Field name="city" class="form-control" id="city" type="text" placeholder="City" />
@@ -79,7 +79,7 @@
             </div> -->
             <div class="form-group">
               <label class="col-form-label" for="password"><i class="zmdi zmdi-lock"></i></label>
-              <Field name="password" class="form-control" id="password" type="password" />
+              <Field name="password" class="form-control" id="password" type="password" placeholder="Password"/>
               <ErrorMessage name="password" class="text-danger p-3" />
 
             </div>
@@ -133,9 +133,6 @@ export default {
       state: yup
         .string()
         .required("State is required!"),
-      role: yup
-        .string()
-        .required("Role is required!"),
       password: yup
         .string()
         .required("Password is required!"),
@@ -175,7 +172,7 @@ export default {
               /* zip_code: user.zip_code, */
               username: user.username,
               second_name: user.second_name,
-              role:  parseInt(user.role),
+              role:  0,
               /* postal_code: user.postal_code, */
               phone_number: user.phone_number,
               password: user.password,

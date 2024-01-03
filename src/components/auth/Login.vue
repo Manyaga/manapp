@@ -75,7 +75,6 @@ export default {
       email: yup
         .string()
         .required("Email is required!")
-        .email("Email is invalid!")
         .max(50, "Must be maximum 50 characters!"),
       password: yup.string().required("Password is required!"),
     });
