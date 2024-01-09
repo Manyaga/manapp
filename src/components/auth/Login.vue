@@ -6,7 +6,7 @@
           <div class="signin-image">
             <br />
             <figure>
-              <img src="../../assets/images/wrist-watch.jpg" alt="sing up image" />
+              <img src="../../assets/images/3.jpg" alt="sing up image" />
             </figure>
             <a href="/register" class="signup-image-link">Create an account</a>
           </div>
@@ -14,9 +14,9 @@
           <div class="signin-form">
             <span class="flex-grow-1"></span>
             <div class="d-flex align-items-center">
-              <img class="logo" src="../../assets/login-logo.jpg" alt="" />
+              <img class="logo" src="../../assets/logo1.jpg" alt="" />
               <div>
-                <h2 class="form-titlem-0">ManApp</h2>
+                <h2 class="form-titlem-0"></h2>
               </div>
             </div>
             <h3 class="form-title">Welcome Back!</h3>
@@ -49,9 +49,6 @@
       </div>
     </section>
   </div>
-  <!-- <div v-if="message" class="alert alert-dismissible fade show alert-card alert-danger" role="alert">
-    {{ message }}
-  </div> -->
 </template>
 
 <script>
@@ -61,7 +58,6 @@ import * as yup from "yup";
 import {
   LOGIN_MUTATION,
   CURRENTUSER_QUERY,
-  ADD_USER_MUTATION,
 } from "@/graphql";
 export default {
   name: "Login",

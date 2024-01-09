@@ -172,7 +172,7 @@ export default {
               /* zip_code: user.zip_code, */
               username: user.username,
               second_name: user.second_name,
-              role:  0,
+              role:  1,
               /* postal_code: user.postal_code, */
               phone_number: user.phone_number,
               password: user.password,
