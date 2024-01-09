@@ -98,9 +98,7 @@
                           <th scope="col">Description</th>
                           <th scope="col">Provider</th>
                           <th scope="col">User</th>
-                          <!-- <th scope="col">Status</th> -->
                           <th scope="col">Price</th>
-                          <!-- <th scope="col">Status</th> -->
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -126,16 +124,6 @@
                           <td>
                             $ {{ appointment.price.toFixed(2) }}
                           </td>
-                          <!-- <td>
-                    <span
-                      :class="
-                        appointment.status == 'active'
-                          ? 'badge bg-success'
-                          : 'badge bg-danger'
-                      "
-                      >{{ appointment.status }}</span
-                    >
-                  </td> -->
                           <td>
                             <a class="text-info me-2" @click="openEditAppointment(appointment)"><i
                                 class="nav-icon i-Pen-2 fw-bold"></i></a>
