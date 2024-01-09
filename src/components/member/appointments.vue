@@ -124,7 +124,7 @@
                             {{ appointment.user_id.first_name.toUpperCase() }}
                           </td>
                           <td>
-                            {{ appointment.price }}
+                            $ {{ appointment.price.toFixed(2) }}
                           </td>
                           <!-- <td>
                     <span
