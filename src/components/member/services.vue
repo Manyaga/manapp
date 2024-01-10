@@ -11,7 +11,7 @@
           <div class="col-md-4" @click="pricings(service)"  v-for="(service, index) in services" :key="service.service_id">
             <div class="card card-profile-1 mb-4">
               <div class="card-body text-center">
-                <div class="ul-widget5__pic"><img src="../../assets/images/services.png" alt="" /></div>
+                <div class="ul-widget5__pic"><img :src="service.icon" alt="" /></div>
                 <h5 class="mt-3 text-primary mb-3">{{ service.service_name.toUpperCase() }}</h5>
                 <p>{{ service.description.toUpperCase() }}</p>
               </div>

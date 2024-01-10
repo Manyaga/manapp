@@ -474,6 +474,7 @@ export const ALL_SERVICE_PRICINGS_QUERY = gql`
         service_id
         description
         service_name
+        icon
       }
       user {
         first_name
@@ -519,6 +520,7 @@ export const EDIT_SERVICE_PRICING_MUTATION = gql`
         service_id
         service_name
         description
+        icon
       }
       user {
         last_name
@@ -548,6 +550,7 @@ export const ALL_SERVICE_INTERESTS_QUERY = gql`
         description
         service_id
         service_name
+        icon
       }
     }
   }
@@ -590,6 +593,7 @@ export const EDIT_SERVICE_INTEREST_MUTATION = gql`
         description
         service_id
         service_name
+        icon
       }
     }
   }
@@ -702,6 +706,7 @@ export const ALL_SERVICES_QUERY = gql`
       service_id
       service_name
       description
+      icon
     }
   }
 `;
@@ -758,6 +763,7 @@ export const ALL_APPOINTMENTS_QUERY = gql`
         service_id
         service_name
         description
+        icon
       }
       vendor_id {
         first_name

@@ -89,7 +89,7 @@
             <!-- Project Card Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Top Services</h6>
+                <h6 class="m-0 font-weight-bold text-primary">OUR SERVICES</h6>
               </div>
               <div class="card-body">
                 <div class="row mb-2">
@@ -97,15 +97,15 @@
                     :key="service.service_id">
                     <div class="card card-ecommerce-3 o-hidden mb-4">
                       <div class="d-flex flex-column flex-sm-row">
-                        <div> <img class="card-img-left" src="../assets/images/fashion.png" alt="" /> </div>
+                        <div> <img class="card-img-left" :src="service.icon" alt="" /> </div>
                         <div class="flex-grow-1 p-4">
                           <h5 class="m-0">{{ service.service_name }}</h5>
                           <p class="text-muted mt-3"> {{ service.description }} </p>
                           <div class="actions position-absolute bottom-0 end-0 p-4">
-                            <router-link v-if="hasGroupID('1')" :to="{ path: '/member-services' }"
+                            <div v-if="hasGroupID('1')" @click="pricings(service)"
                               class="btn btn-primary ul-btn-raised--v2 m-1 text-white float-end">
                               <i class="nav-icon i-add text-white fw-bold"></i> BOOK APPOINTMENT
-                            </router-link>
+                          </div>
                             <router-link v-if="hasGroupID('2')" :to="{ path: '/services' }"
                               class="btn btn-primary ul-btn-raised--v2 m-1 text-white float-end">
                               <i class="nav-icon i-add text-white fw-bold"></i> BOOK APPOINTMENT
@@ -192,6 +192,10 @@ export default {
   async created() {
   },
   methods: {
+    pricings(pricing) {
+      TokenService.setPricing(pricing);
+      this.$router.push("/service-vendors");
+    },
     hasGroupID(id) {
       return this.currentuser.role.some(
         (role) => role.group_id && role.group_id.group_id === id

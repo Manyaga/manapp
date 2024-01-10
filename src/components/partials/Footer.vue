@@ -24,7 +24,7 @@
                    alt=""
                  />
                  <div>
-                   <p class="m-0">&copy; 2023 Man App Enterprise</p>
+                   <p class="m-0">&copy; 2024 Man App Enterprise</p>
                    <p class="m-0">All rights reserved</p>
                  </div>
                </div>

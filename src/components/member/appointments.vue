@@ -68,7 +68,7 @@
                 <div class="ul-widget__head">
                   <div class="ul-widget__head-label">
                     <h3 class="ul-widget__head-title">
-                      MY MANAPP APPOINTMENTS
+                      MY APPOINTMENTS
                     </h3>
                   </div>
                   <div class="ul-widget__head-toolbar">
@@ -94,10 +94,10 @@
                       <thead>
                         <tr class="bg-primary text-white">
                           <th scope="col">#</th>
+                          <th scope="col"></th>
                           <th scope="col">Sevice</th>
                           <th scope="col">Description</th>
                           <th scope="col">Provider</th>
-                          <th scope="col">User</th>
                           <th scope="col">Price</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -105,6 +105,9 @@
                       <tbody>
                         <tr v-for="(appointment, index) in appointments" v-bind:key="appointment.appointment_id">
                           <td>{{ index + 1 }}</td>
+                          <td><span><div class="ul-widget_user-card">
+                                    <div class="ul-widget4__img"><img id="userDropdown" :src="appointment.service_id.icon" alt="" /></div>
+                                  </div></span></td>
                           <td>
                             {{
                               appointment.service_id.service_name.toUpperCase()
@@ -115,14 +118,10 @@
                               appointment.service_id.description.toUpperCase()
                             }}
                           </td>
-                          <td>
-                            {{ appointment.vendor_id.first_name.toUpperCase() }}
+                          <td> {{ appointment.vendor_id.first_name.toUpperCase() + " " + appointment.vendor_id.last_name.toUpperCase() }}
                           </td>
                           <td>
-                            {{ appointment.user_id.first_name.toUpperCase() }}
-                          </td>
-                          <td>
-                            $ {{ appointment.price.toFixed(2) }}
+                            Ksh {{ appointment.price.toFixed(2) }}
                           </td>
                           <td>
                             <a class="text-info me-2" @click="openEditAppointment(appointment)"><i
